@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:clean_todo/core/presentation/screens/screen.dart';
 import 'package:clean_todo/core/presentation/view_models/app_view_model.dart';
 import 'package:clean_todo/core/presentation/view_models/view_model.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,21 @@ class App extends View<AppViewModel> {
                 selector: (_, viewModel) => viewModel.hello,
                 builder: (context, hello, _) {
                   log("CHeck_");
-                  return Text(
-                    "Sample Hit $hello",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sample ${viewModel.hii} Hit $hello, Joo ${viewModel.hello}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      MaterialButton(
+                        onPressed: viewModel.decrement,
+                        child: Text("Decrte"),
+                      )
+                    ],
                   );
                 }),
           ),
@@ -39,4 +50,8 @@ class App extends View<AppViewModel> {
       ),
     );
   }
+
+  @override
+  // TODO: implement name
+  String get name => throw UnimplementedError();
 }
