@@ -7,15 +7,15 @@ import 'injector.dart';
 import 'utils/service_locator.dart';
 
 class Initializer {
-  List<Injector> injectors;
-  Initializer(this.injectors);
+  List<Injector> featureInjectors;
+  Initializer({required this.featureInjectors});
 
   Future inject() async {
     List translations = [];
     List usecases = [];
     List<ChangeNotifierProvider> providers = [];
 
-    for (var injector in injectors) {
+    for (var injector in featureInjectors) {
       translations.addAll(injector.translations);
       usecases.addAll(injector.usecases);
       providers.addAll(injector.providers);
@@ -24,7 +24,7 @@ class Initializer {
 
   injectProviders() {
     List<ChangeNotifierProvider> providers = [];
-    for (var injector in injectors) {
+    for (var injector in featureInjectors) {
       for (var provider in injector.providers) {
         providers.add(provider);
       }
@@ -34,9 +34,10 @@ class Initializer {
 
   injectRoutes() {
     RouteConfig routeConfig = RouteConfig(routes: {});
-    for (var injector in injectors) {
+    for (var injector in featureInjectors) {
       for (var screen in injector.screens) {
-        routeConfig.routes.putIfAbsent(screen.routeName, () => screen);
+        routeConfig.routes
+            .putIfAbsent(screen.routeName, () => (context) => screen);
       }
     }
     getIt.registerSingleton<RouteConfig>(routeConfig);
@@ -45,7 +46,7 @@ class Initializer {
   initDB() async {
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
-    for (var injector in injectors) {
+    for (var injector in featureInjectors) {
       for (var adapter in injector.adapters) {
         Hive.registerAdapter(adapter);
       }
