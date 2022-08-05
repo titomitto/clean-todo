@@ -3,10 +3,9 @@ import 'dart:developer';
 import 'package:clean_todo/core/presentation/screens/screen.dart';
 import 'package:clean_todo/core/presentation/view_models/app_view_model.dart';
 import 'package:clean_todo/core/presentation/view_models/view_model.dart';
+import 'package:clean_todo/core/utils/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../config/providers.dart';
 import 'view.dart';
 
 class App extends View<AppViewModel> {
@@ -16,7 +15,7 @@ class App extends View<AppViewModel> {
   Widget build(BuildContext context) {
     log("CHeck_11");
     return MultiProvider(
-      providers: providers,
+      providers: getIt<List<ChangeNotifierProvider>>(),
       child: MaterialApp(
         home: Scaffold(
           body: Center(

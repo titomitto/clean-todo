@@ -1,20 +1,30 @@
+import 'package:clean_todo/core/injector.dart';
+import 'package:clean_todo/core/presentation/router.dart';
 import 'package:clean_todo/core/presentation/screens/screen.dart';
 import 'package:clean_todo/core/utils/service_locator.dart';
+import 'package:clean_todo/features/todo/domain/usecases/add_count.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
-
+import 'package:path_provider/path_provider.dart';
+import 'domain/usecases/increment_count.dart';
 import 'presentation/screens/todos_screen.dart';
+import 'presentation/view_models/todos_view_model.dart';
 
-abstract class FeatureInjector {
-  List<Screen> screens = [];
-  List translations = [];
-  List syncables = [];
-  List<ChangeNotifierProvider> providers = [];
-}
+class TodoInjector extends Injector {
+  @override
+  List<Screen> get screens => [
+        TodosScreen(),
+      ];
 
-class InjectFeatures {
-  List<FeatureInjector> injectors;
-  InjectFeatures(this.injectors);
+  @override
+  List get usecases => [
+        AddCount(),
+        IncrementCount(),
+      ];
 
-  call() {}
+  @override
+  List<ChangeNotifierProvider> get providers => [
+        ChangeNotifierProvider<TodosViewModel>.value(value: TodosViewModel()),
+      ];
 }
