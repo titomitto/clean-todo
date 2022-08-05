@@ -1,11 +1,12 @@
 import 'dart:developer';
 
+import 'package:clean_todo/features/todo/presentation/view_models/todos_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import '../utils/service_locator.dart';
-import 'view_models/view_model.dart';
+import 'package:provider/provider.dart';
+import '../../utils/service_locator.dart';
+import '../view_models/view_model.dart';
 
-final RouteObserver<ModalRoute<void>> routeObserver =
+/* final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
 
 class View<VM extends ViewModel> extends StatefulWidget {
@@ -122,5 +123,65 @@ class ViewState<V extends View> extends State<V>
   @override
   Widget build(BuildContext context) {
     return widget.build(context);
+  }
+}
+ */
+
+abstract class View<VM extends ViewModel> extends StatefulWidget {
+  View({Key? key}) : super(key: key);
+  late VM viewModel;
+
+  @override
+  State<View> createState() => ViewState<VM>();
+
+  Widget build(BuildContext context);
+}
+
+class ViewState<VM extends ViewModel> extends State<View>
+    with RouteAware, WidgetsBindingObserver {
+  final VM viewModel = getIt();
+
+  @mustCallSuper
+  @override
+  void initState() {
+    viewModel.onInit();
+    super.initState();
+  }
+
+  @mustCallSuper
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    viewModel.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        log("HSSJJAKA");
+        viewModel.onResume();
+        break;
+      case AppLifecycleState.paused:
+        viewModel.onPause();
+        break;
+      case AppLifecycleState.inactive:
+        viewModel.onInactive();
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<TodosViewModel>.value(
+      value: viewModel as TodosViewModel,
+      builder: (context, w) {
+        widget.viewModel = Provider.of<VM>(context);
+        return widget.build(context);
+      },
+    );
   }
 }

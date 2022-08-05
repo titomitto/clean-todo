@@ -1,5 +1,7 @@
 import 'package:clean_todo/core/injector.dart';
 import 'package:clean_todo/core/presentation/screens/screen.dart';
+import 'package:clean_todo/core/presentation/view_models/view_model.dart';
+import 'package:clean_todo/core/utils/service_locator.dart';
 import 'package:clean_todo/features/todo/domain/usecases/add_count.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -14,14 +16,19 @@ class TodoInjector extends Injector {
       ];
 
   @override
-  List get usecases => [
+  List<ViewModel> get viewModels => [
+        TodosViewModel(),
+      ];
+
+  @override
+  List get useCases => [
         AddCount(),
         IncrementCount(),
       ];
 
   @override
   List<ChangeNotifierProvider> get providers => [
-        ChangeNotifierProvider<TodosViewModel>.value(value: TodosViewModel()),
+        ChangeNotifierProvider<TodosViewModel>.value(value: getIt()),
       ];
 
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class RouteConfig {
+class AppRouter {
   Map<String, Widget Function(BuildContext)> routes;
-  RouteConfig({
+  AppRouter({
     required this.routes,
   });
 }

@@ -9,11 +9,11 @@ abstract class ViewModel extends ChangeNotifier {
 
   ///  This method is executed whenever the Widget's Stateful State gets
   /// disposed. It might happen a few times, always matching the amount
-  /// of times `init` is called.
+  /// of times `onInit` is called.
   @override
   void dispose();
 
-  /// Called when the top route has been popped off, and the current route
+/*   /// Called when the top route has been popped off, and the current route
   /// shows up.
   void routingDidPopNext() {}
 
@@ -25,7 +25,7 @@ abstract class ViewModel extends ChangeNotifier {
 
   /// Called when a new route has been pushed, and the current route is no
   /// longer visible.
-  void routingDidPushNext() {}
+  void routingDidPushNext() {} */
 
   // Called when user navigates back into the app
   void onResume() {}
