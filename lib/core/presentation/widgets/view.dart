@@ -7,8 +7,9 @@ import '../../utils/service_locator.dart';
 import '../view_models/view_model.dart';
 
 abstract class View<VM extends ViewModel> extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   View({Key? key}) : super(key: key);
-  late VM viewModel;
+  late final VM viewModel;
 
   @override
   State<View> createState() => ViewState<VM>();
@@ -39,7 +40,6 @@ class ViewState<VM extends ViewModel> extends State<View>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
-        log("HSSJJAKA");
         viewModel.onResume();
         break;
       case AppLifecycleState.paused:
@@ -58,7 +58,8 @@ class ViewState<VM extends ViewModel> extends State<View>
     return ChangeNotifierProvider<TodosViewModel>.value(
       value: viewModel as TodosViewModel,
       builder: (context, w) {
-        widget.viewModel = Provider.of<VM>(context);
+        widget.viewModel ??= Provider.of<VM>(context);
+        widget.viewModel.context = context;
         return widget.build(context);
       },
     );

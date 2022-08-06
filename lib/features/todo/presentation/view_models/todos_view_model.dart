@@ -10,17 +10,11 @@ class TodosViewModel extends ViewModel {
 
   increment() {
     count = getIt<AddCount>()(count);
-    log("ADD_JAA $count");
     notifyListeners();
   }
 
   decrement() {
     count = getIt<IncrementCount>()(count);
     notifyListeners();
-  }
-
-  @override
-  onInit() {
-    log("SHOOOOW_");
   }
 }

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'screens/screen.dart';
+
 class AppRouter {
-  Map<String, Widget Function(BuildContext)> routes;
+  List<Screen> screens = [];
+  Map<String, Widget Function(BuildContext)> routes = {};
   AppRouter({
-    required this.routes,
-  });
+    required this.screens,
+  }) {
+    for (var screen in screens) {
+      routes.putIfAbsent(screen.routeName, () => (context) => screen);
+    }
+  }
 }

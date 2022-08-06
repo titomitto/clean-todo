@@ -6,7 +6,7 @@ import 'core/presentation/app.dart';
 
 void main() async {
   await Initializer(
-    featureInjectors: injectors,
+    injectors: featureInjectors,
   ).init();
   runApp(const App());
 }
