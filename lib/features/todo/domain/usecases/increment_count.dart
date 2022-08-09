@@ -1,15 +1,15 @@
 import 'package:clean_todo/core/domain/usecases/usecase.dart';
 
-class IncrementCount extends UseCase<int, IncrementCountParams> {
+class DecrementCount extends UseCase<int, DecrementCountParams> {
   @override
-  int call(IncrementCountParams params) {
+  int call(DecrementCountParams params) {
     return params.count - 1;
   }
 }
 
-class IncrementCountParams {
+class DecrementCountParams {
   int count;
-  IncrementCountParams({
+  DecrementCountParams({
     required this.count,
   });
 }

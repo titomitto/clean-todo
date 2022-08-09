@@ -1,15 +1,18 @@
-import 'dart:developer';
-
 import 'package:clean_todo/features/todo/presentation/view_models/todos_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/service_locator.dart';
 import '../view_models/view_model.dart';
 
+// ignore: must_be_immutable
 abstract class View<VM extends ViewModel> extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
   View({Key? key}) : super(key: key);
-  late final VM viewModel;
+  VM? $vm;
+
+  VM get viewModel {
+    return $vm!;
+  }
 
   @override
   State<View> createState() => ViewState<VM>();
@@ -58,8 +61,8 @@ class ViewState<VM extends ViewModel> extends State<View>
     return ChangeNotifierProvider<TodosViewModel>.value(
       value: viewModel as TodosViewModel,
       builder: (context, w) {
-        widget.viewModel ??= Provider.of<VM>(context);
-        widget.viewModel.context = context;
+        widget.$vm ??= Provider.of<VM>(context);
+        widget.$vm?.context = context;
         return widget.build(context);
       },
     );

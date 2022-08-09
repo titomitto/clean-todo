@@ -10,7 +10,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("CHANGE_NOTIFIERS ${getIt<List<ChangeNotifierProvider>>().map((e) => e.runtimeType)}");
     return MaterialApp(
       routes: getIt<AppRouter>().routes,
       initialRoute: "/todos",

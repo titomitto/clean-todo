@@ -10,6 +10,5 @@ abstract class Injector {
   List viewModels = [];
   List translations = [];
   List<UseCase> useCases = [];
-  List<ChangeNotifierProvider> providers = [];
   List<TypeAdapter> adapters = [];
 }

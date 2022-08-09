@@ -19,9 +19,11 @@ class CountView extends View<TodosViewModel> {
             ],
           ),
         ),
-        MaterialButton(
-          onPressed: viewModel.increment,
-          child: const Text("ADD +"),
+        Container(
+          child: MaterialButton(
+            onPressed: viewModel.increment,
+            child: Text("ADD +"),
+          ),
         )
       ]),
     );
@@ -41,7 +43,7 @@ class GoonsView extends View<TodosViewModel> {
         ),
         MaterialButton(
           onPressed: viewModel.increment,
-          child: const Text("ADD*"),
+          child: Text("ADD*"),
         )
       ]),
     );

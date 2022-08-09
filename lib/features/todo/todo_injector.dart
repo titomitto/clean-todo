@@ -1,3 +1,4 @@
+import 'package:clean_todo/core/domain/usecases/usecase.dart';
 import 'package:clean_todo/core/injector.dart';
 import 'package:clean_todo/core/presentation/screens/screen.dart';
 import 'package:clean_todo/core/presentation/view_models/view_model.dart';
@@ -21,14 +22,9 @@ class TodoInjector extends Injector {
       ];
 
   @override
-  List get useCases => [
+  List<UseCase> get useCases => [
         AddCount(),
-        IncrementCount(),
-      ];
-
-  @override
-  List<ChangeNotifierProvider> get providers => [
-        ChangeNotifierProvider<TodosViewModel>.value(value: getIt()),
+        DecrementCount(),
       ];
 
   @override

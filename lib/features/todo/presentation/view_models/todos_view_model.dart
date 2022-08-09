@@ -9,12 +9,20 @@ class TodosViewModel extends ViewModel {
   int count = 0;
 
   increment() {
-    count = getIt<AddCount>()(count);
+    var addCount = getIt<AddCount>();
+    count = addCount(AddCountParams(
+      count: count,
+    ));
+
     notifyListeners();
   }
 
   decrement() {
-    count = getIt<IncrementCount>()(count);
+    var addCount = getIt<DecrementCount>();
+    count = addCount(DecrementCountParams(
+      count: count,
+    ));
+
     notifyListeners();
   }
 }
