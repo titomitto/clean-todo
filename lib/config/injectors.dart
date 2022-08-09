@@ -1,5 +1,6 @@
+import 'package:clean_todo/core/injector.dart';
 import 'package:clean_todo/features/todo/todo_injector.dart';
 
-get featureInjectors => [
+List<Injector> get featureInjectors => [
       TodoInjector(),
     ];

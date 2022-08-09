@@ -30,15 +30,9 @@ class Initializer {
     for (var injector in injectors) {
       for (var viewModel in injector.viewModels) {
         //getIt.registerFactory(() => viewModel);
-        log("TYYYOE ${viewModel.runtimeType}, ${getIt.currentScopeName}");
+        log("TYPES ${viewModel.runtimeType}, ${getIt.currentScopeName}");
       }
     }
-  }
-
-  injectProviders() {
-    List<ChangeNotifierProvider> providers =
-        injectors.expand((injector) => injector.providers).toList();
-    getIt.registerSingleton<List<ChangeNotifierProvider>>(providers);
   }
 
   injectRoutes() {
@@ -57,14 +51,18 @@ class Initializer {
     }
   }
 
+  injectUseCases() {
+    List useCases = injectors.expand((injector) => injector.useCases).toList();
+    for (var useCase in useCases) {
+      getIt.registerSingleton(useCase);
+    }
+  }
+
   Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
     await initDB();
-    getIt.registerFactory<TodosViewModel>(() => TodosViewModel());
-    //getIt.registerSingleton<AppViewModel>(AppViewModel());
-    getIt.registerSingleton<AddCount>(AddCount());
     await injectViewModels();
-    await injectProviders();
+    await injectUseCases();
     injectRoutes();
   }
 }

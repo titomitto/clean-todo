@@ -2,9 +2,7 @@ import 'package:clean_todo/core/failure/failure.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class UseCase<R, P> {
-  R call(P arg);
+  R call(P params);
 }
 
-abstract class NoArgsUseCase<R> {
-  R call();
-}
+class NoParams {}
