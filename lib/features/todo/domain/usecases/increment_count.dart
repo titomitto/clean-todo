@@ -1,6 +1,6 @@
 import 'package:clean_todo/core/domain/usecases/usecase.dart';
 
-class DecrementCount extends UseCase<int, DecrementCountParams> {
+class DeleteTodo extends UseCase<int, DecrementCountParams> {
   @override
   int call(DecrementCountParams params) {
     return params.count - 1;
