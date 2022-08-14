@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
-import '../view_models/view_model.dart';
+import '../viewmodels/view_model.dart';
 
 abstract class View<VM extends ViewModel> extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables

@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/presentation/view_models/view_model.dart';
+import 'package:clean_todo/core/presentation/viewmodels/view_model.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/view.dart';
