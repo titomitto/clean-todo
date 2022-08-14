@@ -1,15 +1,15 @@
 import 'package:clean_todo/core/domain/usecases/usecase.dart';
 
-class AddTodo extends UseCase<int, AddCountParams> {
+class AddTodo extends UseCase<int, AddTodoParams> {
   @override
-  int call(AddCountParams params) {
+  int call(AddTodoParams params) {
     return params.count + 1;
   }
 }
 
-class AddCountParams {
+class AddTodoParams {
   int count;
-  AddCountParams({
+  AddTodoParams({
     required this.count,
   });
 }
