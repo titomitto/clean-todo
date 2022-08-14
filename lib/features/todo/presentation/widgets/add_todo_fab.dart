@@ -1,13 +1,13 @@
-import 'package:clean_todo/core/presentation/widgets/view.dart';
-import 'package:clean_todo/features/todo/presentation/view_models/add_todo_view_model.dart';
+import 'package:clean_todo/features/todo/presentation/widgets/todos_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class AddTodoFab extends View<AddTodoViewModel> {
-  AddTodoFab({Key? key}) : super(key: key);
+class AddTodoFab extends StatelessWidget {
+  const AddTodoFab({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: viewModel.onAddTodo,
+      onPressed: Provider.of<TodosViewModel>(context).increment,
       child: const Icon(Icons.add),
     );
   }

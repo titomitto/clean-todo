@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/view.dart';
 
-// ignore: must_be_immutable
 abstract class Screen<VM extends ViewModel> extends View<VM> {
   Screen({Key? key}) : super(key: key);
-
-  @override
-  ViewState<VM> createState() => ViewState<VM>();
 
   String get routeName;
 }

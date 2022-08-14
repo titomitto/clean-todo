@@ -1,10 +1,10 @@
 import 'package:clean_todo/core/presentation/router.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'injector.dart';
 import 'presentation/screens/screen.dart';
-import 'utils/service_locator.dart';
 
 class Initializer {
   List<Injector> injectors;
@@ -25,10 +25,10 @@ class Initializer {
   injectRoutes() {
     List<Screen> screens = injectors.expand((e) => e.screens).toList();
     AppRouter appRouter = AppRouter(screens: screens);
-    getIt.registerSingleton<AppRouter>(appRouter);
+    GetIt.I.registerSingleton<AppRouter>(appRouter);
   }
 
-  initData() async {
+  initRepositories() async {
     await Hive.initFlutter();
     for (var injector in injectors) {
       injector.registerAdapters();
@@ -39,7 +39,7 @@ class Initializer {
 
   Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await initData();
+    await initRepositories();
     await injectUseCases();
     await injectViewModels();
     injectRoutes();
