@@ -1,11 +1,10 @@
 import 'package:clean_todo/core/presentation/screens/screen.dart';
-import 'package:clean_todo/features/todo/presentation/widgets/todo_list_view.dart';
-import 'package:clean_todo/features/todo/presentation/viewmodels/todos_view_model.dart';
+import 'package:clean_todo/features/task/presentation/viewmodels/tasks_view_model.dart';
+import 'package:clean_todo/features/task/presentation/widgets/tasks_list_view.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class TodosScreen extends Screen<TodosViewModel> {
-  TodosScreen({Key? key}) : super(key: key);
+class TasksScreen extends Screen<TasksViewModel> {
+  TasksScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class TodosScreen extends Screen<TodosViewModel> {
       appBar: AppBar(
         title: const Text("Todo Lst"),
       ),
-      body: TodoListView(),
+      body: TasksListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: viewModel.navigate,
         child: const Icon(Icons.add),

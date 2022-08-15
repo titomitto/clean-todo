@@ -1,15 +1,15 @@
 import 'package:clean_todo/core/presentation/screens/screen.dart';
-import 'package:clean_todo/features/todo/presentation/viewmodels/add_todo_view_model.dart';
+import 'package:clean_todo/features/task/presentation/viewmodels/add_task_view_model.dart';
 import 'package:flutter/material.dart';
 
-class AddTodosScreen extends Screen<AddTodoViewModel> {
-  AddTodosScreen({Key? key}) : super(key: key);
+class AddTaskScreen extends Screen<AddTaskViewModel> {
+  AddTaskScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Todo List"),
+        title: const Text("Add Task List"),
       ),
       body: Column(
         children: [
@@ -20,7 +20,7 @@ class AddTodosScreen extends Screen<AddTodoViewModel> {
             ),
           ),
           MaterialButton(
-            onPressed: viewModel.addTodo,
+            onPressed: viewModel.submit,
             child: const Text("SAVE ME"),
           ),
         ],
@@ -29,5 +29,5 @@ class AddTodosScreen extends Screen<AddTodoViewModel> {
   }
 
   @override
-  String get routeName => "/add-todos";
+  String get routeName => "/add-task";
 }

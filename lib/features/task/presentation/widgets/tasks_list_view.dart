@@ -1,9 +1,9 @@
 import 'package:clean_todo/core/presentation/widgets/view.dart';
-import 'package:clean_todo/features/todo/presentation/viewmodels/todo_list_view_model.dart';
+import 'package:clean_todo/features/task/presentation/viewmodels/todo_list_view_model.dart';
 import 'package:flutter/material.dart';
 
-class TodoListView extends View<TodoListViewModel> {
-  TodoListView({Key? key}) : super(key: key);
+class TasksListView extends View<TasksListViewModel> {
+  TasksListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
