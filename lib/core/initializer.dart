@@ -8,7 +8,11 @@ import 'presentation/screens/screen.dart';
 
 class Initializer {
   List<Injector> injectors;
-  Initializer({required this.injectors});
+  String defaultRoute;
+  Initializer({
+    required this.injectors,
+    required this.defaultRoute,
+  });
 
   injectViewModels() {
     for (var injector in injectors) {
@@ -24,7 +28,8 @@ class Initializer {
 
   injectRoutes() {
     List<Screen> screens = injectors.expand((e) => e.screens).toList();
-    AppRouter appRouter = AppRouter(screens: screens);
+    AppRouter appRouter =
+        AppRouter(screens: screens, defaultRoute: defaultRoute);
     GetIt.I.registerSingleton<AppRouter>(appRouter);
   }
 

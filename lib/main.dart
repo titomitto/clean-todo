@@ -6,6 +6,7 @@ import 'core/presentation/app.dart';
 
 void main() async {
   await Initializer(
+    defaultRoute: "/",
     injectors: featureInjectors,
   ).init();
   runApp(const App());

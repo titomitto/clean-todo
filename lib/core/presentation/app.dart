@@ -7,11 +7,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var routes = GetIt.I<AppRouter>().routes;
+    var appRouter = GetIt.I<AppRouter>();
 
     return MaterialApp(
-      routes: routes,
-      initialRoute: "/todos",
+      routes: appRouter.routes,
+      initialRoute: appRouter.defaultRoute,
     );
   }
 }

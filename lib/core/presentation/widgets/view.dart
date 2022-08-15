@@ -24,10 +24,17 @@ class ViewState<VM extends ViewModel> extends State<View>
     super.didChangeDependencies();
   }
 
+  void setViewModel() {
+    setState(() {
+      widget.viewModel = viewModel;
+      widget.viewModel.context = context;
+    });
+  }
+
   @mustCallSuper
   @override
   void initState() {
-    widget.viewModel = viewModel;
+    setViewModel();
     viewModel.onInit();
     super.initState();
   }

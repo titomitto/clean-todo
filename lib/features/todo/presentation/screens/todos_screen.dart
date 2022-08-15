@@ -1,8 +1,8 @@
 import 'package:clean_todo/core/presentation/screens/screen.dart';
-import 'package:clean_todo/features/todo/presentation/widgets/add_todo_fab.dart';
 import 'package:clean_todo/features/todo/presentation/widgets/todo_list_view.dart';
-import 'package:clean_todo/features/todo/presentation/widgets/todos_view_model.dart';
+import 'package:clean_todo/features/todo/presentation/viewmodels/todos_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TodosScreen extends Screen<TodosViewModel> {
   TodosScreen({Key? key}) : super(key: key);
@@ -11,13 +11,16 @@ class TodosScreen extends Screen<TodosViewModel> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Todo List"),
+        title: const Text("Todo Lst"),
       ),
       body: TodoListView(),
-      floatingActionButton: const AddTodoFab(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: viewModel.navigate,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
   @override
-  String get routeName => "/todos";
+  String get routeName => "/";
 }
