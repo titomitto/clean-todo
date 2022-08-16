@@ -2,6 +2,6 @@ abstract class UseCase<R, P> {
   R call(P params);
 }
 
-class NoParams {
-  const NoParams();
+abstract class NoParamsUseCase<R> {
+  R call();
 }

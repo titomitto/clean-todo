@@ -8,7 +8,7 @@ class AddTaskViewModel extends ViewModel {
   TextEditingController taskController = TextEditingController();
   var addTodo = GetIt.I<AddTask>();
 
-  void submit() {
+  void submit() async {
     addTodo(AddTaskParams(
       task: Task(
         title: taskController.text,

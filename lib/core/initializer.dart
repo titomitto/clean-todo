@@ -1,3 +1,4 @@
+import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/core/presentation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -42,11 +43,18 @@ class Initializer {
     }
   }
 
+  initTranslations() async {
+    List<LocaleTranslations> localeTranslations =
+        injectors.expand((e) => e.translations).toList();
+    GetIt.I.registerSingleton<List<LocaleTranslations>>(localeTranslations);
+  }
+
   Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
     await initRepositories();
     await injectUseCases();
     await injectViewModels();
+    await initTranslations();
     injectRoutes();
   }
 }

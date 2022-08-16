@@ -1,3 +1,4 @@
+import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/core/presentation/router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,14 @@ class App extends StatelessWidget {
       routes: appRouter.routes,
       initialRoute: appRouter.defaultRoute,
       localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: const [
         Locale('en', 'US'),
+        Locale('sw', 'KE'),
       ],
     );
   }

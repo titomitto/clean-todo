@@ -1,8 +1,8 @@
 import 'package:clean_todo/core/domain/usecases/usecase.dart';
 
-abstract class SyncUseCase extends UseCase<SyncResults, NoParams> {
+abstract class SyncUseCase extends NoParamsUseCase<SyncResults> {
   @override
-  SyncResults call([NoParams params = const NoParams()]);
+  SyncResults call();
 }
 
 class SyncResults {
@@ -16,7 +16,7 @@ class SyncResults {
 
 class SyncSurveys extends SyncUseCase {
   @override
-  SyncResults call([NoParams params = const NoParams()]) {
+  SyncResults call() {
     return SyncResults(synced: false, message: "Failed to sync");
   }
 }

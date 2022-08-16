@@ -1,5 +1,6 @@
+import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/core/presentation/widgets/view.dart';
-import 'package:clean_todo/features/task/presentation/viewmodels/todo_list_view_model.dart';
+import 'package:clean_todo/features/task/presentation/viewmodels/tasks_list_view_model.dart';
 import 'package:flutter/material.dart';
 
 class TasksListView extends View<TasksListViewModel> {
@@ -11,8 +12,17 @@ class TasksListView extends View<TasksListViewModel> {
       children: [
         Container(
           color: Colors.red,
-          child: const Text("Hello"),
-        )
+          child: Text("hello_world".tr(context)),
+        ),
+        Container(
+          color: Colors.red,
+          child: Text(
+            "complex_string".tr(context, {
+              "name": "Tito Mitto",
+              "age": 25,
+            }),
+          ),
+        ),
       ],
     );
   }
