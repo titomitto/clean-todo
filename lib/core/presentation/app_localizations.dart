@@ -21,13 +21,14 @@ class AppLocalizations {
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
-    /*  
-    String jsonString =
-        await rootBundle.loadString('lang/${locale.languageCode}.json'); 
-    Map<String, dynamic> jsonMap = json.decode(jsonString);
-
-     
-    */
+    try {
+      String jsonString =
+          await rootBundle.loadString('i18n/${locale.languageCode}.json');
+      Map<String, dynamic> jsonMap = json.decode(jsonString);
+      _localizedStrings = jsonMap.map((key, value) => MapEntry(key, value));
+    } catch (e) {
+      log("Error Loading Translations: $e");
+    }
 
     for (var translation in GetIt.I<List<LocaleTranslations>>()) {
       if (translation.languageCode == locale.languageCode) {
@@ -40,7 +41,7 @@ class AppLocalizations {
 
   // This method will be called from every widget which needs a localized text
   String translate(String key) {
-    return _localizedStrings[key]!;
+    return _localizedStrings[key] ?? key;
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
@@ -55,8 +56,10 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
+    var translations = GetIt.I<List<LocaleTranslations>>();
+    var languageCodes = translations.map((t) => t.languageCode).toSet();
     // Include all of your supported language codes here
-    return ['en', 'sw'].contains(locale.languageCode);
+    return languageCodes.contains(locale.languageCode);
   }
 
   @override
