@@ -13,10 +13,3 @@ class SyncResults {
     required this.message,
   });
 }
-
-class SyncSurveys extends SyncUseCase {
-  @override
-  SyncResults call() {
-    return SyncResults(synced: false, message: "Failed to sync");
-  }
-}
