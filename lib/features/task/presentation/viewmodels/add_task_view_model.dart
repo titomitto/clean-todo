@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clean_todo/core/presentation/viewmodels/view_model.dart';
 import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:clean_todo/features/task/domain/usecases/add_task.dart';
@@ -9,10 +11,12 @@ class AddTaskViewModel extends ViewModel {
   var addTodo = GetIt.I<AddTask>();
 
   void submit() async {
-    addTodo(AddTaskParams(
+    var response = await addTodo(AddTaskParams(
       task: Task(
         title: taskController.text,
       ),
     ));
+
+    response.fold((l) => log("LEFT $l"), (r) => log("RIGHT $r"));
   }
 }

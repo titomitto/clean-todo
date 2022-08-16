@@ -14,8 +14,6 @@ import 'presentation/viewmodels/add_task_view_model.dart';
 import 'presentation/viewmodels/tasks_view_model.dart';
 import 'presentation/viewmodels/tasks_list_view_model.dart';
 
-var sl = GetIt.I;
-
 class TodoInjector extends Injector {
   @override
   List<LocaleTranslations> get translations => [
