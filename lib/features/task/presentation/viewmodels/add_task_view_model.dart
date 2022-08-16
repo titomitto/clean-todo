@@ -17,6 +17,9 @@ class AddTaskViewModel extends ViewModel {
       ),
     ));
 
-    response.fold((l) => log("LEFT $l"), (r) => log("RIGHT $r"));
+    response.fold((l) => log("LEFT $l"), (r) {
+      log("RIGHT $r");
+      Navigator.of(context).pop();
+    });
   }
 }

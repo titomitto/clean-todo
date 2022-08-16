@@ -1,4 +1,3 @@
-import 'package:clean_todo/core/failure/exceptions.dart';
 import 'package:clean_todo/core/failure/failure.dart';
 import 'package:clean_todo/features/task/data/datasources/tasks_local_datasource.dart';
 import 'package:clean_todo/features/task/data/mappers/task.dart';
@@ -25,6 +24,17 @@ class TaskRepositoryImpl extends TaskRepository {
       return Right(done);
     } catch (e) {
       return Left(CachePutFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Task>>> getTasks() async {
+    try {
+      var taskModels = await localDataSource.getTasks();
+      var tasks = taskModels.map((e) => e.toEntity()).toList();
+      return Right(tasks);
+    } catch (e) {
+      return Left(CacheGetFailure());
     }
   }
 }

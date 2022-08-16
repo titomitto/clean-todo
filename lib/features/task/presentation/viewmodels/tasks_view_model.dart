@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 
 class TasksViewModel extends ViewModel {
   navigate() {
-    Navigator.of(context).pushReplacementNamed(AddTaskScreen().routeName);
+    Navigator.of(context).pushNamed(AddTaskScreen().routeName);
   }
 }
