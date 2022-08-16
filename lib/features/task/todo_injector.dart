@@ -1,11 +1,10 @@
 import 'package:clean_todo/core/injector.dart';
 import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/core/presentation/screens/screen.dart';
+import 'package:clean_todo/core/utils/sl.dart';
 import 'package:clean_todo/features/task/data/datasources/tasks_local_datasource.dart';
 import 'package:clean_todo/features/task/data/repositories/task_repository_impl.dart';
-import 'package:clean_todo/features/task/domain/repositories/task_repository.dart';
 import 'package:clean_todo/features/task/presentation/screens/add_task_screen.dart';
-import 'package:get_it/get_it.dart';
 import 'domain/usecases/add_task.dart';
 import 'domain/usecases/delete_task.dart';
 import 'presentation/screens/tasks_screen.dart';
