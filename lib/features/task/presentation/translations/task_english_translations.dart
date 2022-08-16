@@ -11,6 +11,6 @@ class TasksEnglishTranslations extends LocaleTranslations {
   @override
   Map<String, String> get translations => {
         "hello_world": "Hello World!!!",
-        "complex_string": "My name is @{name}, and my age is {{age}}",
+        "complex_string": "My name is @{name}, and my age is @{age}",
       };
 }

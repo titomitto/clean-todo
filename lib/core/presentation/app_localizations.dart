@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -79,6 +80,18 @@ abstract class LocaleTranslations {
 
 extension Translation on String {
   String tr(BuildContext context, [Map<String, dynamic>? values]) {
-    return AppLocalizations.of(context)!.translate(this);
+    String translated = AppLocalizations.of(context)!.translate(this);
+    if (values != null) {
+      translated = translated.replaceAllMapped(RegExp(r'@\{(.*?)\}'), (match) {
+        if (!values.containsKey(match.group(1))) {
+          return "${match.group(0)}";
+        }
+
+        String arg = match.group(1) ?? "";
+        arg = arg.trim();
+        return "${values[arg]}";
+      });
+    }
+    return translated;
   }
 }

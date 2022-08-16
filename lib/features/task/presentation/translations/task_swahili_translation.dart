@@ -11,6 +11,6 @@ class TasksSwahiliTranslations extends LocaleTranslations {
   @override
   Map<String, String> get translations => {
         "hello_world": "Abari dunia!!!",
-        "complex_string": "Jina langu ni @{name}, na miaka yangu ni {{age}}",
+        "complex_string": "Jina langu ni @{name}, na miaka yangu ni @{age}",
       };
 }
