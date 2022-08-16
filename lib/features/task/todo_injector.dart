@@ -6,8 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'domain/usecases/add_task.dart';
 import 'domain/usecases/delete_task.dart';
 import 'presentation/screens/tasks_screen.dart';
-import 'presentation/translations/task_english_translations.dart';
-import 'presentation/translations/task_swahili_translation.dart';
+import 'presentation/tasks_translations.dart';
 import 'presentation/viewmodels/add_task_view_model.dart';
 import 'presentation/viewmodels/tasks_view_model.dart';
 import 'presentation/viewmodels/tasks_list_view_model.dart';
@@ -15,8 +14,8 @@ import 'presentation/viewmodels/tasks_list_view_model.dart';
 class TodoInjector extends Injector {
   @override
   List<LocaleTranslations> get translations => [
-        TasksEnglishTranslations(),
-        TasksSwahiliTranslations(),
+        TasksEnTranslations(),
+        TasksSwTranslations(),
       ];
 
   @override
