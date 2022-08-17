@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:clean_todo/core/failure/exceptions.dart';
-import 'package:clean_todo/features/task/data/models/todo_model.dart';
+import 'package:clean_todo/features/task/data/models/task.dart';
 import 'package:hive/hive.dart';
 
 abstract class TasksLocalDataSource {
+  Stream<List<TaskModel>> watchTasks();
   Future<List<TaskModel>> getTasks();
   Future<bool> addTask(TaskModel task);
   Future<bool> updateTask(TaskModel task);
@@ -17,6 +20,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
     try {
       return box.values.toList();
     } catch (e) {
+      log("$e");
       throw CacheException();
     }
   }
@@ -28,6 +32,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
       await box.put(id, task..id = id);
       return true;
     } catch (e) {
+      log("$e");
       throw CacheException();
     }
   }
@@ -38,6 +43,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
       await box.delete(task.id);
       return true;
     } catch (e) {
+      log("$e");
       throw CacheException();
     }
   }
@@ -59,5 +65,11 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
     } catch (e) {
       throw CacheException();
     }
+  }
+
+  @override
+  Stream<List<TaskModel>> watchTasks() async* {
+    yield await getTasks();
+    yield await box.watch().map((event) => event.value as TaskModel).toList();
   }
 }

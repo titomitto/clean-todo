@@ -6,7 +6,7 @@ class AddTaskScreen extends Screen<AddTaskViewModel> {
   AddTaskScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, viewModel) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Task List"),

@@ -12,8 +12,12 @@ class TasksListViewModel extends ViewModel {
   void fetchTasks() async {
     var response = await getTasks();
     response.fold(
-      (l) => log("$l"),
-      (r) => tasks = r,
+      (l) => log("ERRR $l"),
+      (r) {
+        log("RES $r");
+        tasks = r;
+        notifyListeners();
+      },
     );
   }
 

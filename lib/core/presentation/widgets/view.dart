@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
@@ -7,12 +9,10 @@ abstract class View<VM extends ViewModel> extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
   View({Key? key}) : super(key: key);
 
-  late final VM viewModel;
-
   @override
   State<View> createState() => ViewState<VM>();
 
-  Widget build(BuildContext context);
+  Widget build(BuildContext context, VM viewModel);
 }
 
 class ViewState<VM extends ViewModel> extends State<View>
@@ -24,17 +24,9 @@ class ViewState<VM extends ViewModel> extends State<View>
     super.didChangeDependencies();
   }
 
-  void setViewModel() {
-    setState(() {
-      widget.viewModel = viewModel;
-      widget.viewModel.context = context;
-    });
-  }
-
   @mustCallSuper
   @override
   void initState() {
-    setViewModel();
     viewModel.onInit();
     super.initState();
   }
@@ -42,6 +34,7 @@ class ViewState<VM extends ViewModel> extends State<View>
   @mustCallSuper
   @override
   void dispose() {
+    log("Disposing.... VM");
     WidgetsBinding.instance.removeObserver(this);
     viewModel.dispose();
     super.dispose();
@@ -69,7 +62,8 @@ class ViewState<VM extends ViewModel> extends State<View>
     return ChangeNotifierProvider<VM>.value(
       value: viewModel,
       builder: (context, w) {
-        return widget.build(context);
+        viewModel.context = context;
+        return widget.build(context, viewModel);
       },
     );
   }

@@ -7,7 +7,7 @@ class TasksScreen extends Screen<TasksViewModel> {
   TasksScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, viewModel) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Todo Lst"),

@@ -4,15 +4,15 @@ import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:clean_todo/features/task/domain/repositories/task_repository.dart';
 import 'package:dartz/dartz.dart' hide Task;
 
-class GetTasks extends NoParamsUseCase<Future<Either<Failure, List<Task>>>> {
+class WatchTasks extends NoParamsUseCase<Stream<Either<Failure, List<Task>>>> {
   TaskRepository repository;
 
-  GetTasks({
+  WatchTasks({
     required this.repository,
   });
 
   @override
-  Future<Either<Failure, List<Task>>> call() {
-    return repository.getTasks();
+  Stream<Either<Failure, List<Task>>> call() {
+    return repository.watchTasks();
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clean_todo/core/failure/failure.dart';
 import 'package:clean_todo/features/task/data/datasources/tasks_local_datasource.dart';
 import 'package:clean_todo/features/task/data/mappers/task.dart';
@@ -34,7 +36,19 @@ class TaskRepositoryImpl extends TaskRepository {
       var tasks = taskModels.map((e) => e.toEntity()).toList();
       return Right(tasks);
     } catch (e) {
+      log("$e");
       return Left(CacheGetFailure());
     }
+  }
+
+  @override
+  Stream<Either<Failure, List<Task>>> watchTasks() async* {
+    /* try {
+     localDataSource.watchTasks().listen((event) {
+      yield localDataSource.getTasks();
+    });
+    } catch(e){
+
+    } */
   }
 }

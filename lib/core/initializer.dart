@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/core/presentation/router.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'injector.dart';
 import 'presentation/screens/screen.dart';
+import 'utils/sl.dart';
 
 class Initializer {
   List<Injector> injectors;
@@ -15,15 +18,15 @@ class Initializer {
     required this.defaultRoute,
   });
 
-  injectViewModels() {
+  injectViewModels() async {
     for (var injector in injectors) {
-      injector.registerViewModels();
+      await injector.registerViewModels();
     }
   }
 
-  injectUseCases() {
+  injectUseCases() async {
     for (var injector in injectors) {
-      injector.registerUseCases();
+      await injector.registerUseCases();
     }
   }
 
@@ -31,22 +34,22 @@ class Initializer {
     List<Screen> screens = injectors.expand((e) => e.screens).toList();
     AppRouter appRouter =
         AppRouter(screens: screens, defaultRoute: defaultRoute);
-    GetIt.I.registerSingleton<AppRouter>(appRouter);
+    sl.registerSingleton<AppRouter>(appRouter);
   }
 
   initRepositories() async {
     await Hive.initFlutter();
     for (var injector in injectors) {
-      injector.registerAdapters();
-      injector.registerDataSources();
-      injector.registerRepositories();
+      await injector.registerAdapters();
+      await injector.registerDataSources();
+      await injector.registerRepositories();
     }
   }
 
   initTranslations() async {
     List<LocaleTranslations> localeTranslations =
         injectors.expand((e) => e.translations).toList();
-    GetIt.I.registerSingleton<List<LocaleTranslations>>(localeTranslations);
+    sl.registerSingleton<List<LocaleTranslations>>(localeTranslations);
   }
 
   Future init() async {

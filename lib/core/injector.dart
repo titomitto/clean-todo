@@ -5,9 +5,9 @@ import 'presentation/screens/screen.dart';
 abstract class Injector {
   List<Screen> screens = [];
   List<LocaleTranslations> translations = [];
-  void registerAdapters() {}
-  void registerRepositories() {}
-  void registerDataSources() {}
-  void registerViewModels() {}
-  void registerUseCases() {}
+  Future<void> registerAdapters() async {}
+  Future<void> registerRepositories() async {}
+  Future<void> registerDataSources() async {}
+  Future<void> registerViewModels() async {}
+  Future<void> registerUseCases() async {}
 }

@@ -1,5 +1,6 @@
-import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:hive/hive.dart';
+
+part 'task.g.dart';
 
 @HiveType(typeId: 0)
 class TaskModel {
