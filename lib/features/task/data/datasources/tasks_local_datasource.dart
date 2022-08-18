@@ -69,7 +69,13 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
 
   @override
   Stream<List<TaskModel>> watchTasks() async* {
-    yield await getTasks();
-    yield await box.watch().map((event) => event.value as TaskModel).toList();
+    yield [];
+    try {
+      yield await getTasks();
+      yield* box.watch().map((event) => box.values.toList());
+    } catch (e) {
+      log("WATCH_ERROR $e");
+      throw CacheException();
+    }
   }
 }

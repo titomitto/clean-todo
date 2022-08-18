@@ -11,6 +11,7 @@ class TasksEnTranslations extends LocaleTranslations {
   Map<String, String> get translations => {
         "hello_world": "Hello World!!!",
         "complex_string": "My name is @{name}, and my age is @{age}",
+        "tasks_title": "Tasks",
       };
 }
 
@@ -23,7 +24,8 @@ class TasksSwTranslations extends LocaleTranslations {
 
   @override
   Map<String, String> get translations => {
-        "hello_world": "Abari dunia!!!",
+        "hello_world": "Habari dunia!!!",
         "complex_string": "Jina langu ni @{name}, na miaka yangu ni @{age}",
+        "tasks_title": "Kazi",
       };
 }

@@ -42,6 +42,7 @@ dependencies:
   dartz: ^0.10.1
   flutter_localizations:
     sdk: flutter
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:

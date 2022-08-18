@@ -43,12 +43,23 @@ class TaskRepositoryImpl extends TaskRepository {
 
   @override
   Stream<Either<Failure, List<Task>>> watchTasks() async* {
-    /* try {
-     localDataSource.watchTasks().listen((event) {
-      yield localDataSource.getTasks();
-    });
-    } catch(e){
+    try {
+      yield* localDataSource.watchTasks().map((event) {
+        return Right(event.map((e) => e.toEntity()).toList());
+      });
+    } catch (e) {
+      log("EEERRED $e");
+      yield Left(CacheGetFailure());
+    }
+  }
 
-    } */
+  @override
+  Future<Either<Failure, bool>> deleteTask(Task task) async {
+    try {
+      var done = await localDataSource.deleteTask(task.toModel());
+      return Right(done);
+    } catch (e) {
+      return Left(CachePutFailure());
+    }
   }
 }

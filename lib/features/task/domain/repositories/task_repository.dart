@@ -7,4 +7,5 @@ abstract class TaskRepository {
   Future<Either<Failure, List<Task>>> getTasks();
   Future<Either<Failure, bool>> addTask(Task task);
   Future<bool> updateTask(Task task);
+  Future<Either<Failure, bool>> deleteTask(Task task);
 }
