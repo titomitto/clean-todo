@@ -59,12 +59,8 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   }
 
   Future<TasksLocalDataSourceImpl> init() async {
-    try {
-      box = await Hive.openBox("tasks");
-      return this;
-    } catch (e) {
-      throw CacheException();
-    }
+    box = await Hive.openBox("tasks");
+    return this;
   }
 
   @override

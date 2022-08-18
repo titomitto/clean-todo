@@ -3,6 +3,7 @@ import 'package:clean_todo/core/presentation/widgets/view.dart';
 import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 class TaskView extends View<TaskViewModel> {
   final Task task;
@@ -24,20 +25,30 @@ class TaskView extends View<TaskViewModel> {
           Expanded(
             child: Row(
               children: [
-                const Icon(
-                  Iconsax.tick_square5,
-                  color: Color(0xffd5ee9b),
-                  size: 28,
-                ),
-                const SizedBox(
-                  width: 30,
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureDetector(
+                    onTap: () => viewModel.onCheck(task),
+                    behavior: HitTestBehavior.opaque,
+                    child: Icon(
+                      task.isDone
+                          ? EvaIcons.checkmarkSquare2
+                          : EvaIcons.squareOutline,
+                      color:
+                          task.isDone ? const Color(0xffd5ee9b) : Colors.grey,
+                      size: 28,
+                    ),
+                  ),
                 ),
                 Expanded(
                   child: Text(
                     task.title,
-                    style: const TextStyle(
+                    style: TextStyle(
+                      decoration: task.isDone
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
                       fontSize: 18,
-                      color: Colors.white,
+                      color: task.isDone ? Colors.grey : Colors.white,
                     ),
                   ),
                 ),

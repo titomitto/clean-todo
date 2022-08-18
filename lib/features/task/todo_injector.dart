@@ -12,6 +12,7 @@ import 'package:clean_todo/features/task/presentation/screens/add_task_screen.da
 import 'package:hive/hive.dart';
 import 'domain/usecases/add_task.dart';
 import 'domain/usecases/delete_task.dart';
+import 'domain/usecases/update_task.dart';
 import 'presentation/screens/tasks_screen.dart';
 import 'presentation/task_translations.dart';
 import 'presentation/viewmodels/add_task_view_model.dart';
@@ -52,6 +53,7 @@ class TodoInjector extends Injector {
     sl.registerSingleton(GetTasks(repository: sl()));
     sl.registerSingleton(WatchTasks(repository: sl()));
     sl.registerSingleton(DeleteTask(repository: sl()));
+    sl.registerSingleton(UpdateTask(repository: sl()));
   }
 
   @override

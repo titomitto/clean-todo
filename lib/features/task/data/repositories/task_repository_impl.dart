@@ -15,8 +15,13 @@ class TaskRepositoryImpl extends TaskRepository {
   });
 
   @override
-  Future<bool> updateTask(Task task) {
-    return localDataSource.updateTask(task.toModel());
+  Future<Either<Failure, bool>> updateTask(Task task) async {
+    try {
+      var done = await localDataSource.updateTask(task.toModel());
+      return Right(done);
+    } catch (e) {
+      return Left(CachePutFailure());
+    }
   }
 
   @override

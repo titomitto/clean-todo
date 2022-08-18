@@ -15,6 +15,8 @@ class TasksListView extends View<TasksListViewModel> {
   @override
   Widget build(BuildContext context, viewModel) {
     return Container(
+      width: double.infinity,
+      height: double.infinity,
       padding: const EdgeInsets.symmetric(
         horizontal: 15,
         vertical: 10,
