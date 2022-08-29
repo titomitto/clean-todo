@@ -34,21 +34,21 @@ class TodoInjector extends Injector {
       ];
 
   @override
-  Future<void> registerDataSources() async {
+  Future<void> registerDataSources(sl) async {
     TasksLocalDataSourceImpl tasksLocalDataSourceImpl =
         await TasksLocalDataSourceImpl().init();
     sl.registerSingleton<TasksLocalDataSource>(tasksLocalDataSourceImpl);
   }
 
   @override
-  Future<void> registerRepositories() async {
+  Future<void> registerRepositories(sl) async {
     sl.registerSingleton<TaskRepository>(TaskRepositoryImpl(
       localDataSource: sl(),
     ));
   }
 
   @override
-  Future<void> registerUseCases() async {
+  Future<void> registerUseCases(sl) async {
     sl.registerSingleton(AddTask(repository: sl()));
     sl.registerSingleton(GetTasks(repository: sl()));
     sl.registerSingleton(WatchTasks(repository: sl()));
@@ -57,7 +57,7 @@ class TodoInjector extends Injector {
   }
 
   @override
-  Future<void> registerViewModels() async {
+  Future<void> registerViewModels(sl) async {
     sl.registerFactory(() => TasksListViewModel());
     sl.registerFactory(() => TasksViewModel());
     sl.registerFactory(() => AddTaskViewModel());

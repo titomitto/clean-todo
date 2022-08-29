@@ -8,15 +8,24 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-class App extends View<MOOsViewModel> {
-  App({Key? key}) : super(key: key);
+class App extends View<AppViewModel> {
+  final String title;
+  App({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, viewModel) {
     var appRouter = GetIt.I<AppRouter>();
     return MaterialApp(
+      title: title,
       routes: appRouter.routes,
       initialRoute: appRouter.defaultRoute,
+      builder: (context, widget) {
+        viewModel.context = context;
+        return widget ?? const SizedBox();
+      },
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -31,24 +40,7 @@ class App extends View<MOOsViewModel> {
   }
 }
 
-class MOOsViewModel extends AppViewModel {
+class AppViewModel extends ViewModel {
   @override
-  void onResume() {
-    log("ON RESUMED $context");
-    if (context != null) {
-      showDialog(
-          context: context!,
-          builder: (context) {
-            return const AlertDialog(
-              title: Text("Heeey"),
-              content: Text("Woohan a Yut"),
-            );
-          });
-    }
-  }
-
-  @override
-  void onInit() {
-    log("YUUUUT A FOOT ");
-  }
+  void onInit() {}
 }
