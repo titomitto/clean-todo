@@ -9,5 +9,5 @@ void main() async {
     defaultRoute: "/",
     injectors: featureInjectors,
   ).init();
-  runApp(const App());
+  runApp(App());
 }

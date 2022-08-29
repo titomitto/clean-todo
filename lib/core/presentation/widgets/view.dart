@@ -28,6 +28,7 @@ class ViewState<VM extends ViewModel> extends State<View>
   @override
   void initState() {
     viewModel.onInit();
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
@@ -42,6 +43,7 @@ class ViewState<VM extends ViewModel> extends State<View>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("STATE CHANGED $state");
     switch (state) {
       case AppLifecycleState.resumed:
         viewModel.onResume();

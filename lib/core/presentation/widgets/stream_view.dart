@@ -4,7 +4,7 @@ class StreamView<T> extends StatelessWidget {
   final T? initialData;
   final Stream<T> stream;
   final Widget Function(Object? error, StackTrace? stackTrace)? onError;
-  final Widget Function(T data) onSuccess;
+  final Widget Function(T? data) onSuccess;
   final Widget Function() onWaiting;
 
   const StreamView({
@@ -25,7 +25,7 @@ class StreamView<T> extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return onWaiting();
         } else if (snapshot.hasData) {
-          return onSuccess(snapshot.data!);
+          return onSuccess(snapshot.data);
         } else {
           return const Text("UnCought!");
         }
