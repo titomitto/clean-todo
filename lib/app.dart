@@ -1,18 +1,13 @@
-import 'package:clean_todo/core/presentation/theme.dart';
-import 'package:flutter/material.dart';
+import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-
-import 'app_localizations.dart';
 
 class App extends StatelessWidget {
   final String title;
-  final GoRouter routes;
   const App({
     Key? key,
     required this.title,
-    required this.routes,
   }) : super(key: key);
 
   @override
@@ -20,9 +15,9 @@ class App extends StatelessWidget {
     return OKToast(
       position: ToastPosition.bottom,
       child: MaterialApp.router(
-        routerConfig: routes,
+        //routerConfig: routes,
         title: title,
-        theme: lightTheme,
+        //theme: lightTheme,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           AppLocalizations.delegate,

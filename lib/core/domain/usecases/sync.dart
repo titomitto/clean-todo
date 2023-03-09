@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/domain/usecases/usecase.dart';
+import 'usecase.dart';
 
 abstract class SyncUseCase extends NoParamsUseCase<SyncResults> {
   @override

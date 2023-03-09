@@ -5,16 +5,11 @@ abstract class Failure {
 }
 
 class ServerFailure extends Failure {
-  final Exception _exception;
+  final ServerException _exception;
   ServerFailure(this._exception);
   @override
   String get msg {
-    switch (_exception.runtimeType) {
-      case NoNetworkException:
-        return "No internet connection";
-      default:
-        return "An unexpected error occured";
-    }
+    return _exception.message;
   }
 }
 

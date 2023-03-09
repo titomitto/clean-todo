@@ -1,10 +1,18 @@
 import 'package:clean_todo/core/initializer.dart';
-import 'config/injectors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'app.dart';
+import 'config/features.dart';
 
 void main() async {
   await Initializer(
-    title: "Todo Tasks",
-    defaultRoute: "/",
-    injectors: featureInjectors,
+    injectors: features,
+    initialRoute: '/',
   ).init();
+
+  runApp(const ProviderScope(
+    child: App(
+      title: "Todo Tasks",
+    ),
+  ));
 }

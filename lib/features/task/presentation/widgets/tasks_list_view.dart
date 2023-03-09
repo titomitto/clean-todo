@@ -21,7 +21,7 @@ class TasksListView extends View<TasksListViewModel> {
       ),
       color: const Color(0xff14141b),
       child: StreamBuilder<Either<Failure, List<Task>>>(
-        stream: viewModel.taskWatcher(),
+        // stream: viewModel.taskWatcher(),
         builder: ((context, snapshot) {
           var data = snapshot.data;
           return data != null

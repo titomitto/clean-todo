@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -10,12 +8,6 @@ class AppLocalizations {
   final Locale locale;
 
   AppLocalizations(this.locale);
-
-  // Helper method to keep the code in the widgets concise
-  // Localizations are accessed using an InheritedWidget "of" syntax
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
-  }
 
   Map<String, String> _localizedStrings = {};
 
@@ -27,13 +19,9 @@ class AppLocalizations {
       Map<String, dynamic> jsonMap = json.decode(jsonString);
       _localizedStrings = jsonMap.map((key, value) => MapEntry(key, value));
     } catch (e) {
-      log("Error Loading Translations: $e");
-    }
-
-    for (var translation in GetIt.I<List<LocaleTranslations>>()) {
-      if (translation.languageCode == locale.languageCode) {
-        _localizedStrings.addAll(translation.translations);
-      }
+      String jsonString = await rootBundle.loadString('i18n/en.json');
+      Map<String, dynamic> jsonMap = json.decode(jsonString);
+      _localizedStrings = jsonMap.map((key, value) => MapEntry(key, value));
     }
 
     return true;
@@ -56,10 +44,8 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    var translations = GetIt.I<List<LocaleTranslations>>();
-    var languageCodes = translations.map((t) => t.languageCode).toSet();
     // Include all of your supported language codes here
-    return languageCodes.contains(locale.languageCode);
+    return true;
   }
 
   @override
@@ -67,6 +53,7 @@ class _AppLocalizationsDelegate
     // AppLocalizations class is where the JSON loading actually runs
     AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
+    GetIt.I.registerSingleton<AppLocalizations>(localizations);
     return localizations;
   }
 
@@ -82,8 +69,10 @@ abstract class LocaleTranslations {
 }
 
 extension Translation on String {
-  String tr(BuildContext context, [Map<String, dynamic>? values]) {
-    String translated = AppLocalizations.of(context)!.translate(this);
+  String get tr => trWith();
+
+  String trWith([Map<String, dynamic>? values]) {
+    String translated = GetIt.I<AppLocalizations>().translate(this);
     if (values != null) {
       translated = translated.replaceAllMapped(RegExp(r'@\{(.*?)\}'), (match) {
         if (!values.containsKey(match.group(1))) {

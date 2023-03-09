@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract class ViewModel extends ChangeNotifier {
   late BuildContext context;
 
+  bool mounted = true;
+
   /// This method is executed exactly once for each State object Flutter's
   ///  framework creates.
   void onInit() {}
