@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/injector.dart';
+import 'package:clean_todo/core/feature.dart';
 
 class TodoFeature extends Feature {
   @override

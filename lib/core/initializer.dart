@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../app.dart';
-import 'injector.dart';
+import 'feature.dart';
+import 'utils/app_config.dart';
 
 GlobalKey<NavigatorState>? parentNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -19,23 +20,24 @@ class Initializer {
     required this.initialRoute,
   });
 
-  Future init() async {
+  preregister() async {
+    for (var injector in injectors) {
+      await injector.preregister();
+    }
+  }
+
+  Future<AppConfig> init() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     await preregister();
 
-    final GoRouter routers = GoRouter(
+    final GoRouter router = GoRouter(
       navigatorKey: parentNavigatorKey,
       initialLocation: initialRoute,
       routes: <RouteBase>[
         ...injectors.expand((e) => e.routes),
       ],
     );
-  }
-
-  preregister() async {
-    for (var injector in injectors) {
-      await injector.preregister();
-    }
+    return AppConfig(router: router);
   }
 }

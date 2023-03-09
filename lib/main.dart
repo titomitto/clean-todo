@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 import 'config/features.dart';
+import 'core/utils/app_config.dart';
 
 void main() async {
-  await Initializer(
+  AppConfig config = await Initializer(
     injectors: features,
     initialRoute: '/',
   ).init();
 
-  runApp(const ProviderScope(
+  var app = ProviderScope(
     child: App(
       title: "Todo Tasks",
+      config: config,
     ),
-  ));
+  );
+
+  runApp(app);
 }
