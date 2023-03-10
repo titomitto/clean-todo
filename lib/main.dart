@@ -6,8 +6,10 @@ import 'config/features.dart';
 import 'core/utils/app_config.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   AppConfig config = await Initializer(
-    injectors: features,
+    features: features,
     initialRoute: '/',
   ).init();
 

@@ -2,7 +2,6 @@ import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/core/utils/app_config.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:oktoast/oktoast.dart';
 
 class App extends StatelessWidget {

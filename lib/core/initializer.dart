@@ -12,32 +12,33 @@ import 'utils/app_config.dart';
 GlobalKey<NavigatorState>? parentNavigatorKey = GlobalKey<NavigatorState>();
 
 class Initializer {
-  List<Feature> injectors;
+  List<Feature> features;
   String initialRoute;
-  GetIt sl = GetIt.instance;
   Initializer({
-    required this.injectors,
+    required this.features,
     required this.initialRoute,
   });
 
   preregister() async {
-    for (var injector in injectors) {
-      await injector.preregister();
+    for (var feature in features) {
+      await feature.preregister();
     }
   }
 
-  Future<AppConfig> init() async {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    await preregister();
-
+  GoRouter registerRoutes() {
     final GoRouter router = GoRouter(
       navigatorKey: parentNavigatorKey,
       initialLocation: initialRoute,
       routes: <RouteBase>[
-        ...injectors.expand((e) => e.routes),
+        ...features.expand((e) => e.routes),
       ],
     );
+    return router;
+  }
+
+  Future<AppConfig> init() async {
+    await preregister();
+    var router = registerRoutes();
     return AppConfig(router: router);
   }
 }

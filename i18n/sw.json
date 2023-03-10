@@ -1,3 +1,5 @@
 {
-    "complex_string": "Mimi jina langu ni @{name}, na miaka yangu ni @{age}"
+    "hello_world": "Habari dunia!!!",
+    "complex_string": "Mimi jina langu ni @{name}, na miaka yangu ni @{age}",
+    "tasks_title": "Kazi"
 }
