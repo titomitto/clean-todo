@@ -1,6 +1,7 @@
-import 'package:clean_todo/features/task/presentation/notifiers/tasks_notifier.dart';
+import 'package:clean_todo/features/task/presentation/notifiers/tasks_state_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../domain/entities/task.dart';
 
@@ -24,7 +25,9 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
       isDone: false,
     );
 
-    ref.read(tasksProvider.notifier).addTask(task);
+    ref.read(tasksStateNotifierProvider.notifier).addTask(task);
+
+    context.pop();
   }
 
   @override

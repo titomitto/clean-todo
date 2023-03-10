@@ -2,9 +2,19 @@ import 'dart:developer';
 
 import 'package:clean_todo/core/failure/exceptions.dart';
 import 'package:clean_todo/features/task/data/models/task.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
-abstract class TasksLocalDataSource {
+import '../../../../core/data/local_data_source.dart';
+
+final tasksLocalDataSourceProvider =
+    FutureProvider<TasksLocalDataSource>((ref) async {
+  var tasksLocalDataSource = TasksLocalDataSourceImpl();
+  await tasksLocalDataSource.init();
+  return tasksLocalDataSource;
+});
+
+abstract class TasksLocalDataSource implements LocalDataSource {
   Stream<List<TaskModel>> watchTasks();
   Future<List<TaskModel>> getTasks();
   Future<bool> addTask(TaskModel task);
@@ -58,9 +68,9 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
     }
   }
 
-  Future<TasksLocalDataSourceImpl> init() async {
+  @override
+  Future<void> init() async {
     box = await Hive.openBox("tasks");
-    return this;
   }
 
   @override
@@ -73,5 +83,15 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
       log("WATCH_ERROR $e");
       throw CacheException();
     }
+  }
+
+  @override
+  Future<void> clear() async {
+    await box.clear();
+  }
+
+  @override
+  Future<void> close() async {
+    await box.close();
   }
 }

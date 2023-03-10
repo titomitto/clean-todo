@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../notifiers/tasks_notifier.dart';
+import '../notifiers/tasks_state_notifier.dart';
 import 'task_view.dart';
 
 class TasksListView extends ConsumerWidget {
@@ -9,7 +9,7 @@ class TasksListView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    var tasks = ref.watch(tasksProvider);
+    var tasksState = ref.watch(tasksStateNotifierProvider);
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -19,9 +19,9 @@ class TasksListView extends ConsumerWidget {
       ),
       color: const Color(0xff14141b),
       child: ListView.builder(
-        itemCount: tasks.length,
+        itemCount: tasksState.tasks.length,
         itemBuilder: (context, index) {
-          var task = tasks[index];
+          var task = tasksState.tasks[index];
           return TaskView(task: task);
         },
       ),

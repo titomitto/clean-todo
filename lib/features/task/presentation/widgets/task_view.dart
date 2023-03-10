@@ -1,9 +1,12 @@
 import 'package:clean_todo/features/task/domain/entities/task.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
-class TaskView extends StatelessWidget {
+import '../notifiers/tasks_state_notifier.dart';
+
+class TaskView extends ConsumerWidget {
   final Task task;
   const TaskView({
     Key? key,
@@ -11,7 +14,8 @@ class TaskView extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    var tasksNotifier = ref.read(tasksStateNotifierProvider.notifier);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -54,7 +58,9 @@ class TaskView extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              tasksNotifier.removeTask(task);
+            },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Icon(
