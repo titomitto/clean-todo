@@ -7,7 +7,7 @@ import 'add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
   static String get routePath => "/";
-  TasksScreen({Key? key}) : super(key: key);
+  const TasksScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class TasksScreen extends StatelessWidget {
         backgroundColor: const Color(0xff14141b),
         title: Text("tasks_title".tr),
       ),
-      body: TasksListView(),
+      body: const TasksListView(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xffffd78a),
         foregroundColor: Colors.black,

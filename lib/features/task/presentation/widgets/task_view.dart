@@ -1,19 +1,17 @@
-import 'package:clean_todo/features/task/presentation/viewmodels/task_view_model.dart';
-import 'package:clean_todo/core/presentation/widgets/view.dart';
 import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
-class TaskView extends View<TaskViewModel> {
+class TaskView extends StatelessWidget {
   final Task task;
-  TaskView({
+  const TaskView({
     Key? key,
     required this.task,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, viewModel) {
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -28,7 +26,7 @@ class TaskView extends View<TaskViewModel> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: GestureDetector(
-                    onTap: () => viewModel.onCheck(task),
+                    onTap: () {},
                     behavior: HitTestBehavior.opaque,
                     child: Icon(
                       task.isDone
@@ -56,7 +54,7 @@ class TaskView extends View<TaskViewModel> {
             ),
           ),
           GestureDetector(
-            onTap: () => viewModel.onDeleteTask(task),
+            onTap: () {},
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Icon(

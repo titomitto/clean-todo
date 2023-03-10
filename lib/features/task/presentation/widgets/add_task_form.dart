@@ -1,0 +1,70 @@
+import 'package:clean_todo/features/task/presentation/notifiers/tasks_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../domain/entities/task.dart';
+
+class AddTaskForm extends ConsumerStatefulWidget {
+  const AddTaskForm({
+    super.key,
+  });
+
+  @override
+  ConsumerState<AddTaskForm> createState() => _AddTaskFormState();
+}
+
+class _AddTaskFormState extends ConsumerState<AddTaskForm> {
+  final taskController = TextEditingController();
+
+  void submit() {
+    if (taskController.text.isEmpty) return;
+
+    final task = Task(
+      title: taskController.text,
+      isDone: false,
+    );
+
+    ref.read(tasksProvider.notifier).addTask(task);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    taskController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: Column(
+        children: [
+          TextFormField(
+            controller: taskController,
+            maxLines: 3,
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
+              hintText: "Enter task",
+              hintStyle: TextStyle(
+                color: Color(0xff565765),
+              ),
+              filled: true,
+              fillColor: Color(0xff282934),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          MaterialButton(
+            minWidth: double.infinity,
+            onPressed: submit,
+            color: const Color(0xffffd78a),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              child: Text("SAVE TASK"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
