@@ -1,21 +1,13 @@
 import 'package:clean_todo/core/feature.dart';
-import 'package:clean_todo/features/task/presentation/screens/add_task_screen.dart';
 import 'package:go_router/go_router.dart';
-
-import 'presentation/screens/tasks_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'presentation/task_routes.dart';
 
 class TaskFeature extends Feature {
   @override
-  List<RouteBase> get routes => [
-        GoRoute(
-          path: TasksScreen.routePath,
-          builder: (context, state) => const TasksScreen(),
-        ),
-        GoRoute(
-          path: AddTaskScreen.routePath,
-          builder: (context, state) => const AddTaskScreen(),
-        ),
-      ];
+  List<RouteBase> get routes => taskRoutes;
   @override
-  Future<void> preregister() async {}
+  Future<void> preregister() async {
+    await Hive.initFlutter();
+  }
 }

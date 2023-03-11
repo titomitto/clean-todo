@@ -70,6 +70,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
 
   @override
   Future<void> init() async {
+    Hive.registerAdapter(TaskModelAdapter());
     box = await Hive.openBox("tasks");
   }
 

@@ -15,7 +15,7 @@ class TaskView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    var tasksNotifier = ref.read(tasksStateNotifierProvider.notifier);
+    // var tasksNotifier = ref.read(tasksStateNotifierProvider.notifier);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -30,7 +30,11 @@ class TaskView extends ConsumerWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      ref
+                          .read(tasksStateNotifierProvider.notifier)
+                          .toggle(task);
+                    },
                     behavior: HitTestBehavior.opaque,
                     child: Icon(
                       task.isDone
@@ -59,7 +63,7 @@ class TaskView extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              tasksNotifier.removeTask(task);
+              ref.read(tasksStateNotifierProvider.notifier).deleteTask(task);
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),

@@ -8,7 +8,7 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final taskRepositoryProvider = FutureProvider<TaskRepository>((ref) async {
+final taskRepositoryProvider = Provider<TaskRepository>((ref) {
   return TaskRepositoryImpl(ref: ref);
 });
 
