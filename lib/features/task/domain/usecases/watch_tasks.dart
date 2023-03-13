@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/domain/usecases/usecase.dart';
+import 'package:clean_todo/core/usecases/usecase.dart';
 import 'package:clean_todo/core/failure/failure.dart';
 import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:clean_todo/features/task/domain/repositories/task_repository.dart';

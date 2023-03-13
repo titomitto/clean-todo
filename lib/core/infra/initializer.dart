@@ -5,9 +5,9 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../app.dart';
+import '../../app.dart';
 import 'feature.dart';
-import 'utils/app_config.dart';
+import '../utils/app_config.dart';
 
 GlobalKey<NavigatorState>? parentNavigatorKey = GlobalKey<NavigatorState>();
 

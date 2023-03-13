@@ -6,7 +6,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 import '../notifiers/tasks_state_notifier.dart';
 
-class TaskView extends ConsumerWidget {
+class TaskView extends StatelessWidget {
   final Task task;
   const TaskView({
     Key? key,
@@ -14,8 +14,7 @@ class TaskView extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
-    // var tasksNotifier = ref.read(tasksStateNotifierProvider.notifier);
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -27,25 +26,7 @@ class TaskView extends ConsumerWidget {
           Expanded(
             child: Row(
               children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: GestureDetector(
-                    onTap: () {
-                      ref
-                          .read(tasksStateNotifierProvider.notifier)
-                          .toggle(task);
-                    },
-                    behavior: HitTestBehavior.opaque,
-                    child: Icon(
-                      task.isDone
-                          ? EvaIcons.checkmarkSquare2
-                          : EvaIcons.squareOutline,
-                      color:
-                          task.isDone ? const Color(0xffd5ee9b) : Colors.grey,
-                      size: 28,
-                    ),
-                  ),
-                ),
+                CheckBox(task: task),
                 Expanded(
                   child: Text(
                     task.title,
@@ -61,20 +42,61 @@ class TaskView extends ConsumerWidget {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              ref.read(tasksStateNotifierProvider.notifier).deleteTask(task);
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Icon(
-                Iconsax.trash,
-                color: Colors.grey,
-                size: 20,
-              ),
-            ),
-          )
+          DeleteButton(task: task)
         ],
+      ),
+    );
+  }
+}
+
+class CheckBox extends ConsumerWidget {
+  const CheckBox({
+    super.key,
+    required this.task,
+  });
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context, ref) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: GestureDetector(
+        onTap: () {
+          ref.read(tasksStateNotifierProvider.notifier).toggle(task);
+        },
+        behavior: HitTestBehavior.opaque,
+        child: Icon(
+          task.isDone ? EvaIcons.checkmarkSquare2 : EvaIcons.squareOutline,
+          color: task.isDone ? const Color(0xffd5ee9b) : Colors.grey,
+          size: 28,
+        ),
+      ),
+    );
+  }
+}
+
+class DeleteButton extends ConsumerWidget {
+  const DeleteButton({
+    super.key,
+    required this.task,
+  });
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context, ref) {
+    return GestureDetector(
+      onTap: () {
+        ref.read(tasksStateNotifierProvider.notifier).deleteTask(task);
+      },
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
+        child: Icon(
+          Iconsax.trash,
+          color: Colors.grey,
+          size: 20,
+        ),
       ),
     );
   }

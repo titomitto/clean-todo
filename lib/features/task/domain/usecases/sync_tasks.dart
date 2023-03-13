@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/domain/usecases/sync.dart';
+import 'package:clean_todo/core/usecases/sync.dart';
 
 class SyncTasks extends SyncUseCase {
   @override

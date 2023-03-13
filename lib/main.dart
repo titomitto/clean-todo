@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/initializer.dart';
+import 'package:clean_todo/core/infra/initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
