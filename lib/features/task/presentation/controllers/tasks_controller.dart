@@ -7,7 +7,8 @@ import '../../domain/usecases/get_tasks.dart';
 import '../../domain/usecases/update_task.dart';
 
 final tasksControllerProvider =
-    StateNotifierProvider<TasksController, AsyncValue<List<Task>>>((ref) {
+    StateNotifierProvider.autoDispose<TasksController, AsyncValue<List<Task>>>(
+        (ref) {
   return TasksController(ref);
 });
 
