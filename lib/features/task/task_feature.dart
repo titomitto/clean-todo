@@ -1,6 +1,5 @@
 import 'package:clean_todo/core/infra/feature.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'presentation/task_routes.dart';
 
 class TaskFeature extends Feature {

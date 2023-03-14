@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:clean_todo/core/failure/failure.dart';
+import 'package:clean_todo/core/errors/failure.dart';
 import 'package:clean_todo/features/task/data/datasources/tasks_local_datasource.dart';
 import 'package:clean_todo/features/task/data/mappers/task.dart';
 import 'package:clean_todo/features/task/domain/entities/task.dart';

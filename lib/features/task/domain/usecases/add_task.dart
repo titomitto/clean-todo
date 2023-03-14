@@ -1,5 +1,5 @@
 import 'package:clean_todo/core/usecases/usecase.dart';
-import 'package:clean_todo/core/failure/failure.dart';
+import 'package:clean_todo/core/errors/failure.dart';
 import 'package:clean_todo/features/task/data/repositories/task_repository_impl.dart';
 import 'package:clean_todo/features/task/domain/entities/task.dart';
 import 'package:clean_todo/features/task/domain/repositories/task_repository.dart';

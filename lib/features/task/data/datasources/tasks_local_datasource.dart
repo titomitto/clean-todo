@@ -1,11 +1,11 @@
 import 'dart:developer';
 
-import 'package:clean_todo/core/failure/exceptions.dart';
+import 'package:clean_todo/core/errors/exceptions.dart';
 import 'package:clean_todo/features/task/data/models/task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../core/data/local_data_source.dart';
+import '../../../../core/datasource/local_data_source.dart';
 
 final tasksLocalDataSourceProvider =
     FutureProvider<TasksLocalDataSource>((ref) async {
