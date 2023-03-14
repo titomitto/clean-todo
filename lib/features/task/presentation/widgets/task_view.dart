@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
-import '../notifiers/tasks_state_notifier.dart';
+import '../view_model/tasks_controller.dart';
 
 class TaskView extends StatelessWidget {
   final Task task;
@@ -63,7 +63,7 @@ class CheckBox extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: () {
-          ref.read(tasksStateNotifierProvider.notifier).toggle(task);
+          ref.read(tasksControllerProvider.notifier).toggle(task);
         },
         behavior: HitTestBehavior.opaque,
         child: Icon(
@@ -88,7 +88,7 @@ class DeleteButton extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(tasksStateNotifierProvider.notifier).deleteTask(task);
+        ref.read(tasksControllerProvider.notifier).deleteTask(task);
       },
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),

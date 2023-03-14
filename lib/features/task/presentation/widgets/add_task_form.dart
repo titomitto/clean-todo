@@ -1,4 +1,4 @@
-import 'package:clean_todo/features/task/presentation/notifiers/tasks_state_notifier.dart';
+import 'package:clean_todo/features/task/presentation/view_model/tasks_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +18,7 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
   final taskController = TextEditingController();
 
   void submit() {
-    ref.read(tasksStateNotifierProvider.notifier).addTask(taskController.text);
+    ref.read(tasksControllerProvider.notifier).addTask(taskController.text);
     context.pop();
   }
 

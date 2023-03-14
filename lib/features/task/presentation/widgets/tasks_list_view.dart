@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../notifiers/tasks_state_notifier.dart';
+import '../controllers/tasks_controller.dart';
 import 'package:lottie/lottie.dart';
 import 'task_view.dart';
 
@@ -15,7 +15,7 @@ class TasksListView extends ConsumerStatefulWidget {
 class _TasksListViewState extends ConsumerState<TasksListView> {
   @override
   Widget build(BuildContext context) {
-    var tasksState = ref.watch(tasksStateNotifierProvider);
+    var tasksState = ref.watch(tasksControllerProvider);
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -56,7 +56,7 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
           children: [
             Lottie.asset(
               'assets/lottie/error-state.json',
-              width: 250,
+              width: 220,
             ),
             Text(
               "$error",

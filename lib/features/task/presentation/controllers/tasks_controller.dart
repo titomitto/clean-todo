@@ -6,14 +6,14 @@ import '../../domain/usecases/delete_task.dart';
 import '../../domain/usecases/get_tasks.dart';
 import '../../domain/usecases/update_task.dart';
 
-final tasksStateNotifierProvider =
-    StateNotifierProvider<TasksStateNotifier, AsyncValue<List<Task>>>((ref) {
-  return TasksStateNotifier(ref);
+final tasksControllerProvider =
+    StateNotifierProvider<TasksController, AsyncValue<List<Task>>>((ref) {
+  return TasksController(ref);
 });
 
-class TasksStateNotifier extends StateNotifier<AsyncValue<List<Task>>> {
+class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   StateNotifierProviderRef ref;
-  TasksStateNotifier(this.ref) : super(const AsyncValue.loading()) {
+  TasksController(this.ref) : super(const AsyncValue.loading()) {
     getTasks();
   }
 

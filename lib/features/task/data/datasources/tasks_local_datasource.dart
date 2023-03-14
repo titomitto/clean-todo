@@ -15,7 +15,6 @@ final tasksLocalDataSourceProvider =
 });
 
 abstract class TasksLocalDataSource implements LocalDataSource {
-  Stream<List<TaskModel>> watchTasks();
   Future<List<TaskModel>> getTasks();
   Future<bool> addTask(TaskModel task);
   Future<bool> updateTask(TaskModel task);
@@ -28,6 +27,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   @override
   Future<List<TaskModel>> getTasks() async {
     try {
+      log("CHAA ${box.values.toList()}}");
       return box.values.toList();
     } catch (e) {
       log("$e");
@@ -49,6 +49,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
 
   @override
   Future<bool> deleteTask(TaskModel task) async {
+    log("CHAP ${task.id}}");
     try {
       await box.delete(task.id);
       return true;
@@ -61,9 +62,12 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   @override
   Future<bool> updateTask(TaskModel task) async {
     try {
+      log("CHAP ${task.id}");
+
       await box.put(task.id, task);
       return true;
     } catch (e) {
+      log("$e");
       throw CacheException();
     }
   }
@@ -72,18 +76,6 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   Future<void> init() async {
     Hive.registerAdapter(TaskModelAdapter());
     box = await Hive.openBox("tasks");
-  }
-
-  @override
-  Stream<List<TaskModel>> watchTasks() async* {
-    yield [];
-    try {
-      yield await getTasks();
-      yield* box.watch().map((event) => box.values.toList());
-    } catch (e) {
-      log("WATCH_ERROR $e");
-      throw CacheException();
-    }
   }
 
   @override

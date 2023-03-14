@@ -55,19 +55,6 @@ class TaskRepositoryImpl extends TaskRepository {
   }
 
   @override
-  Stream<Either<Failure, List<Task>>> watchTasks() async* {
-    try {
-      var localDataSource = await ref.read(tasksLocalDataSourceProvider.future);
-      yield* localDataSource.watchTasks().map((event) {
-        return Right(event.map((e) => e.toEntity()).toList());
-      });
-    } catch (e) {
-      log("EEERRED $e");
-      yield Left(CacheGetFailure());
-    }
-  }
-
-  @override
   Future<Either<Failure, bool>> deleteTask(Task task) async {
     try {
       var localDataSource = await ref.read(tasksLocalDataSourceProvider.future);
