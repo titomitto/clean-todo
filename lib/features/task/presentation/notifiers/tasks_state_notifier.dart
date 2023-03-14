@@ -26,7 +26,7 @@ class TasksStateNotifier extends StateNotifier<AsyncValue<List<Task>>> {
 
     var response = await addTaskUseCase(AddTaskParams(task: task));
     await response.fold((failure) {
-      state = AsyncError(failure, StackTrace.current);
+      state = AsyncError(failure.message, StackTrace.current);
     }, (success) async {
       await getTasks();
     });
@@ -40,7 +40,7 @@ class TasksStateNotifier extends StateNotifier<AsyncValue<List<Task>>> {
     var response = await getTasksUseCase();
 
     response.fold((failure) {
-      state = AsyncError(failure, StackTrace.current);
+      state = AsyncError(failure.message, StackTrace.current);
     }, (tasks) {
       state = AsyncData(tasks);
     });
@@ -52,7 +52,7 @@ class TasksStateNotifier extends StateNotifier<AsyncValue<List<Task>>> {
     var response = await deleteTaskUseCase(DeleteTaskParams(task: task));
 
     await response.fold((failure) {
-      state = AsyncError(failure, StackTrace.current);
+      state = AsyncError(failure.message, StackTrace.current);
     }, (_) async {
       await getTasks();
     });
@@ -64,7 +64,7 @@ class TasksStateNotifier extends StateNotifier<AsyncValue<List<Task>>> {
     var response = await updateTaskUseCase(task.copyWith(isDone: !task.isDone));
 
     response.fold((failure) {
-      state = AsyncError(failure, StackTrace.current);
+      state = AsyncError(failure.message, StackTrace.current);
     }, (_) {
       getTasks();
     });
