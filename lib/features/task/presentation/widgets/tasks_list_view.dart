@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../notifiers/tasks_state_notifier.dart';
+import 'package:lottie/lottie.dart';
 import 'task_view.dart';
 
 class TasksListView extends ConsumerStatefulWidget {
@@ -12,14 +13,6 @@ class TasksListView extends ConsumerStatefulWidget {
 }
 
 class _TasksListViewState extends ConsumerState<TasksListView> {
-  @override
-  initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(tasksStateNotifierProvider.notifier).getTasks();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     var tasksState = ref.watch(tasksStateNotifierProvider);
@@ -32,6 +25,24 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
       ),
       color: const Color(0xff14141b),
       child: tasksState.when(data: (tasks) {
+        if (tasks.isEmpty) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/lottie/empty-folder.json',
+                width: 250,
+              ),
+              const Text(
+                "No tasks yet",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          );
+        }
         return ListView.builder(
           itemCount: tasks.length,
           itemBuilder: (context, index) {
@@ -40,11 +51,21 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
           },
         );
       }, error: (error, stackTrace) {
-        return Center(
-          child: Text(
-            "Error: $error",
-            style: const TextStyle(color: Colors.white),
-          ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(
+              'assets/lottie/error-state.json',
+              width: 250,
+            ),
+            Text(
+              "$error",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          ],
         );
       }, loading: () {
         return const Center(
