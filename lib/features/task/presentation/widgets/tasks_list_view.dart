@@ -31,13 +31,26 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
         vertical: 10,
       ),
       color: const Color(0xff14141b),
-      child: ListView.builder(
-        itemCount: tasksState.tasks.length,
-        itemBuilder: (context, index) {
-          var task = tasksState.tasks[index];
-          return TaskView(task: task);
-        },
-      ),
+      child: tasksState.when(data: (tasks) {
+        return ListView.builder(
+          itemCount: tasks.length,
+          itemBuilder: (context, index) {
+            var task = tasks[index];
+            return TaskView(task: task);
+          },
+        );
+      }, error: (error, stackTrace) {
+        return Center(
+          child: Text(
+            "Error: $error",
+            style: const TextStyle(color: Colors.white),
+          ),
+        );
+      }, loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }),
     );
   }
 }

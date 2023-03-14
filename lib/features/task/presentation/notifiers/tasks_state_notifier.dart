@@ -1,4 +1,3 @@
-import 'package:clean_todo/features/task/presentation/notifiers/tasks_state.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../domain/entities/task.dart';
@@ -8,40 +7,42 @@ import '../../domain/usecases/get_tasks.dart';
 import '../../domain/usecases/update_task.dart';
 
 final tasksStateNotifierProvider =
-    StateNotifierProvider<TasksStateNotifier, TasksState>((ref) {
+    StateNotifierProvider<TasksStateNotifier, AsyncValue<List<Task>>>((ref) {
   return TasksStateNotifier(ref);
 });
 
-class TasksStateNotifier extends StateNotifier<TasksState> {
+class TasksStateNotifier extends StateNotifier<AsyncValue<List<Task>>> {
   StateNotifierProviderRef ref;
-  TasksStateNotifier(this.ref)
-      : super(TasksState(tasks: [], isLoading: false, isSaving: false));
+  TasksStateNotifier(this.ref) : super(const AsyncValue.loading()) {
+    getTasks();
+  }
 
   void addTask(String title) async {
-    state = state.saving();
+    state = const AsyncLoading();
 
     var addTaskUseCase = ref.read(addTaskUseCaseProvider);
-    var task = Task(title: title);
-    var response = await addTaskUseCase(AddTaskParams(task: task));
 
+    var task = Task(title: title);
+
+    var response = await addTaskUseCase(AddTaskParams(task: task));
     await response.fold((failure) {
-      state = state.withFailure(failure);
+      state = AsyncError(failure, StackTrace.current);
     }, (success) async {
       await getTasks();
     });
   }
 
   Future<void> getTasks() async {
-    state = state.loading();
+    state = const AsyncLoading();
 
     var getTasksUseCase = ref.read(getTasksUseCaseProvider);
 
     var response = await getTasksUseCase();
 
     response.fold((failure) {
-      state = state.withFailure(failure);
+      state = AsyncError(failure, StackTrace.current);
     }, (tasks) {
-      state = state.data(tasks);
+      state = AsyncData(tasks);
     });
   }
 
@@ -51,7 +52,7 @@ class TasksStateNotifier extends StateNotifier<TasksState> {
     var response = await deleteTaskUseCase(DeleteTaskParams(task: task));
 
     await response.fold((failure) {
-      state = state.withFailure(failure);
+      state = AsyncError(failure, StackTrace.current);
     }, (_) async {
       await getTasks();
     });
@@ -63,7 +64,7 @@ class TasksStateNotifier extends StateNotifier<TasksState> {
     var response = await updateTaskUseCase(task.copyWith(isDone: !task.isDone));
 
     response.fold((failure) {
-      state = state.withFailure(failure);
+      state = AsyncError(failure, StackTrace.current);
     }, (_) {
       getTasks();
     });

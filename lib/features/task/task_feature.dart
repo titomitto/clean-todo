@@ -7,7 +7,5 @@ class TaskFeature extends Feature {
   @override
   List<RouteBase> get routes => taskRoutes;
   @override
-  Future<void> preregister() async {
-    await Hive.initFlutter();
-  }
+  Future<void> preregister() async {}
 }
