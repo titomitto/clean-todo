@@ -3,15 +3,19 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:clean_todo/features/task/domain/usecases/get_tasks.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockTaskRepository extends Mock implements TaskRepository {}
 
 void main() {
-  MockTaskRepository mockTaskRepository = MockTaskRepository();
-  GetTasksUseCase getTasksUseCase = GetTasksUseCase(
-    repository: mockTaskRepository,
-  );
+  late MockTaskRepository mockTaskRepository;
+  late GetTasksUseCase getTasksUseCase;
+  setUp(() {
+    mockTaskRepository = MockTaskRepository();
+    getTasksUseCase = GetTasksUseCase(
+      repository: mockTaskRepository,
+    );
+  });
 
   var tTasks = [
     Task(
@@ -23,12 +27,13 @@ void main() {
 
   test('should get tasks from the repository', () async {
     // arrange
-    when(mockTaskRepository.getTasks()).thenAnswer((_) async => Right(tTasks));
+    when(() => mockTaskRepository.getTasks())
+        .thenAnswer((_) async => Right(tTasks));
     // act
     final result = await getTasksUseCase();
     // assert
     expect(result, Right(tTasks));
-    verify(mockTaskRepository.getTasks());
+    verify(() => mockTaskRepository.getTasks());
     verifyNoMoreInteractions(mockTaskRepository);
   });
 }
