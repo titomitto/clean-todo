@@ -62,7 +62,13 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   void toggle(Task task) async {
     var updateTaskUseCase = ref.read(updateTaskUseCaseProvider);
 
-    var response = await updateTaskUseCase(task.copyWith(isDone: !task.isDone));
+    var response = await updateTaskUseCase(UpdateTaskParams(
+      task: Task(
+        id: task.id,
+        title: task.title,
+        isDone: !task.isDone,
+      ),
+    ));
 
     response.fold((failure) {
       state = AsyncError(failure.message, StackTrace.current);

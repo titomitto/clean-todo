@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
+import 'config/theme.dart';
+
 class App extends StatelessWidget {
   final String title;
   final AppConfig config;
@@ -18,6 +20,9 @@ class App extends StatelessWidget {
     return OKToast(
       position: ToastPosition.bottom,
       child: MaterialApp.router(
+        darkTheme: darkTheme,
+        theme: lightTheme,
+        themeMode: ThemeMode.dark,
         routerConfig: config.router,
         title: title,
         debugShowCheckedModeBanner: false,

@@ -1,22 +1,15 @@
-import 'package:clean_todo/features/task/domain/usecases/update_task.dart';
+import 'package:equatable/equatable.dart';
 
-class Task {
-  int? id;
-  String title;
-  bool isDone;
-  Task({
+class Task extends Equatable {
+  final int? id;
+  final String title;
+  final bool isDone;
+  const Task({
     this.id,
     required this.title,
     this.isDone = false,
   });
 
-  UpdateTaskParams copyWith({bool? isDone, String? title, int? id}) {
-    return UpdateTaskParams(
-      task: Task(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        isDone: isDone ?? this.isDone,
-      ),
-    );
-  }
+  @override
+  List<Object?> get props => [id, title];
 }
