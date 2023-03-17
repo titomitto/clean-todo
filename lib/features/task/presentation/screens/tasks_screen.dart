@@ -1,5 +1,5 @@
-import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:clean_todo/features/task/presentation/widgets/tasks_list_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
@@ -15,7 +15,7 @@ class TasksScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: const Color(0xff14141b),
-        title: Text("tasks_title".tr),
+        title: Text(AppLocalizations.of(context)!.helloWorld),
       ),
       body: const TasksListView(),
       floatingActionButton: FloatingActionButton(

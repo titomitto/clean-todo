@@ -3,59 +3,50 @@ import 'package:dio/dio.dart';
 class CacheException implements Exception {}
 
 class ServerException implements Exception {
-  late String message;
+  final String message;
 
-  ServerException.fromDioError(DioError dioError) {
+  ServerException.fromDioError(DioError dioError)
+      : message = _parseDioError(dioError);
+
+  static String _parseDioError(DioError dioError) {
     switch (dioError.type) {
       case DioErrorType.cancel:
-        message = "Request was cancelled";
-        break;
+        return "The request was cancelled.";
       case DioErrorType.connectionTimeout:
-        message = "Connection timeout";
-        break;
+        return "Unable to connect to the server. Please check your internet connection and try again.";
       case DioErrorType.receiveTimeout:
-        message = "Receive timeout";
-        break;
-      case DioErrorType.badResponse:
-        message = _handleError(
-          dioError.response?.statusCode,
-          dioError.response?.data,
-        );
-        break;
+        return "The server took too long to respond. Please try again later.";
       case DioErrorType.sendTimeout:
-        message = "Send timeout";
-        break;
+        return "Unable to send data to the server. Please try again later.";
+      case DioErrorType.badResponse:
+        return _handleResponseError(dioError.response!);
       case DioErrorType.unknown:
-        if ((dioError.message ?? "").contains("SocketException")) {
-          message = 'No Internet';
-          break;
-        }
-        message = "Unexpected error occurred";
-        break;
       default:
-        message = "Something went wrong";
-        break;
+        if ((dioError.message ?? "").contains("SocketException")) {
+          return 'No internet connection. Please check your network settings and try again.';
+        }
+        return "An unexpected error occurred. Please try again later.";
     }
   }
 
-  String _handleError(int? statusCode, dynamic error) {
-    switch (statusCode) {
+  static String _handleResponseError(Response response) {
+    switch (response.statusCode) {
       case 200:
-        return error['message'];
+        return response.data['message'] ?? 'OK';
       case 400:
-        return 'Bad request';
+        return 'There was an error processing your request. Please check your input and try again.';
       case 401:
-        return 'Unauthorized';
+        return 'You are not authorized to access this resource. Please log in and try again.';
       case 403:
-        return 'Forbidden';
+        return 'You do not have permission to access this resource.';
       case 404:
-        return error['message'];
+        return 'The requested resource was not found.';
       case 500:
-        return 'Internal server error';
+        return 'There was an internal server error. Please try again later.';
       case 502:
-        return 'Bad gateway';
+        return 'The server is currently unavailable. Please try again later.';
       default:
-        return 'Oops something went wrong';
+        return 'An unexpected error occurred. Please try again later.';
     }
   }
 }
