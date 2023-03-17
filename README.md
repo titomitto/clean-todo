@@ -52,6 +52,22 @@ If you would like to contribute to this project, please follow these guidelines:
 
 For more information on how to contribute, see the [contributing guidelines](./CONTRIBUTING.md).
 
+## Localization
+
+Our app is localized into multiple languages. You can learn more about how to use localization in our [Localization Documentation](./docs/localization.md).
+
+## Testing
+
+We have a suite of unit and integration tests to ensure the quality of our app. You can learn more about testing in our [Testing Documentation](./docs/testing.md).
+
+## Deployment
+
+We use Code Magic for continuous integration and deployment. You can learn more about how to deploy our app using Code Magic in our [Deployment Documentation](./docs/deployment.md).
+
+## Troubleshooting
+
+If you run into any issues while developing or using our app, check out our [Troubleshooting Documentation](./docs/troubleshooting.md) for some common solutions and tips.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
