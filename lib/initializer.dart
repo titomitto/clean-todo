@@ -5,40 +5,43 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../app.dart';
-import 'feature.dart';
-import '../utils/app_config.dart';
-
-GlobalKey<NavigatorState>? parentNavigatorKey = GlobalKey<NavigatorState>();
+import 'app.dart';
+import 'core/feature.dart';
+import 'core/app_config.dart';
+import 'core/utils/navigator_key.dart';
 
 class Initializer {
-  List<Feature> features;
-  String initialRoute;
+  final List<Feature> features;
+  final String initialRoute;
+
   Initializer({
     required this.features,
     required this.initialRoute,
   });
 
-  preregister() async {
+  Future<void> preregisterFeatures() async {
     for (var feature in features) {
       await feature.preregister();
     }
   }
 
   GoRouter registerRoutes() {
-    final GoRouter router = GoRouter(
+    final router = GoRouter(
       navigatorKey: parentNavigatorKey,
       initialLocation: initialRoute,
-      routes: <RouteBase>[
-        ...features.expand((e) => e.routes),
-      ],
+      routes: features.expand((e) => e.routes).toList(),
     );
     return router;
   }
 
-  Future<AppConfig> init() async {
-    await preregister();
-    var router = registerRoutes();
+  Future<AppConfig> initializeApp() async {
+    final initializer = Initializer(
+      features: features,
+      initialRoute: '/',
+    );
+    await Hive.initFlutter();
+    await initializer.preregisterFeatures();
+    final router = initializer.registerRoutes();
     return AppConfig(router: router);
   }
 }

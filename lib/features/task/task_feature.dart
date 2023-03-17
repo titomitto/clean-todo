@@ -1,4 +1,4 @@
-import 'package:clean_todo/core/infra/feature.dart';
+import 'package:clean_todo/core/feature.dart';
 import 'package:go_router/go_router.dart';
 import 'presentation/task_routes.dart';
 
