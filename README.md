@@ -57,7 +57,6 @@ For more information on how to contribute, see the [contributing guidelines](./C
 
 - [Localization](./docs/localization.md)
 - [Testing](./docs/testing.md)
-- [Deployment](./docs/deployment.md)
 - [Troubleshooting](./docs/troubleshooting.md)
 ## License
 

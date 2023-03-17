@@ -1,18 +1,18 @@
 import 'package:clean_todo/core/presentation/app_localizations.dart';
-import 'package:clean_todo/core/app_config.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:oktoast/oktoast.dart';
 
 import 'config/theme.dart';
 
 class App extends StatelessWidget {
   final String title;
-  final AppConfig config;
+  final GoRouter router;
   const App({
     Key? key,
     required this.title,
-    required this.config,
+    required this.router,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class App extends StatelessWidget {
         darkTheme: darkTheme,
         theme: lightTheme,
         themeMode: ThemeMode.dark,
-        routerConfig: config.router,
+        routerConfig: router,
         title: title,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [

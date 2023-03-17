@@ -1,13 +1,13 @@
 // ignore_for_file: unused_import
 import 'package:clean_todo/core/presentation/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
 import 'core/feature.dart';
-import 'core/app_config.dart';
 import 'core/utils/navigator_key.dart';
 
 class Initializer {
@@ -19,7 +19,6 @@ class Initializer {
     required this.initialRoute,
   });
 
-  // Pre-register features before initializing the app
   Future<void> preregisterFeatures() async {
     for (var feature in features) {
       await feature.preregister();
@@ -36,11 +35,19 @@ class Initializer {
     return router;
   }
 
-  Future<AppConfig> initializeApp() async {
+  Future initializeApp() async {
+    WidgetsFlutterBinding.ensureInitialized();
     await Hive.initFlutter();
     await preregisterFeatures();
     final router = registerRoutes();
-    // Return AppConfig instance with the created router
-    return AppConfig(router: router);
+
+    runApp(
+      ProviderScope(
+        child: App(
+          title: 'Todo Tasks',
+          router: router,
+        ),
+      ),
+    );
   }
 }
