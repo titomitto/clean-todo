@@ -11,9 +11,7 @@ This app follows the principles of Clean Architecture and is structured into the
 - `features`: Contains the main features of the app, each with its own set of `data`, `domain`, and `presentation` layers. 
 
 The `data` layer contains models, data sources and repositories for retrieving and storing data related to the feature. 
-
 The `domain` layer contains entities, use cases, and repository interfaces for defining the business logic of the feature. 
-
 The `presentation` layer contains the UI layer and widgets for displaying and interacting with the feature, as well as any state management code with Riverpod.
 
 For more information on how the app is structured and organized, see the [architecture documentation](./docs/architecture.md).
