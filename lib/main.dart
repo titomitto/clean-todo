@@ -5,7 +5,7 @@ import 'app.dart';
 import 'config/features.dart';
 
 Future<void> main() async {
-  // Initialize the app with features and initial route.
+  // Pass required features to the initializer
   final initializer = Initializer(
     features: features,
     initialRoute: '/',
