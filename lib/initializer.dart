@@ -1,8 +1,7 @@
 // ignore_for_file: unused_import
-import 'package:clean_todo/core/presentation/app_localizations.dart';
+import 'package:clean_todo/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

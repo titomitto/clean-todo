@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Thank you for considering contributing to Clean Todo! We welcome and appreciate your contributions.
+Thank you for considering contributing to Clean Todo! I appreciate your contributions.
 
 ## Code of Conduct
 
@@ -32,7 +32,7 @@ When contributing to Clean Todo, please follow these guidelines:
 
 ## Issues and Feature Requests
 
-If you encounter any issues or have feature requests, please search the [existing issues](https://github.com/yourusername/my-awesome-flutter-app/issues) to see if it has already been reported. If not, feel free to create a new issue or feature request and provide as much detail as possible.
+If you encounter any issues or have feature requests, please search the [existing issues](https://github.com/TitoMitto/clean-todo/issues) to see if it has already been reported. If not, feel free to create a new issue or feature request and provide as much detail as possible.
 
 ## Feedback and Suggestions
 
