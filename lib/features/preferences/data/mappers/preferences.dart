@@ -3,14 +3,14 @@ import '../models/preferences.dart';
 
 extension PreferencesModelExtension on PreferencesModel {
   Preferences toEntity() => Preferences(
-        darkModeEnabled: darkModeEnabled,
+        themeMode: themeMode,
         language: language,
       );
 }
 
 extension PreferencesExtension on Preferences {
   PreferencesModel toModel() => PreferencesModel(
-        darkModeEnabled: darkModeEnabled,
+        themeMode: themeMode,
         language: language,
       );
 }

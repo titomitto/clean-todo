@@ -1,19 +1,19 @@
 class Preferences {
   final String language;
-  final bool darkModeEnabled;
+  final String themeMode;
 
   Preferences({
     required this.language,
-    required this.darkModeEnabled,
+    required this.themeMode,
   });
 
   Preferences copyWith({
     String? language,
-    bool? darkModeEnabled,
+    String? themeMode,
   }) {
     return Preferences(
       language: language ?? this.language,
-      darkModeEnabled: darkModeEnabled ?? this.darkModeEnabled,
+      themeMode: themeMode ?? this.themeMode,
     );
   }
 }

@@ -7,29 +7,36 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/preferences_repository_impl.dart';
 import '../entities/preferences.dart';
 
-final toggleDarkModeUseCaseProvider = Provider<ToggleDarkModeUseCase>((ref) {
+final changeThemeModeUseCaseProvider = Provider<ChangeThemeModeUseCase>((ref) {
   final repository = ref.read(preferencesRepositoryProvider);
-  return ToggleDarkModeUseCase(repository: repository);
+  return ChangeThemeModeUseCase(repository: repository);
 });
 
-class ToggleDarkModeUseCase
-    extends NoParamsUseCase<Future<Either<Failure, void>>> {
+class ChangeThemeModeUseCase
+    extends UseCase<Future<Either<Failure, void>>, ChangeThemeModeParams> {
   PreferencesRepository repository;
 
-  ToggleDarkModeUseCase({
+  ChangeThemeModeUseCase({
     required this.repository,
   });
 
   @override
-  Future<Either<Failure, Unit>> call() async {
+  Future<Either<Failure, Unit>> call(ChangeThemeModeParams params) async {
     var response = await repository.getPreferences();
     return response.fold((l) => Left(l), (preferences) {
       preferences ??= Preferences(
         language: "en",
-        darkModeEnabled: true,
+        themeMode: params.themeMode,
       );
 
       return repository.savePreferences(preferences);
     });
   }
+}
+
+class ChangeThemeModeParams {
+  String themeMode;
+  ChangeThemeModeParams({
+    required this.themeMode,
+  });
 }

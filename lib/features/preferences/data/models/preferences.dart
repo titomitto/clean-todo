@@ -7,10 +7,10 @@ class PreferencesModel {
   @HiveField(0)
   final String language;
   @HiveField(1)
-  final bool darkModeEnabled;
+  final String themeMode;
 
   PreferencesModel({
     required this.language,
-    required this.darkModeEnabled,
+    required this.themeMode,
   });
 }

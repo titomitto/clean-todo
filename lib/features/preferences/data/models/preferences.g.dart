@@ -18,7 +18,7 @@ class PreferencesModelAdapter extends TypeAdapter<PreferencesModel> {
     };
     return PreferencesModel(
       language: fields[0] as String,
-      darkModeEnabled: fields[1] as bool,
+      themeMode: fields[1] as String,
     );
   }
 
@@ -29,7 +29,7 @@ class PreferencesModelAdapter extends TypeAdapter<PreferencesModel> {
       ..writeByte(0)
       ..write(obj.language)
       ..writeByte(1)
-      ..write(obj.darkModeEnabled);
+      ..write(obj.themeMode);
   }
 
   @override
