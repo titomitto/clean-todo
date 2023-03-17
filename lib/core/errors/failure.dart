@@ -15,15 +15,15 @@ class ServerFailure extends Failure {
 
 class CacheGetFailure extends Failure {
   @override
-  String get message => "Error retrieving data. We're working to fix it.";
+  String get message => "Failed to retrieve data. We're working to fix it.";
 }
 
 class CachePutFailure extends Failure {
   @override
-  String get message => "Error saving data. We're working to fix it.";
+  String get message => "Failed to save data. We're working to fix it.";
 }
 
 class CacheDeleteFailure extends Failure {
   @override
-  String get message => "Error deleting data. We're working to fix it.";
+  String get message => "Failed to delete data. We're working to fix it.";
 }
