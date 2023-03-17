@@ -10,7 +10,7 @@ This app follows the principles of Clean Architecture and is structured into the
 - `core`: Contains common functionality and abstractions used throughout the app.
 - `features`: Contains the main features of the app, each with its own set of `data`, `domain`, and `presentation` layers. 
 
-The `data` layer contains data sources and repositories for retrieving and storing data related to the feature. 
+The `data` layer contains models, data sources and repositories for retrieving and storing data related to the feature. 
 
 The `domain` layer contains entities, use cases, and repository interfaces for defining the business logic of the feature. 
 
