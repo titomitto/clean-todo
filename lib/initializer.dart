@@ -19,12 +19,14 @@ class Initializer {
     required this.initialRoute,
   });
 
+  // Pre-register features before initializing the app
   Future<void> preregisterFeatures() async {
     for (var feature in features) {
       await feature.preregister();
     }
   }
 
+  // Register routes and create a GoRouter instance
   GoRouter registerRoutes() {
     final router = GoRouter(
       navigatorKey: parentNavigatorKey,
@@ -35,13 +37,10 @@ class Initializer {
   }
 
   Future<AppConfig> initializeApp() async {
-    final initializer = Initializer(
-      features: features,
-      initialRoute: '/',
-    );
     await Hive.initFlutter();
-    await initializer.preregisterFeatures();
-    final router = initializer.registerRoutes();
+    await preregisterFeatures();
+    final router = registerRoutes();
+    // Return AppConfig instance with the created router
     return AppConfig(router: router);
   }
 }

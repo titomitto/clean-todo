@@ -7,11 +7,13 @@ import 'config/features.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize the app with features and initial route.
   final initializer = Initializer(
     features: features,
     initialRoute: '/',
   );
 
+  // Obtain the app configuration.
   final config = await initializer.initializeApp();
 
   runApp(

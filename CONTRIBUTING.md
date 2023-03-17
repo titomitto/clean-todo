@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Thank you for considering contributing to My Awesome Flutter App! We welcome and appreciate your contributions.
+Thank you for considering contributing to Clean Todo! We welcome and appreciate your contributions.
 
 ## Code of Conduct
 
@@ -8,7 +8,7 @@ Before contributing, please make sure to read our [Code of Conduct](./CODE_OF_CO
 
 ## Getting Started
 
-To get started with contributing to My Awesome Flutter App, you will need to:
+To get started with contributing to Clean Todo, you will need to:
 
 1. Fork the repository on GitHub.
 2. Clone your forked repository onto your local machine.
@@ -20,7 +20,7 @@ To get started with contributing to My Awesome Flutter App, you will need to:
 
 ## Contribution Guidelines
 
-When contributing to My Awesome Flutter App, please follow these guidelines:
+When contributing to Clean Todo, please follow these guidelines:
 
 1. Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for your commit messages.
 2. Ensure your changes adhere to the Clean Architecture pattern used in the app.
@@ -36,6 +36,6 @@ If you encounter any issues or have feature requests, please search the [existin
 
 ## Feedback and Suggestions
 
-If you have any feedback or suggestions on how to improve My Awesome Flutter App, please feel free to open an issue or pull request. We welcome and appreciate any feedback to help us improve our app.
+If you have any feedback or suggestions on how to improve Clean Todo, please feel free to open an issue or pull request. We welcome and appreciate any feedback to help us improve our app.
 
 Thank you for your contributions!
