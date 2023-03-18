@@ -27,3 +27,8 @@ class CacheDeleteFailure extends Failure {
   @override
   String get message => "Failed to delete data. We're working to fix it.";
 }
+
+class InvalidInputFailure extends Failure {
+  @override
+  String get message => "Failed to validate input. We're working to fix it.";
+}
