@@ -1,6 +1,6 @@
 # Clean Todo
 
-This is a mobile app built with Flutter that does X, Y, and Z.
+Todo App following clean architecture and best coding practices
 
 ## Architecture
 
