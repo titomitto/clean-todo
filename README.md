@@ -55,8 +55,6 @@ For more information on how to contribute, see the [contributing guidelines](./C
 ## Internationalization
 The all features supports internationalization using the `AppLocalizations` class provided by the Flutter Internationalization package. All the strings used are defined in the `AppLocalizations` class and can be translated into different languages, just add another file in `l10n` folder. For more you can refer to [this](https://docs.flutter.dev/development/accessibility-and-localization/internationalization) flutter documentation.
 ## Others
-
-- [Localization](./docs/localization.md)
 - [Testing](./docs/testing.md)
 - [Troubleshooting](./docs/troubleshooting.md)
 ## License

@@ -18,9 +18,9 @@ The domain layer is responsible for defining the business logic and use cases re
 ## Presentation Layer
 The presentation layer is responsible for handling the UI logic and user interactions related to tasks. It includes the following classes:
 
-- `TasksController`: a view model that exposes the tasks data to the UI.
-- `TasksScreen`: a page that displays the tasks UI.
-- `AddTaskScreen`: a page that allows users to add a new task.
+- `TasksController`: a controller that manages state of the tasks and exposes the tasks data to the UI.
+- `TasksScreen`: a screen that displays the tasks UI.
+- `AddTaskScreen`: a screen that allows users to add a new task.
 
 
 ## Dependencies
@@ -31,12 +31,12 @@ The tasks feature depends on the following external libraries:
 ## Usage
 To use the tasks feature in your app, you need to:
 
-Define the Task data class.
-Implement the TasksLocalDataSource interface using TasksLocalDataSourceImpl.
-Implement the TaskRepository interface using TaskRepositoryImpl.
-Define the GetTasksUseCase, AddTaskUseCase, UpdateTaskUseCase, and DeleteTaskUseCase use cases using the TaskRepository interface.
-Define the TasksViewModel view model using the GetTasksUseCase, AddTaskUseCase, UpdateTaskUseCase, and DeleteTaskUseCase use cases.
-Define the TasksPage, AddTaskPage, and UpdateTaskPage UI pages using the TasksViewModel view model.
-Use Riverpod to manage the tasks state and inject the TasksViewModel view model into the UI pages.
-Use Hive to store tasks data locally using TasksLocalDataSourceImpl.
+- Define the Task data class.
+- Implement the TasksLocalDataSource interface using TasksLocalDataSourceImpl.
+- Implement the TaskRepository interface using TaskRepositoryImpl.
+- Define the GetTasksUseCase, AddTaskUseCase, UpdateTaskUseCase, and DeleteTaskUseCase use cases using the TaskRepository interface.
+- Define the TasksViewModel view model using the GetTasksUseCase, AddTaskUseCase, UpdateTaskUseCase, and DeleteTaskUseCase use cases.
+- Define the TasksPage, AddTaskPage, and UpdateTaskPage UI pages using the TasksViewModel view model.
+- Use Riverpod to manage the tasks state and inject the TasksViewModel view model into the UI pages.
+- Use Hive to store tasks data locally using TasksLocalDataSourceImpl.
 That's it! You should now be able to use the tasks feature in your app.
