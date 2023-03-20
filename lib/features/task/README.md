@@ -5,14 +5,9 @@ The tasks feature allows users to manage their to-do list by creating, reading, 
 
 The tasks feature follows the clean architecture pattern, with the following layers:
 
-- Presentation: Contains the UI components and the controller that manages the state of the UI.
 - Domain: Contains the business logic and use cases for managing tasks.
 - Data: Contains the repositories and data sources for fetching and persisting task data.
-## Data Layer
-The data layer is responsible for providing the source of the tasks data. It includes the following classes:
-
-- `TasksLocalDataSource`: an interface defining the local data source contract for tasks.
-- `TasksLocalDataSourceImpl`: an implementation of `TasksLocalDataSource` using Hive as the underlying data store.
+- Presentation: Contains the UI components and the controller that manages the state of the UI.
 ## Domain Layer
 The domain layer is responsible for defining the business logic and use cases related to tasks. It includes the following classes:
 
@@ -25,6 +20,11 @@ The domain layer is responsible for defining the business logic and use cases re
 - `AddTask`: a use case that adds a new task.
 - `UpdateTask`: a use case that updates an existing task.
 - `DeleteTask`: a use case that deletes an existing task.
+## Data Layer
+The data layer is responsible for providing the source of the tasks data. It includes the following classes:
+
+- `TasksLocalDataSource`: an interface defining the local data source contract for tasks.
+- `TasksLocalDataSourceImpl`: an implementation of `TasksLocalDataSource` using Hive as the underlying data store.
 ## Presentation Layer
 The presentation layer is responsible for handling the UI logic and user interactions related to tasks. It includes the following classes:
 
