@@ -13,15 +13,9 @@ class TaskModel {
   @HiveField(2, defaultValue: false)
   bool isDone;
 
-  bool fromServer;
-
-  bool hasSynced;
-
   TaskModel({
     this.id,
     required this.title,
     required this.isDone,
-    this.fromServer = false,
-    this.hasSynced = false,
   });
 }

@@ -17,7 +17,7 @@ void main() {
     );
   });
 
-  var tTasks = [
+  const tTasks = [
     Task(
       id: 1,
       title: 'title',
@@ -28,11 +28,11 @@ void main() {
   test('should get tasks from the repository', () async {
     // arrange
     when(() => mockTaskRepository.getTasks())
-        .thenAnswer((_) async => Right(tTasks));
+        .thenAnswer((_) async => const Right(tTasks));
     // act
     final result = await getTasksUseCase();
     // assert
-    expect(result, Right(tTasks));
+    expect(result, const Right(tTasks));
     verify(() => mockTaskRepository.getTasks());
     verifyNoMoreInteractions(mockTaskRepository);
   });
