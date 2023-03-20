@@ -3,11 +3,11 @@ The tasks feature allows users to manage their to-do list by creating, reading, 
 
 ## Architecture
 
-The tasks feature follows the clean architecture pattern, with the following layers:
+This feature follows the clean architecture, with the following layers:
 
-- Domain: Contains the business logic and use cases for managing tasks.
-- Data: Contains the repositories and data sources for fetching and persisting task data.
-- Presentation: Contains the UI components and the controller that manages the state of the UI.
+- `Domain`: Contains the business logic and use cases for managing tasks.
+- `Data`: Contains the repositories and data sources for fetching and persisting task data.
+- `Presentation`: Contains the UI components and the controller that manages the state of the UI.
 ## Domain Layer
 The domain layer is responsible for defining the business logic and use cases related to tasks. It includes the following classes:
 
