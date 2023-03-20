@@ -24,7 +24,6 @@ class TasksRepositoryImpl extends TasksRepository {
   @override
   Future<Either<Failure, bool>> updateTask(Task task) async {
     try {
-      ;
       var done = await localDataSource.updateTask(task.toModel());
       return Right(done);
     } catch (e) {
