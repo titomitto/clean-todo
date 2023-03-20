@@ -28,7 +28,9 @@ The domain layer is responsible for defining the business logic and use cases re
 ## Presentation Layer
 The presentation layer is responsible for handling the UI logic and user interactions related to tasks. It includes the following classes:
 
+### Controllers
 - `TasksController`: a controller that manages state of the tasks and exposes the tasks data to the UI.
+### Screens
 - `TasksScreen`: a screen that displays the tasks UI.
 - `AddTaskScreen`: a screen that allows users to add a new task.
 
