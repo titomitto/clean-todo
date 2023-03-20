@@ -1,6 +1,13 @@
 # Tasks feature
 The tasks feature allows users to manage their to-do list by creating, reading, updating, and deleting tasks.
 
+## Architecture
+
+The tasks feature follows the clean architecture pattern, with the following layers:
+
+- Presentation: Contains the UI components and the controller that manages the state of the UI.
+- Domain: Contains the business logic and use cases for managing tasks.
+- Data: Contains the repositories and data sources for fetching and persisting task data.
 ## Data Layer
 The data layer is responsible for providing the source of the tasks data. It includes the following classes:
 
@@ -28,15 +35,14 @@ The tasks feature depends on the following external libraries:
 
 - `Riverpod`: a state management library used to manage the tasks state.
 - `Hive`: a lightweight and fast key-value database used to store tasks data locally.
-## Usage
-To use the tasks feature in your app, you need to:
 
-- Define the Task data class.
-- Implement the TasksLocalDataSource interface using TasksLocalDataSourceImpl.
-- Implement the TaskRepository interface using TaskRepositoryImpl.
-- Define the GetTasksUseCase, AddTaskUseCase, UpdateTaskUseCase, and DeleteTaskUseCase use cases using the TaskRepository interface.
-- Define the TasksViewModel view model using the GetTasksUseCase, AddTaskUseCase, UpdateTaskUseCase, and DeleteTaskUseCase use cases.
-- Define the TasksPage, AddTaskPage, and UpdateTaskPage UI pages using the TasksViewModel view model.
-- Use Riverpod to manage the tasks state and inject the TasksViewModel view model into the UI pages.
-- Use Hive to store tasks data locally using TasksLocalDataSourceImpl.
-That's it! You should now be able to use the tasks feature in your app.
+## Testing
+
+The tasks feature has the following tests:
+
+- Unit tests for the use cases in the domain layer.
+- Integration tests for the repositories and data sources in the data layer.
+
+## Known Issues
+
+None at the moment.
