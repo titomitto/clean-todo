@@ -26,8 +26,8 @@ The presentation layer is responsible for handling the UI logic and user interac
 ## Dependencies
 The tasks feature depends on the following external libraries:
 
-`Riverpod`: a state management library used to manage the tasks state.
-`Hive`: a lightweight and fast key-value database used to store tasks data locally.
+- `Riverpod`: a state management library used to manage the tasks state.
+- `Hive`: a lightweight and fast key-value database used to store tasks data locally.
 ## Usage
 To use the tasks feature in your app, you need to:
 
