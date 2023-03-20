@@ -8,6 +8,8 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../datasources/tasks_local_datasource_impl.dart';
+
 final tasksRepositoryProvider = FutureProvider<TasksRepository>((ref) async {
   final tasksLocalDataSource =
       await ref.read(tasksLocalDataSourceProvider.future);
