@@ -6,16 +6,15 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final addTaskUseCaseProvider = Provider<AddTaskUseCase>((ref) {
+final addTaskUseCaseProvider = Provider<AddTask>((ref) {
   final repository = ref.read(taskRepositoryProvider);
-  return AddTaskUseCase(repository: repository);
+  return AddTask(repository: repository);
 });
 
-class AddTaskUseCase
-    extends UseCase<Future<Either<Failure, bool>>, AddTaskParams> {
+class AddTask extends UseCase<Future<Either<Failure, bool>>, AddTaskParams> {
   TaskRepository repository;
 
-  AddTaskUseCase({
+  AddTask({
     required this.repository,
   });
 

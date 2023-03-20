@@ -7,16 +7,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/task_repository_impl.dart';
 
-final getTasksUseCaseProvider = Provider<GetTasksUseCase>((ref) {
+final getTasksUseCaseProvider = Provider<GetTasks>((ref) {
   final repository = ref.read(taskRepositoryProvider);
-  return GetTasksUseCase(repository: repository);
+  return GetTasks(repository: repository);
 });
 
-class GetTasksUseCase
-    extends NoParamsUseCase<Future<Either<Failure, List<Task>>>> {
+class GetTasks extends NoParamsUseCase<Future<Either<Failure, List<Task>>>> {
   TaskRepository repository;
 
-  GetTasksUseCase({
+  GetTasks({
     required this.repository,
   });
 

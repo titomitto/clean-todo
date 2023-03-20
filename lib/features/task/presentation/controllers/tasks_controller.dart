@@ -21,11 +21,11 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   void addTask(String title) async {
     state = const AsyncLoading();
 
-    var addTaskUseCase = ref.read(addTaskUseCaseProvider);
+    final addTask = ref.read(addTaskUseCaseProvider);
 
     var task = Task(title: title);
 
-    var response = await addTaskUseCase(AddTaskParams(task: task));
+    var response = await addTask(AddTaskParams(task: task));
     await response.fold((failure) {
       state = AsyncError(failure.message, StackTrace.current);
     }, (success) async {
@@ -36,9 +36,9 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   Future<void> getTasks() async {
     state = const AsyncLoading();
 
-    var getTasksUseCase = ref.read(getTasksUseCaseProvider);
+    final getTasks = ref.read(getTasksUseCaseProvider);
 
-    var response = await getTasksUseCase();
+    var response = await getTasks();
 
     response.fold((failure) {
       state = AsyncError(failure.message, StackTrace.current);
@@ -48,9 +48,9 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   }
 
   void deleteTask(Task task) async {
-    var deleteTaskUseCase = ref.read(deleteTaskUseCaseProvider);
+    final deleteTask = ref.read(deleteTaskUseCaseProvider);
 
-    var response = await deleteTaskUseCase(DeleteTaskParams(task: task));
+    var response = await deleteTask(DeleteTaskParams(task: task));
 
     await response.fold((failure) {
       state = AsyncError(failure.message, StackTrace.current);
@@ -60,9 +60,9 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   }
 
   void toggle(Task task) async {
-    var updateTaskUseCase = ref.read(updateTaskUseCaseProvider);
+    var updateTask = ref.read(updateTaskUseCaseProvider);
 
-    var response = await updateTaskUseCase(
+    var response = await updateTask(
       UpdateTaskParams(
           task: task.copyWith(
         isDone: !task.isDone,

@@ -9,10 +9,10 @@ class MockTaskRepository extends Mock implements TaskRepository {}
 
 void main() {
   late MockTaskRepository mockTaskRepository;
-  late GetTasksUseCase getTasksUseCase;
+  late GetTasks getTasksUseCase;
   setUp(() {
     mockTaskRepository = MockTaskRepository();
-    getTasksUseCase = GetTasksUseCase(
+    getTasksUseCase = GetTasks(
       repository: mockTaskRepository,
     );
   });
