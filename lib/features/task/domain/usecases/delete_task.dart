@@ -5,16 +5,16 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/repositories/task_repository_impl.dart';
+import '../../data/repositories/tasks_repository_impl.dart';
 
-final deleteTaskUseCaseProvider = Provider<DeleteTask>((ref) {
-  final repository = ref.read(taskRepositoryProvider);
+final deleteTaskUseCaseProvider = FutureProvider<DeleteTask>((ref) async {
+  final repository = await ref.read(tasksRepositoryProvider.future);
   return DeleteTask(repository: repository);
 });
 
 class DeleteTask
     extends UseCase<Future<Either<Failure, bool>>, DeleteTaskParams> {
-  TaskRepository repository;
+  TasksRepository repository;
 
   DeleteTask({
     required this.repository,

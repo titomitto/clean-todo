@@ -5,16 +5,16 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/repositories/task_repository_impl.dart';
+import '../../data/repositories/tasks_repository_impl.dart';
 
-final updateTaskUseCaseProvider = Provider<UpdateTask>((ref) {
-  final repository = ref.read(taskRepositoryProvider);
+final updateTaskUseCaseProvider = FutureProvider<UpdateTask>((ref) async {
+  final repository = await ref.read(tasksRepositoryProvider.future);
   return UpdateTask(repository: repository);
 });
 
 class UpdateTask
     extends UseCase<Future<Either<Failure, void>>, UpdateTaskParams> {
-  TaskRepository repository;
+  TasksRepository repository;
 
   UpdateTask({
     required this.repository,

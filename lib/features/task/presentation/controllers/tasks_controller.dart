@@ -21,7 +21,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   void addTask(String title) async {
     state = const AsyncLoading();
 
-    final addTask = ref.read(addTaskUseCaseProvider);
+    final addTask = await ref.read(addTaskUseCaseProvider.future);
 
     var task = Task(title: title);
 
@@ -36,7 +36,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   Future<void> getTasks() async {
     state = const AsyncLoading();
 
-    final getTasks = ref.read(getTasksUseCaseProvider);
+    final getTasks = await ref.read(getTasksUseCaseProvider.future);
 
     var response = await getTasks();
 
@@ -48,7 +48,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   }
 
   void deleteTask(Task task) async {
-    final deleteTask = ref.read(deleteTaskUseCaseProvider);
+    final deleteTask = await ref.read(deleteTaskUseCaseProvider.future);
 
     var response = await deleteTask(DeleteTaskParams(task: task));
 
@@ -60,7 +60,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   }
 
   void toggle(Task task) async {
-    var updateTask = ref.read(updateTaskUseCaseProvider);
+    var updateTask = await ref.read(updateTaskUseCaseProvider.future);
 
     var response = await updateTask(
       UpdateTaskParams(

@@ -8,21 +8,23 @@ import 'package:clean_todo/features/task/domain/repositories/task_repository.dar
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final taskRepositoryProvider = Provider<TaskRepository>((ref) {
-  return TaskRepositoryImpl(ref: ref);
+final tasksRepositoryProvider = FutureProvider<TasksRepository>((ref) async {
+  final tasksLocalDataSource =
+      await ref.read(tasksLocalDataSourceProvider.future);
+  return TasksRepositoryImpl(localDataSource: tasksLocalDataSource);
 });
 
-class TaskRepositoryImpl extends TaskRepository {
-  Ref ref;
+class TasksRepositoryImpl extends TasksRepository {
+  TasksLocalDataSource localDataSource;
 
-  TaskRepositoryImpl({
-    required this.ref,
+  TasksRepositoryImpl({
+    required this.localDataSource,
   });
 
   @override
   Future<Either<Failure, bool>> updateTask(Task task) async {
     try {
-      var localDataSource = await ref.read(tasksLocalDataSourceProvider.future);
+      ;
       var done = await localDataSource.updateTask(task.toModel());
       return Right(done);
     } catch (e) {
@@ -33,7 +35,6 @@ class TaskRepositoryImpl extends TaskRepository {
   @override
   Future<Either<Failure, bool>> addTask(Task task) async {
     try {
-      var localDataSource = await ref.read(tasksLocalDataSourceProvider.future);
       var done = await localDataSource.addTask(task.toModel());
       return Right(done);
     } catch (e) {
@@ -44,7 +45,6 @@ class TaskRepositoryImpl extends TaskRepository {
   @override
   Future<Either<Failure, List<Task>>> getTasks() async {
     try {
-      var localDataSource = await ref.read(tasksLocalDataSourceProvider.future);
       var taskModels = await localDataSource.getTasks();
       var tasks = taskModels.map((e) => e.toEntity()).toList();
       return Right(tasks);
@@ -57,7 +57,6 @@ class TaskRepositoryImpl extends TaskRepository {
   @override
   Future<Either<Failure, bool>> deleteTask(Task task) async {
     try {
-      var localDataSource = await ref.read(tasksLocalDataSourceProvider.future);
       var done = await localDataSource.deleteTask(task.toModel());
       return Right(done);
     } catch (e) {

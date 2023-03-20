@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockTaskRepository extends Mock implements TaskRepository {}
+class MockTaskRepository extends Mock implements TasksRepository {}
 
 void main() {
   late MockTaskRepository mockTaskRepository;
