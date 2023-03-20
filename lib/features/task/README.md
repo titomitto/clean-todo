@@ -16,7 +16,9 @@ The data layer is responsible for providing the source of the tasks data. It inc
 ## Domain Layer
 The domain layer is responsible for defining the business logic and use cases related to tasks. It includes the following classes:
 
-- `Task`: a data class representing a task.
+### Entities
+- `Task`: an data class representing a task.
+### Repositories
 - `TaskRepository`: an interface defining the repository contract for tasks.
 ### Use cases
 - `GetTasks`: a use case that retrieves a list of tasks.
