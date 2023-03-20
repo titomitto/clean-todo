@@ -18,10 +18,11 @@ The domain layer is responsible for defining the business logic and use cases re
 
 - `Task`: a data class representing a task.
 - `TaskRepository`: an interface defining the repository contract for tasks.
-- `GetTasksUseCase`: a use case that retrieves a list of tasks.
-- `AddTaskUseCase`: a use case that adds a new task.
-- `UpdateTaskUseCase`: a use case that updates an existing task.
-- `DeleteTaskUseCase`: a use case that deletes an existing task.
+### Use cases
+- `GetTasks`: a use case that retrieves a list of tasks.
+- `AddTask`: a use case that adds a new task.
+- `UpdateTask`: a use case that updates an existing task.
+- `DeleteTask`: a use case that deletes an existing task.
 ## Presentation Layer
 The presentation layer is responsible for handling the UI logic and user interactions related to tasks. It includes the following classes:
 
