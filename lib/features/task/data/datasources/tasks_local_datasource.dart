@@ -8,9 +8,15 @@ import 'package:hive/hive.dart';
 import '../../../../core/datasource/local_data_source.dart';
 
 final tasksLocalDataSourceProvider =
-    FutureProvider<TasksLocalDataSource>((ref) async {
-  var tasksLocalDataSource = TasksLocalDataSourceImpl();
-  await tasksLocalDataSource.init();
+    FutureProvider.autoDispose<TasksLocalDataSource>((ref) async {
+  Hive.registerAdapter(TaskModelAdapter());
+  Box<TaskModel> box = await Hive.openBox("tasks");
+  var tasksLocalDataSource = TasksLocalDataSourceImpl(box);
+
+  ref.onDispose(() {
+    tasksLocalDataSource.close();
+  });
+
   return tasksLocalDataSource;
 });
 
@@ -22,12 +28,13 @@ abstract class TasksLocalDataSource implements LocalDataSource {
 }
 
 class TasksLocalDataSourceImpl extends TasksLocalDataSource {
-  late Box<TaskModel> box;
+  final Box<TaskModel> box;
+
+  TasksLocalDataSourceImpl(this.box);
 
   @override
   Future<List<TaskModel>> getTasks() async {
     try {
-      log("CHAA ${box.values.toList()}}");
       return box.values.toList();
     } catch (e) {
       log("$e");
@@ -49,7 +56,6 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
 
   @override
   Future<bool> deleteTask(TaskModel task) async {
-    log("CHAP ${task.id}}");
     try {
       await box.delete(task.id);
       return true;
@@ -62,20 +68,12 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   @override
   Future<bool> updateTask(TaskModel task) async {
     try {
-      log("CHAP ${task.id}");
-
       await box.put(task.id, task);
       return true;
     } catch (e) {
       log("$e");
       throw CacheException();
     }
-  }
-
-  @override
-  Future<void> init() async {
-    Hive.registerAdapter(TaskModelAdapter());
-    box = await Hive.openBox("tasks");
   }
 
   @override
