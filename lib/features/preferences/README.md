@@ -10,25 +10,25 @@ The Preferences feature allows users to customize the theme mode and language of
 The domain layer is responsible for defining the business logic and use cases related to preferences. It includes the following classes:
 
 ### Entities
-- `Preference`: a data class representing a user's preference for theme mode and language.
+- `Preferences`: a data class representing a user's preference for theme mode and language.
 ### Repositories
-- `PreferenceRepository`: an interface defining the repository contract for preferences.
+- `PreferencesRepository`: an interface defining the repository contract for preferences.
 ### Use cases
-- `GetPreference`: a use case that retrieves the user's preference for theme mode and language.
+- `GetPreferences`: a use case that retrieves the user's preference for theme mode and language.
 - `SetThemeMode`: a use case that updates the user's preference for theme mode.
 - `SetLanguage`: a use case that updates the user's preference for language.
 ### Data Layer
 The data layer is responsible for providing the source of the preference data. It includes the following classes:
 
-- `PreferenceLocalDataSource`: an interface defining the local data source contract for preferences.
-- `PreferenceLocalDataSourceImpl`: an implementation of `PreferenceLocalDataSource` using Hive as the underlying data store.
+- `PreferencesLocalDataSource`: an interface defining the local data source contract for preferences.
+- `PreferencesLocalDataSourceImpl`: an implementation of `PreferencesLocalDataSource` using Hive as the underlying data store.
 ## Presentation Layer
 The presentation layer is responsible for handling the UI logic and user interactions related to preferences. It includes the following classes:
 
 ### Controllers
-- `PreferenceController`: a controller that manages state of the preferences and exposes the preference data to the UI.
+- `PreferencesController`: a controller that manages state of the preferences and exposes the preference data to the UI.
 ### Screens
-- `PreferenceScreen`: a screen that displays the preference UI.
+- `PreferencesScreen`: a screen that displays the preference UI.
 ## Dependencies
 The preferences feature depends on the following external libraries:
 

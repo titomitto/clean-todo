@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../entities/preferences.dart';
+import '../entities/preference.dart';
 
 abstract class PreferencesRepository {
   Future<Either<Failure, Preferences>> getPreferences();
