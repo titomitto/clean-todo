@@ -1,6 +1,4 @@
-import 'package:clean_todo/features/tasks/data/mappers/task.dart';
-import 'package:clean_todo/features/tasks/data/models/task.dart';
-import 'package:clean_todo/features/tasks/domain/entities/task.dart';
+import 'package:clean_todo/features/tasks/tasks.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'presentation/task_routes.dart';
 
 export 'data/data.dart';
+export 'domain/domain.dart';
+export 'presentation/presentation.dart';
 
 class TasksFeature extends Feature {
   @override
