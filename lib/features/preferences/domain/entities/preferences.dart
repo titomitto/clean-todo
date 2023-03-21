@@ -1,6 +1,6 @@
 class Preferences {
-  final String language;
-  final String themeMode;
+  final String? language;
+  final String? themeMode;
 
   Preferences({
     required this.language,

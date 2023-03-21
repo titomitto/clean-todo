@@ -24,9 +24,9 @@ class PreferencesLocalDataSourceImpl extends PreferencesLocalDataSource {
   late Box<PreferencesModel> box;
   PreferencesLocalDataSourceImpl(this.box);
   @override
-  Future<PreferencesModel?> getPreferences() async {
+  Future<PreferencesModel> getPreferences() async {
     try {
-      return box.values.isEmpty ? null : box.values.first;
+      return box.values.isEmpty ? PreferencesModel() : box.values.first;
     } catch (e) {
       log("$e");
       throw CacheException();
@@ -34,9 +34,31 @@ class PreferencesLocalDataSourceImpl extends PreferencesLocalDataSource {
   }
 
   @override
-  Future<void> savePreferences(PreferencesModel preferences) async {
+  Future<void> setLanguage(String language) async {
     try {
-      await box.put("preferences", preferences);
+      PreferencesModel preferences = await getPreferences();
+      await box.put(
+        "preferences",
+        preferences.copyWith(
+          language: language,
+        ),
+      );
+    } catch (e) {
+      log("$e");
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> setThemeMode(String themeMode) async {
+    try {
+      PreferencesModel preferences = await getPreferences();
+      await box.put(
+        "preferences",
+        preferences.copyWith(
+          themeMode: themeMode,
+        ),
+      );
     } catch (e) {
       log("$e");
       throw CacheException();

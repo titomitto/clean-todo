@@ -20,25 +20,36 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
   });
 
   @override
-  Future<Either<Failure, Preferences?>> getPreferences() async {
+  Future<Either<Failure, Preferences>> getPreferences() async {
     try {
       var localDataSource =
           await ref.read(preferencesLocalDataSourceProvider.future);
       var preferencesModel = await localDataSource.getPreferences();
-      var preferences = preferencesModel?.toEntity();
+      var preferences = preferencesModel.toEntity();
       return Right(preferences);
     } catch (e) {
-      log("$e");
       return Left(CacheGetFailure());
     }
   }
 
   @override
-  Future<Either<Failure, Unit>> savePreferences(Preferences preferences) async {
+  Future<Either<Failure, Unit>> setLanguage(String language) async {
     try {
       var localDataSource =
           await ref.read(preferencesLocalDataSourceProvider.future);
-      await localDataSource.savePreferences(preferences.toModel());
+      await localDataSource.setLanguage(language);
+      return const Right(unit);
+    } catch (e) {
+      return Left(CachePutFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> setThemeMode(String themeMode) async {
+    try {
+      var localDataSource =
+          await ref.read(preferencesLocalDataSourceProvider.future);
+      await localDataSource.setLanguage(themeMode);
       return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());
