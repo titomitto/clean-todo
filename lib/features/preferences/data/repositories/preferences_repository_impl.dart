@@ -1,13 +1,12 @@
 import 'dart:developer';
 
-import 'package:clean_todo/core/errors/failure.dart';
-import 'package:clean_todo/features/preferences/data/datasources/preferences_local_datasource.dart';
+import 'package:clean_todo/core/core.dart';
 import 'package:clean_todo/features/preferences/domain/entities/preferences.dart';
-import 'package:clean_todo/features/preferences/data/mappers/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/repositories/preferences_repository.dart';
+import '../data.dart';
 
 final preferencesRepositoryProvider = Provider<PreferencesRepository>((ref) {
   return PreferencesRepositoryImpl(ref: ref);

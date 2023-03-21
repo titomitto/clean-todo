@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
-import 'core/feature.dart';
+import 'core/shared/feature.dart';
 import 'core/utils/navigator_key.dart';
 
 class Initializer {

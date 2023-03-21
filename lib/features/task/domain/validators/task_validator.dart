@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/utils/validator.dart';
+import '../../../../core/shared/validator.dart';
 import '../entities/task.dart';
 
 var taskValidatorProvider = Provider<TaskValidator>((ref) {
