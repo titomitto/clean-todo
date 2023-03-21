@@ -1,4 +1,4 @@
-import 'package:clean_todo/features/task/data/models/task.dart';
+import 'package:clean_todo/features/tasks/data/models/task_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

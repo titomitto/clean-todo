@@ -1,6 +1,6 @@
-import 'package:clean_todo/features/task/domain/entities/task.dart';
-import 'package:clean_todo/features/task/domain/repositories/task_repository.dart';
-import 'package:clean_todo/features/task/domain/usecases/get_tasks.dart';
+import 'package:clean_todo/features/tasks/domain/entities/task.dart';
+import 'package:clean_todo/features/tasks/domain/repositories/task_repository.dart';
+import 'package:clean_todo/features/tasks/domain/usecases/get_tasks.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

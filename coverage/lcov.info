@@ -1,4 +1,4 @@
-SF:lib/features/task/domain/entities/task.dart
+SF:lib/features/tasks/domain/entities/task.dart
 DA:7,1
 DA:13,0
 DA:18,0
@@ -10,7 +10,7 @@ DA:26,0
 LF:8
 LH:1
 end_of_record
-SF:lib/features/task/domain/usecases/get_tasks.dart
+SF:lib/features/tasks/domain/usecases/get_tasks.dart
 DA:10,0
 DA:11,0
 DA:12,0
@@ -56,7 +56,7 @@ DA:32,0
 LF:7
 LH:0
 end_of_record
-SF:lib/features/task/data/datasources/tasks_local_datasource.dart
+SF:lib/features/tasks/data/datasources/tasks_local_datasource.dart
 DA:10,0
 DA:11,0
 DA:12,0
@@ -91,12 +91,12 @@ DA:88,0
 LF:31
 LH:0
 end_of_record
-SF:lib/features/task/data/models/task.dart
+SF:lib/features/tasks/data/models/task.dart
 DA:20,0
 LF:1
 LH:0
 end_of_record
-SF:lib/features/task/data/models/task.g.dart
+SF:lib/features/tasks/data/models/task.g.dart
 DA:13,0
 DA:15,0
 DA:16,0
@@ -122,7 +122,7 @@ DA:46,0
 LF:22
 LH:0
 end_of_record
-SF:lib/features/task/data/mappers/task.dart
+SF:lib/features/tasks/data/mappers/task.dart
 DA:5,0
 DA:6,0
 DA:7,0
@@ -134,7 +134,7 @@ DA:16,0
 LF:8
 LH:0
 end_of_record
-SF:lib/features/task/data/repositories/task_repository_impl.dart
+SF:lib/features/tasks/data/repositories/task_repository_impl.dart
 DA:11,0
 DA:12,0
 DA:18,0

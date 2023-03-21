@@ -1,4 +1,4 @@
-import 'package:clean_todo/features/task/domain/entities/task.dart';
+import 'package:clean_todo/features/tasks/domain/entities/task.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 
