@@ -1,4 +1,4 @@
-import 'package:clean_todo/features/preferences/domain/entities/preference.dart';
+import 'package:clean_todo/features/preferences/domain/entities/preferences.dart';
 import '../models/preferences.dart';
 
 extension PreferencesModelExtension on PreferencesModel {
