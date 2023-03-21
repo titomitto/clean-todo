@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:clean_todo/core/core.dart';
-import 'package:clean_todo/features/preferences/domain/entities/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../domain/repositories/preferences_repository.dart';
-import '../data.dart';
+import '../../preferences.dart';
 
 final preferencesRepositoryProvider =
     FutureProvider<PreferencesRepository>((ref) async {
@@ -46,7 +41,7 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
   @override
   Future<Either<Failure, Unit>> setThemeMode(String themeMode) async {
     try {
-      await localDataSource.setLanguage(themeMode);
+      await localDataSource.setThemeMode(themeMode);
       return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());
