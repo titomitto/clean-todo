@@ -10,34 +10,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../datasources/tasks_local_datasource_impl.dart';
 
-final tasksRepositoryProvider = FutureProvider<TasksRepository>((ref) async {
+final tasksRepositoryProvider =
+    FutureProvider.autoDispose<TasksRepository>((ref) async {
   final tasksLocalDataSource =
-      await ref.read(tasksLocalDataSourceProvider.future);
+      await ref.watch(tasksLocalDataSourceProvider.future);
   return TasksRepositoryImpl(localDataSource: tasksLocalDataSource);
 });
 
 class TasksRepositoryImpl extends TasksRepository {
-  TasksLocalDataSource localDataSource;
-
+  final TasksLocalDataSource localDataSource;
   TasksRepositoryImpl({
     required this.localDataSource,
   });
 
   @override
-  Future<Either<Failure, bool>> updateTask(Task task) async {
+  Future<Either<Failure, Unit>> updateTask(Task task) async {
     try {
-      var done = await localDataSource.updateTask(task.toModel());
-      return Right(done);
+      await localDataSource.updateTask(task.toModel());
+      return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());
     }
   }
 
   @override
-  Future<Either<Failure, bool>> addTask(Task task) async {
+  Future<Either<Failure, Unit>> addTask(Task task) async {
     try {
-      var done = await localDataSource.addTask(task.toModel());
-      return Right(done);
+      await localDataSource.addTask(task.toModel());
+      return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());
     }
@@ -56,10 +56,10 @@ class TasksRepositoryImpl extends TasksRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> deleteTask(Task task) async {
+  Future<Either<Failure, Unit>> deleteTask(Task task) async {
     try {
-      var done = await localDataSource.deleteTask(task.toModel());
-      return Right(done);
+      await localDataSource.deleteTask(task.toModel());
+      return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());
     }

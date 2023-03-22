@@ -11,7 +11,7 @@ final addTaskUseCaseProvider = FutureProvider<AddTask>((ref) async {
   return AddTask(repository: repository);
 });
 
-class AddTask extends UseCase<Future<Either<Failure, bool>>, AddTaskParams> {
+class AddTask extends UseCase<Future<Either<Failure, void>>, AddTaskParams> {
   TasksRepository repository;
 
   AddTask({
@@ -19,7 +19,7 @@ class AddTask extends UseCase<Future<Either<Failure, bool>>, AddTaskParams> {
   });
 
   @override
-  Future<Either<Failure, bool>> call(AddTaskParams params) {
+  Future<Either<Failure, void>> call(AddTaskParams params) {
     return repository.addTask(params.task);
   }
 }

@@ -9,11 +9,14 @@ import 'tasks_local_datasource.dart';
 final tasksLocalDataSourceProvider =
     FutureProvider.autoDispose<TasksLocalDataSource>((ref) async {
   Hive.registerAdapter(TaskModelAdapter());
+
   Box<TaskModel> box = await Hive.openBox("tasks");
+
   var tasksLocalDataSource = TasksLocalDataSourceImpl(box);
 
   ref.onDispose(() {
     tasksLocalDataSource.close();
+    log("tasksLocalDataSourceProvider cancelled");
   });
 
   return tasksLocalDataSource;
@@ -47,10 +50,9 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   }
 
   @override
-  Future<bool> deleteTask(TaskModel task) async {
+  Future<void> deleteTask(TaskModel task) async {
     try {
       await box.delete(task.id);
-      return true;
     } catch (e) {
       log("$e");
       throw CacheException();

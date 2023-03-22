@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/add_task_form.dart';
 
 class AddTaskScreen extends StatelessWidget {

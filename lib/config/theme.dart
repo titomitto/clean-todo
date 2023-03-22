@@ -6,6 +6,7 @@ final darkTheme = ThemeData(
   brightness: Brightness.dark,
   dividerColor: Colors.black12,
   colorScheme: ColorScheme.fromSwatch(
+    brightness: Brightness.dark,
     primarySwatch: Colors.white.toMaterialColor(),
     backgroundColor: Colors.black,
   ).copyWith(
@@ -18,6 +19,7 @@ final lightTheme = ThemeData(
   brightness: Brightness.light,
   dividerColor: Colors.white54,
   colorScheme: ColorScheme.fromSwatch(
+    brightness: Brightness.light,
     primarySwatch: const Color(0xffFF5E00).toMaterialColor(),
   ).copyWith(
     secondary: const Color(0xffFF5E00),

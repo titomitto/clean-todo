@@ -13,17 +13,18 @@ class AddTaskForm extends ConsumerStatefulWidget {
 }
 
 class _AddTaskFormState extends ConsumerState<AddTaskForm> {
-  final taskController = TextEditingController();
+  final taskTitleController = TextEditingController();
 
   void submit() {
-    ref.read(tasksControllerProvider.notifier).addTask(taskController.text);
+    final taskController = ref.read(tasksControllerProvider.notifier);
+    taskController.addTask(taskTitleController.text.trim());
     context.pop();
   }
 
   @override
   void dispose() {
     super.dispose();
-    taskController.dispose();
+    taskTitleController.dispose();
   }
 
   @override
@@ -32,7 +33,7 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
       child: Column(
         children: [
           TextFormField(
-            controller: taskController,
+            controller: taskTitleController,
             maxLines: 3,
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(

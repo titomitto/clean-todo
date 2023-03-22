@@ -19,6 +19,7 @@ class TasksScreen extends StatelessWidget {
       ),
       body: const TasksListView(),
       floatingActionButton: FloatingActionButton(
+        mini: true,
         backgroundColor: const Color(0xffffd78a),
         foregroundColor: Colors.black,
         onPressed: () => context.push(AddTaskScreen.routePath),

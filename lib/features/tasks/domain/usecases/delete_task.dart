@@ -13,7 +13,7 @@ final deleteTaskUseCaseProvider = FutureProvider<DeleteTask>((ref) async {
 });
 
 class DeleteTask
-    extends UseCase<Future<Either<Failure, bool>>, DeleteTaskParams> {
+    extends UseCase<Future<Either<Failure, void>>, DeleteTaskParams> {
   TasksRepository repository;
 
   DeleteTask({
@@ -21,7 +21,7 @@ class DeleteTask
   });
 
   @override
-  Future<Either<Failure, bool>> call(DeleteTaskParams params) {
+  Future<Either<Failure, void>> call(DeleteTaskParams params) {
     return repository.deleteTask(params.task);
   }
 }
