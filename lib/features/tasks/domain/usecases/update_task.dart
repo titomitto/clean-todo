@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/tasks_repository_impl.dart';
 
-final updateTaskUseCaseProvider = FutureProvider<UpdateTask>((ref) async {
-  final repository = await ref.read(tasksRepositoryProvider.future);
+final updateTaskUseCaseProvider = Provider<UpdateTask>((ref) {
+  final repository = ref.read(tasksRepositoryProvider);
   return UpdateTask(repository: repository);
 });
 

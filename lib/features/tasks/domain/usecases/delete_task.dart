@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/tasks_repository_impl.dart';
 
-final deleteTaskUseCaseProvider = FutureProvider<DeleteTask>((ref) async {
-  final repository = await ref.read(tasksRepositoryProvider.future);
+final deleteTaskUseCaseProvider = Provider<DeleteTask>((ref) {
+  final repository = ref.read(tasksRepositoryProvider);
   return DeleteTask(repository: repository);
 });
 
