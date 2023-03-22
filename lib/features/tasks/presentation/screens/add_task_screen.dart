@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../preferences/presentation/widgets/change_theme_button.dart';
 import '../widgets/add_task_form.dart';
 
 class AddTaskScreen extends StatelessWidget {
@@ -10,11 +11,9 @@ class AddTaskScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: const Color(0xff14141b),
         title: const Text("Add Task List"),
       ),
       body: Container(
-        color: const Color(0xff14141b),
         padding: const EdgeInsets.all(20),
         child: const AddTaskForm(),
       ),

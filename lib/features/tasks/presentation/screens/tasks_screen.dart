@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../preferences/presentation/widgets/change_theme_button.dart';
 import 'add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -15,16 +16,16 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: const Color(0xff14141b),
         title: Text(AppLocalizations.of(context)!.helloWorld),
+        actions: const [
+          AppThemeButton(),
+        ],
       ),
       body: const TasksListView(),
       floatingActionButton: FloatingActionButton(
-        mini: true,
         backgroundColor: const Color(0xffffd78a),
         foregroundColor: Colors.black,
-        //onPressed: () => context.go(PreferencesScreen.routePath),
-        onPressed: () => context.go(AddTaskScreen.routePath),
+        onPressed: () => context.push(AddTaskScreen.routePath),
         child: const Icon(Iconsax.add),
       ),
     );

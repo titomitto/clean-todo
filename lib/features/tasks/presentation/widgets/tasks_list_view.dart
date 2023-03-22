@@ -23,7 +23,6 @@ class _TasksListViewState extends ConsumerState<TasksListView> {
         horizontal: 15,
         vertical: 10,
       ),
-      color: const Color(0xff14141b),
       child: tasksState.when(data: (tasks) {
         if (tasks.isEmpty) {
           return Column(

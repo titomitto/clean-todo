@@ -1,10 +1,10 @@
 class Preferences {
-  final String? language;
-  final String? themeMode;
+  final String language;
+  final String themeMode;
 
   Preferences({
-    this.language,
-    this.themeMode,
+    required this.language,
+    required this.themeMode,
   });
 
   Preferences copyWith({

@@ -4,8 +4,9 @@ import '../../domain/entities/preferences.dart';
 import '../../domain/usecases/get_preferences.dart';
 import '../../domain/usecases/set_language.dart';
 
-final preferencesControllerProvider = StateNotifierProvider.autoDispose<
-    PreferencesController, AsyncValue<Preferences>>((ref) {
+final preferencesControllerProvider =
+    StateNotifierProvider.autoDispose<PreferencesController, Preferences>(
+        (ref) {
   GetPreferences getPreferences = ref.watch(getPreferencesUseCaseProvider);
   SetLanguage setLanguage = ref.watch(setLanguageUseCaseProvider);
 
@@ -21,16 +22,21 @@ class PreferencesController extends StateNotifier<Preferences> {
   PreferencesController({
     required this.getPreferences,
     required this.setLanguage,
-  }) : super(Preferences()) {
-    getPreferences();
-  }
+  }) : super(
+          Preferences(
+            language: "en",
+            themeMode: "light",
+          ),
+        );
 
   void changeLanguage(String language) {
     state = state.copyWith(language: language);
   }
 
-  void changeThemeMode(String themeMode) {
-    state = state.copyWith(themeMode: themeMode);
+  void toggleTheme() {
+    state = state.copyWith(
+      themeMode: state.themeMode == "light" ? "dark" : "light",
+    );
   }
 
   Future<void> fetchPreferences() async {

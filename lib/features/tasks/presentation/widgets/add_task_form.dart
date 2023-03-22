@@ -35,14 +35,12 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
           TextFormField(
             controller: taskTitleController,
             maxLines: 3,
-            style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               hintText: "Enter task",
               hintStyle: TextStyle(
                 color: Color(0xff565765),
               ),
               filled: true,
-              fillColor: Color(0xff282934),
             ),
           ),
           const SizedBox(

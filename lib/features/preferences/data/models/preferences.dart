@@ -5,13 +5,13 @@ part 'preferences.g.dart';
 @HiveType(typeId: 1)
 class PreferencesModel {
   @HiveField(0)
-  final String? language;
+  final String language;
   @HiveField(1)
-  final String? themeMode;
+  final String themeMode;
 
   PreferencesModel({
-    this.language,
-    this.themeMode,
+    required this.language,
+    required this.themeMode,
   });
 
   copyWith({

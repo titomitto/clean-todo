@@ -26,7 +26,7 @@ class PreferencesLocalDataSourceImpl extends PreferencesLocalDataSource {
   @override
   Future<PreferencesModel> getPreferences() async {
     try {
-      return box.values.isEmpty ? PreferencesModel() : box.values.first;
+      return box.values.first;
     } catch (e) {
       log("$e");
       throw CacheException();
