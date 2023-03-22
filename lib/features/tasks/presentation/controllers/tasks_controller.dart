@@ -4,19 +4,22 @@ import '../../domain/domain.dart';
 final tasksControllerProvider =
     StateNotifierProvider.autoDispose<TasksController, AsyncValue<List<Task>>>(
         (ref) {
-  return TasksController(ref);
+  GetTasks getTaskUseCase = ref.watch(getTasksUseCaseProvider);
+  return TasksController(ref, getTaskUseCase);
 });
 
 class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   StateNotifierProviderRef ref;
-  TasksController(this.ref) : super(const AsyncValue.loading()) {
+  GetTasks getTasksUseCase;
+  TasksController(this.ref, this.getTasksUseCase)
+      : super(const AsyncValue.loading()) {
     getTasks();
   }
 
   void addTask(String title) async {
     state = const AsyncLoading();
 
-    final addTask = await ref.read(addTaskUseCaseProvider.future);
+    final addTask = ref.read(addTaskUseCaseProvider);
 
     var task = Task(title: title);
 
@@ -31,9 +34,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   Future<void> getTasks() async {
     state = const AsyncLoading();
 
-    final getTasks = await ref.read(getTasksUseCaseProvider.future);
-
-    var response = await getTasks();
+    var response = await getTasksUseCase();
 
     response.fold((failure) {
       state = AsyncError(failure.message, StackTrace.current);
@@ -43,7 +44,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   }
 
   void deleteTask(Task task) async {
-    final deleteTask = await ref.read(deleteTaskUseCaseProvider.future);
+    final deleteTask = ref.read(deleteTaskUseCaseProvider);
 
     var response = await deleteTask(DeleteTaskParams(task: task));
 
@@ -55,7 +56,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
   }
 
   void toggle(Task task) async {
-    var updateTask = await ref.read(updateTaskUseCaseProvider.future);
+    var updateTask = ref.read(updateTaskUseCaseProvider);
 
     var response = await updateTask(
       UpdateTaskParams(
