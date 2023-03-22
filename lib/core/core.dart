@@ -3,3 +3,4 @@ export './errors/exceptions.dart';
 export './errors/failure.dart';
 export './shared/feature.dart';
 export './shared/validator.dart';
+export './utils/utils.dart';

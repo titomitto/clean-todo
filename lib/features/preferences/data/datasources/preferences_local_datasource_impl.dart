@@ -9,12 +9,12 @@ import 'preferences_local_datasource.dart';
 
 final preferencesLocalDataSourceProvider =
     FutureProvider.autoDispose<PreferencesLocalDataSource>((ref) async {
-  Hive.registerAdapter(PreferencesModelAdapter());
   Box<PreferencesModel> box = await Hive.openBox("preferences");
   var preferencesLocalDataSource = PreferencesLocalDataSourceImpl(box);
 
-  ref.onDispose(() {
-    preferencesLocalDataSource.close();
+  ref.onDispose(() async {
+    await preferencesLocalDataSource.close();
+    log("preferencesLocalDataSourceProvider disposed");
   });
 
   return preferencesLocalDataSource;

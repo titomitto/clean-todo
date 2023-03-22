@@ -4,22 +4,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../preferences.dart';
 
 final preferencesRepositoryProvider =
-    FutureProvider<PreferencesRepository>((ref) async {
+    Provider.autoDispose<PreferencesRepository>((ref) {
   final preferencesLocalDataSource =
-      await ref.read(preferencesLocalDataSourceProvider.future);
-  return PreferencesRepositoryImpl(localDataSource: preferencesLocalDataSource);
+      ref.watch(preferencesLocalDataSourceProvider.future);
+  return PreferencesRepositoryImpl(
+      futureLocalDataSource: preferencesLocalDataSource);
 });
 
 class PreferencesRepositoryImpl extends PreferencesRepository {
-  PreferencesLocalDataSource localDataSource;
+  Future<PreferencesLocalDataSource> futureLocalDataSource;
 
   PreferencesRepositoryImpl({
-    required this.localDataSource,
+    required this.futureLocalDataSource,
   });
 
   @override
   Future<Either<Failure, Preferences>> getPreferences() async {
     try {
+      final localDataSource = await futureLocalDataSource;
       var preferencesModel = await localDataSource.getPreferences();
       var preferences = preferencesModel.toEntity();
       return Right(preferences);
@@ -31,6 +33,7 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
   @override
   Future<Either<Failure, Unit>> setLanguage(String language) async {
     try {
+      final localDataSource = await futureLocalDataSource;
       await localDataSource.setLanguage(language);
       return const Right(unit);
     } catch (e) {
@@ -41,6 +44,7 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
   @override
   Future<Either<Failure, Unit>> setThemeMode(String themeMode) async {
     try {
+      final localDataSource = await futureLocalDataSource;
       await localDataSource.setThemeMode(themeMode);
       return const Right(unit);
     } catch (e) {
