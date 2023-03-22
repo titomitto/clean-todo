@@ -3,8 +3,8 @@ class Preferences {
   final String? themeMode;
 
   Preferences({
-    required this.language,
-    required this.themeMode,
+    this.language,
+    this.themeMode,
   });
 
   Preferences copyWith({

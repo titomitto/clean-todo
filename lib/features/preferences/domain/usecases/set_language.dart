@@ -4,8 +4,8 @@ import 'package:clean_todo/features/preferences/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final setLanguageUseCaseProvider = FutureProvider<SetLanguage>((ref) async {
-  final repository = await ref.read(preferencesRepositoryProvider.future);
+final setLanguageUseCaseProvider = Provider<SetLanguage>((ref) {
+  final repository = ref.read(preferencesRepositoryProvider);
   return SetLanguage(repository: repository);
 });
 
