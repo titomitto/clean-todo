@@ -8,7 +8,6 @@ import 'tasks_local_datasource.dart';
 
 final tasksLocalDataSourceProvider =
     FutureProvider.autoDispose<TasksLocalDataSource>((ref) async {
-  Hive.registerAdapter(TaskModelAdapter());
   Box<TaskModel> box = await Hive.openBox("tasks");
 
   var tasksLocalDataSource = TasksLocalDataSourceImpl(box);
