@@ -19,13 +19,17 @@ class SetLanguage
 
   @override
   Future<Either<Failure, Unit>> call(SetLanguageParams params) async {
-    return repository.setLanguage(params.language);
+    return repository.setPreferences(params.preferences.copyWith(
+      language: params.language,
+    ));
   }
 }
 
 class SetLanguageParams {
   String language;
+  Preferences preferences;
   SetLanguageParams({
     required this.language,
+    required this.preferences,
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../controllers/preferences_controller.dart';
 
@@ -10,8 +11,10 @@ class AppThemeButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var preferencesController =
         ref.watch(preferencesControllerProvider.notifier);
+    var isDark = ref.watch(preferencesControllerProvider).themeMode == 'dark';
+
     return IconButton(
-      icon: const Icon(Icons.brightness_2),
+      icon: Icon(isDark ? FeatherIcons.sun : FeatherIcons.moon),
       onPressed: () => preferencesController.toggleTheme(),
     );
   }

@@ -19,11 +19,11 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
   });
 
   @override
-  Future<Either<Failure, Preferences>> getPreferences() async {
+  Future<Either<Failure, Preferences?>> getPreferences() async {
     try {
       final localDataSource = await futureLocalDataSource;
       var preferencesModel = await localDataSource.getPreferences();
-      var preferences = preferencesModel.toEntity();
+      var preferences = preferencesModel?.toEntity();
       return Right(preferences);
     } catch (e) {
       return Left(CacheGetFailure());
@@ -31,21 +31,10 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> setLanguage(String language) async {
+  Future<Either<Failure, Unit>> setPreferences(Preferences preferences) async {
     try {
       final localDataSource = await futureLocalDataSource;
-      await localDataSource.setLanguage(language);
-      return const Right(unit);
-    } catch (e) {
-      return Left(CachePutFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, Unit>> setThemeMode(String themeMode) async {
-    try {
-      final localDataSource = await futureLocalDataSource;
-      await localDataSource.setThemeMode(themeMode);
+      await localDataSource.setPreferences(preferences.toModel());
       return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());

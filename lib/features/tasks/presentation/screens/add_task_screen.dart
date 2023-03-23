@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../preferences/presentation/widgets/change_theme_button.dart';
 import '../widgets/add_task_form.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddTaskScreen extends StatelessWidget {
   static String get routePath => "/add-task";
@@ -11,7 +11,7 @@ class AddTaskScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const Text("Add Task List"),
+        title: Text(AppLocalizations.of(context)!.addTaskScreenTitle),
       ),
       body: Container(
         padding: const EdgeInsets.all(20),

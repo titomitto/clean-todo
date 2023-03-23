@@ -10,7 +10,7 @@ final setThemeModeUseCaseProvider = Provider<SetThemeMode>((ref) {
 });
 
 class SetThemeMode
-    extends UseCase<Future<Either<Failure, void>>, ChangeThemeModeParams> {
+    extends UseCase<Future<Either<Failure, void>>, SetThemeModeParams> {
   PreferencesRepository repository;
 
   SetThemeMode({
@@ -18,14 +18,18 @@ class SetThemeMode
   });
 
   @override
-  Future<Either<Failure, Unit>> call(ChangeThemeModeParams params) async {
-    return repository.setThemeMode(params.themeMode);
+  Future<Either<Failure, Unit>> call(SetThemeModeParams params) async {
+    return repository.setPreferences(params.preferences.copyWith(
+      themeMode: params.themeMode,
+    ));
   }
 }
 
-class ChangeThemeModeParams {
+class SetThemeModeParams {
   String themeMode;
-  ChangeThemeModeParams({
+  Preferences preferences;
+  SetThemeModeParams({
     required this.themeMode,
+    required this.preferences,
   });
 }

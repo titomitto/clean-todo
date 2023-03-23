@@ -11,7 +11,7 @@ final getPreferencesUseCaseProvider =
 });
 
 class GetPreferences
-    extends NoParamsUseCase<Future<Either<Failure, Preferences>>> {
+    extends NoParamsUseCase<Future<Either<Failure, Preferences?>>> {
   PreferencesRepository repository;
 
   GetPreferences({
@@ -19,7 +19,7 @@ class GetPreferences
   });
 
   @override
-  Future<Either<Failure, Preferences>> call() async {
+  Future<Either<Failure, Preferences?>> call() async {
     return repository.getPreferences();
   }
 }

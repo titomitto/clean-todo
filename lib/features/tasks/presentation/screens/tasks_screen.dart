@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../preferences/presentation/widgets/change_language_button.dart';
 import '../../../preferences/presentation/widgets/change_theme_button.dart';
 import 'add_task_screen.dart';
 
@@ -16,8 +17,9 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text(AppLocalizations.of(context)!.helloWorld),
+        title: Text(AppLocalizations.of(context)!.listTasksScreenTitle),
         actions: const [
+          ChangeLanguageButton(),
           AppThemeButton(),
         ],
       ),

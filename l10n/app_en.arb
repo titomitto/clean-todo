@@ -1,4 +1,6 @@
 {
-  "helloWorld": "Hello World!",
-  "chogoSA": "Chogo SA"
+  "listTasksScreenTitle": "Hello, World!",
+  "addTaskScreenTitle": "Add Task",
+  "taskTitleHint": "Enter task here",
+  "saveTaskButton": "Save Task"
 }
