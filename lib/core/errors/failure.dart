@@ -15,7 +15,7 @@ class ServerFailure extends Failure {
 
 class CacheGetFailure extends Failure {
   @override
-  String get message => "Failed to retrieve data. We're working to fix it.";
+  String get message => "Failed to retrieve data.";
 }
 
 class CachePutFailure extends Failure {

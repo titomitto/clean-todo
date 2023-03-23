@@ -9,8 +9,7 @@ class ChangeLanguageButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var preferencesController =
-        ref.watch(preferencesControllerProvider.notifier);
+    var preferencesController = ref.watch(preferencesProvider.notifier);
     return PopupMenuButton<String>(
       icon: const Icon(FeatherIcons.globe),
       onSelected: (value) => preferencesController.changeLanguage(value),

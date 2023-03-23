@@ -1,4 +1,6 @@
-class Preferences {
+import 'package:equatable/equatable.dart';
+
+class Preferences extends Equatable {
   final String language;
   final String themeMode;
 
@@ -16,4 +18,7 @@ class Preferences {
       themeMode: themeMode ?? this.themeMode,
     );
   }
+
+  @override
+  List<Object?> get props => [language, themeMode];
 }

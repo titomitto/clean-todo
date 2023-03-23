@@ -15,7 +15,7 @@ class TasksListView extends ConsumerStatefulWidget {
 class _TasksListViewState extends ConsumerState<TasksListView> {
   @override
   Widget build(BuildContext context) {
-    var tasksState = ref.watch(tasksControllerProvider);
+    var tasksState = ref.watch(tasksProvider);
     return Container(
       width: double.infinity,
       height: double.infinity,

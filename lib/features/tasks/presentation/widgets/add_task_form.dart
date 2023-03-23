@@ -17,7 +17,7 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
   final taskTitleController = TextEditingController();
 
   void submit() {
-    final taskController = ref.read(tasksControllerProvider.notifier);
+    final taskController = ref.read(tasksProvider.notifier);
     taskController.addTask(taskTitleController.text.trim());
     context.pop();
   }

@@ -63,7 +63,7 @@ class CheckBox extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: () {
-          ref.read(tasksControllerProvider.notifier).toggle(task);
+          ref.read(tasksProvider.notifier).toggle(task);
         },
         behavior: HitTestBehavior.opaque,
         child: Icon(
@@ -88,7 +88,7 @@ class DeleteButton extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(tasksControllerProvider.notifier).deleteTask(task);
+        ref.read(tasksProvider.notifier).deleteTask(task);
       },
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),

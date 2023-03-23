@@ -1,7 +1,7 @@
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 
-final tasksControllerProvider =
+final tasksProvider =
     StateNotifierProvider.autoDispose<TasksController, AsyncValue<List<Task>>>(
         (ref) {
   GetTasks getTaskUseCase = ref.watch(getTasksUseCaseProvider);

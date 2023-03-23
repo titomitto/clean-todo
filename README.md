@@ -24,13 +24,13 @@ For more information on how the app is structured and organized, see the [archit
 
 Allows users to customize the app's settings and preferences.
 
-For more information on how the preferences feature is structured and implemented, see the [preferences documentation](./docs/preferences_feature.md).
+For more information on how the preferences feature is structured and implemented, see the [preferences documentation](./lib/features/READMDE.md).
 
 ### Tasks
 
 Allows users to create, manage, and complete tasks.
 
-For more information on how the tasks feature is structured and implemented, see the [tasks documentation](./docs/tasks_feature.md).
+For more information on how the tasks feature is structured and implemented, see the [tasks documentation](./lib/features/README.md).
 
 ## Getting Started
 

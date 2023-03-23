@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/usecases/get_preferences.dart';
 import '../../domain/usecases/set_language.dart';
 
-final preferencesControllerProvider =
+final preferencesProvider =
     StateNotifierProvider.autoDispose<PreferencesController, Preferences>(
         (ref) {
   GetPreferences getPreferences = ref.watch(getPreferencesUseCaseProvider);

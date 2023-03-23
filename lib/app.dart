@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,21 +20,19 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    var preferences = ref.watch(preferencesControllerProvider);
-    return OKToast(
-      position: ToastPosition.bottom,
-      child: MaterialApp.router(
-        darkTheme: darkTheme,
-        theme: lightTheme,
-        themeMode:
-            preferences.themeMode == 'light' ? ThemeMode.light : ThemeMode.dark,
-        routerConfig: router,
-        title: title,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: Locale(preferences.language),
-      ),
+    var preferences = ref.watch(preferencesProvider);
+    log("Rebuilding App with theme: ${preferences.language} ${preferences.themeMode}");
+    return MaterialApp.router(
+      darkTheme: darkTheme,
+      theme: lightTheme,
+      themeMode:
+          preferences.themeMode == 'light' ? ThemeMode.light : ThemeMode.dark,
+      routerConfig: router,
+      title: title,
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale(preferences.language),
     );
   }
 }

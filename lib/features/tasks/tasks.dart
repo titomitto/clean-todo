@@ -13,6 +13,6 @@ class TasksFeature extends Feature {
   List<RouteBase> get routes => taskRoutes;
   @override
   Future<void> preregister() async {
-    Hive.registerAdapter(TaskModelAdapter());
+    //Hive.registerAdapter(TaskModelAdapter());
   }
 }

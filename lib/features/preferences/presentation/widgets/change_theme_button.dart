@@ -9,9 +9,8 @@ class AppThemeButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var preferencesController =
-        ref.watch(preferencesControllerProvider.notifier);
-    var isDark = ref.watch(preferencesControllerProvider).themeMode == 'dark';
+    var preferencesController = ref.watch(preferencesProvider.notifier);
+    var isDark = ref.watch(preferencesProvider).themeMode == 'dark';
 
     return IconButton(
       icon: Icon(isDark ? FeatherIcons.sun : FeatherIcons.moon),
