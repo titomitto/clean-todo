@@ -1,7 +1,7 @@
 import 'package:clean_todo/core/shared/feature.dart';
 
-import '../features/preferences/preferences.dart';
-import '../features/tasks/tasks.dart';
+import 'preferences/preferences.dart';
+import 'tasks/tasks.dart';
 
 List<Feature> get features => [
       TasksFeature(),
