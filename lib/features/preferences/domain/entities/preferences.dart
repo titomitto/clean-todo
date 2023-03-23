@@ -4,7 +4,7 @@ class Preferences extends Equatable {
   final String language;
   final String themeMode;
 
-  Preferences({
+  const Preferences({
     required this.language,
     required this.themeMode,
   });
