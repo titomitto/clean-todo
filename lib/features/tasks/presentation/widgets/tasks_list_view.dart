@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../controllers/tasks_controller.dart';
-import 'package:lottie/lottie.dart';
+import '../presentation.dart';
+import 'empty_view.dart';
+import 'error_view.dart';
 import 'task_view.dart';
 
 class TasksListView extends ConsumerStatefulWidget {
@@ -15,62 +15,38 @@ class TasksListView extends ConsumerStatefulWidget {
 class _TasksListViewState extends ConsumerState<TasksListView> {
   @override
   Widget build(BuildContext context) {
-    var tasksState = ref.watch(tasksProvider);
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 10,
-      ),
-      child: tasksState.when(data: (tasks) {
-        if (tasks.isEmpty) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Lottie.asset(
-                'assets/lottie/empty-folder.json',
-                width: 250,
-              ),
-              const Text(
-                "No tasks yet",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          );
-        }
-        return ListView.builder(
-          itemCount: tasks.length,
+    var state = ref.watch(tasksProvider);
+
+    if (state is TasksLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (state is TasksError) {
+      return ErrorView(message: state.message);
+    }
+
+    if (state is TasksEmpty) {
+      return const EmptyView();
+    }
+
+    if (state is TasksData) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 10,
+        ),
+        child: ListView.builder(
+          itemCount: state.tasks.length,
           itemBuilder: (context, index) {
-            var task = tasks[index];
+            var task = state.tasks[index];
             return TaskView(task: task);
           },
-        );
-      }, error: (error, stackTrace) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              'assets/lottie/error-state.json',
-              width: 220,
-            ),
-            Text(
-              "$error",
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-            ),
-          ],
-        );
-      }, loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }),
-    );
+        ),
+      );
+    }
+
+    return Container();
   }
 }

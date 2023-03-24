@@ -1,23 +1,22 @@
+import 'package:clean_todo/features/tasks/presentation/state/tasks_state.dart';
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 
 final tasksProvider =
-    StateNotifierProvider.autoDispose<TasksController, AsyncValue<List<Task>>>(
-        (ref) {
+    StateNotifierProvider.autoDispose<TasksController, TasksState>((ref) {
   GetTasks getTaskUseCase = ref.watch(getTasksUseCaseProvider);
   return TasksController(ref, getTaskUseCase);
 });
 
-class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
+class TasksController extends StateNotifier<TasksState> {
   StateNotifierProviderRef ref;
   GetTasks getTasksUseCase;
-  TasksController(this.ref, this.getTasksUseCase)
-      : super(const AsyncValue.loading()) {
+  TasksController(this.ref, this.getTasksUseCase) : super(TasksInitial()) {
     getTasks();
   }
 
   void addTask(String title) async {
-    state = const AsyncLoading();
+    state = TasksLoading();
 
     final addTask = ref.read(addTaskUseCaseProvider);
 
@@ -25,21 +24,25 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
 
     var response = await addTask(AddTaskParams(task: task));
     await response.fold((failure) {
-      state = AsyncError(failure.message, StackTrace.current);
+      state = TasksError(failure.message);
     }, (success) async {
       await getTasks();
     });
   }
 
   Future<void> getTasks() async {
-    state = const AsyncLoading();
+    state = TasksLoading();
 
     var response = await getTasksUseCase();
 
     response.fold((failure) {
-      state = AsyncError(failure.message, StackTrace.current);
+      state = TasksError(failure.message);
     }, (tasks) {
-      state = AsyncData(tasks);
+      if (tasks.isEmpty) {
+        state = TasksEmpty();
+        return;
+      }
+      state = TasksData(tasks);
     });
   }
 
@@ -49,7 +52,7 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
     var response = await deleteTask(DeleteTaskParams(task: task));
 
     await response.fold((failure) {
-      state = AsyncError(failure.message, StackTrace.current);
+      state = TasksError(failure.message);
     }, (_) async {
       await getTasks();
     });
@@ -60,13 +63,14 @@ class TasksController extends StateNotifier<AsyncValue<List<Task>>> {
 
     var response = await updateTask(
       UpdateTaskParams(
-          task: task.copyWith(
-        isDone: !task.isDone,
-      )),
+        task: task.copyWith(
+          isDone: !task.isDone,
+        ),
+      ),
     );
 
     response.fold((failure) {
-      state = AsyncError(failure.message, StackTrace.current);
+      state = TasksError(failure.message);
     }, (_) {
       getTasks();
     });
