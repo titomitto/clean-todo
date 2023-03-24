@@ -2,6 +2,11 @@
 
 Todo App following clean architecture and best coding practices
 
+## Screenshot
+
+|<image src="screenshots/dark1.png"> | <image src="screenshots/dark2.png"> | <image src="screenshots/light1.png">| <image src="screenshots/light2.png">|
+|:---:|:---:|:---:|:---:|
+
 ## Architecture
 
 This app follows the principles of Clean Architecture and is structured into the following layers:
