@@ -1,4 +1,4 @@
-import 'package:clean_todo/features/tasks/presentation/state/tasks_state.dart';
+import 'package:clean_todo/features/tasks/presentation/controllers/tasks_state.dart';
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 
