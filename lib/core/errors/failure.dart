@@ -1,8 +1,6 @@
 import 'exceptions.dart';
 
-abstract class Failure {
-  String get message;
-}
+abstract class Failure {}
 
 class ServerFailure extends Failure {
   final ServerException _exception;
@@ -13,22 +11,24 @@ class ServerFailure extends Failure {
   }
 }
 
-class CacheGetFailure extends Failure {
-  @override
-  String get message => "Failed to retrieve data.";
+class NetworkFailure extends Failure {}
+
+class CacheGetFailure extends Failure {}
+
+class CachePutFailure extends Failure {}
+
+class CacheDeleteFailure extends Failure {}
+
+class InvalidInputFailure extends Failure {}
+
+class ValidationFailure implements Failure {
+  final Map<String, ValidationError> errors;
+
+  ValidationFailure(this.errors);
+
+  ValidationError? errorForField(String field) {
+    return errors[field];
+  }
 }
 
-class CachePutFailure extends Failure {
-  @override
-  String get message => "Failed to save data. We're working to fix it.";
-}
-
-class CacheDeleteFailure extends Failure {
-  @override
-  String get message => "Failed to delete data. We're working to fix it.";
-}
-
-class InvalidInputFailure extends Failure {
-  @override
-  String get message => "Failed to validate input. We're working to fix it.";
-}
+abstract class ValidationError {}

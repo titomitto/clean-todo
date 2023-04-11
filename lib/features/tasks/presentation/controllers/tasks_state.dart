@@ -1,3 +1,5 @@
+import 'package:clean_todo/core/core.dart';
+
 import '../../domain/entities/task.dart';
 
 abstract class TasksState {}
@@ -16,6 +18,6 @@ class TasksEmpty extends TasksState {
 }
 
 class TasksError extends TasksState {
-  final String message;
-  TasksError(this.message);
+  final Failure failure;
+  TasksError(this.failure);
 }

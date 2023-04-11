@@ -2,5 +2,10 @@
   "listTasksScreenTitle": "Salamu, Dunia!",
   "addTaskScreenTitle": "Ongeza Kazi",
   "taskTitleHint": "Kazi",
-  "saveTaskButton": "Hifadhi"
+  "saveTaskButton": "Hifadhi",
+  "somethingWentWrong": "Jambo lisilojulikana lilitokea",
+  "networkError": "Tafadhali angalia uhusiano wako wa mtandao",
+  "cacheGetError": "Hakuna data iliyopatikana.",
+  "cachePutError": "Hakuna uwezo wa kuhifadhi data.",
+  "emptyFieldError": "Hii ni sehemu ya lazima"
 }

@@ -1,8 +1,10 @@
-import 'package:clean_todo/features/tasks/presentation/controllers/tasks_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../core/core.dart';
+import '../../tasks.dart';
 
 class AddTaskForm extends ConsumerStatefulWidget {
   const AddTaskForm({
@@ -14,12 +16,20 @@ class AddTaskForm extends ConsumerStatefulWidget {
 }
 
 class _AddTaskFormState extends ConsumerState<AddTaskForm> {
+  final formKey = GlobalKey<FormState>();
   final taskTitleController = TextEditingController();
 
   void submit() {
     final taskController = ref.read(tasksProvider.notifier);
     taskController.addTask(taskTitleController.text.trim());
     context.pop();
+  }
+
+  String mapValidationErrorToMessage(context, ValidationError error) {
+    if (error is EmptyFieldError) {
+      return AppLocalizations.of(context)!.emptyFieldError;
+    }
+    return AppLocalizations.of(context)!.somethingWentWrong;
   }
 
   @override
@@ -31,11 +41,19 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         children: [
           TextFormField(
             controller: taskTitleController,
             maxLines: 3,
+            validator: (value) {
+              final error = TaskValidator.validateTitle(value!);
+              if (error != null) {
+                return mapValidationErrorToMessage(context, error);
+              }
+              return null;
+            },
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.taskTitleHint,
               hintStyle: const TextStyle(
@@ -49,7 +67,11 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
           ),
           MaterialButton(
             minWidth: double.infinity,
-            onPressed: submit,
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                submit();
+              }
+            },
             color: const Color(0xffffd78a),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),

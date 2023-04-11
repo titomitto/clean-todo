@@ -1,11 +1,5 @@
-class Validator<T> {
-  List<ValidationError> validate(T t) {
-    return [];
-  }
-}
+import '../errors/failure.dart';
 
-class ValidationError {
-  final String field;
-  final String message;
-  ValidationError(this.field, this.message);
+abstract class Validator<T> {
+  ValidationFailure? validate(T params);
 }

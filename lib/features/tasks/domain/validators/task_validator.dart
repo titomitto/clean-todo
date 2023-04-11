@@ -7,13 +7,29 @@ var taskValidatorProvider = Provider<TaskValidator>((ref) {
   return TaskValidator();
 });
 
+class EmptyFieldError implements ValidationError {}
+
 class TaskValidator implements Validator<Task> {
-  @override
-  List<ValidationError> validate(Task task) {
-    final errors = <ValidationError>[];
-    if (task.title.isEmpty) {
-      errors.add(ValidationError('title', 'Title cannot be empty'));
+  static ValidationError? validateTitle(String title) {
+    if (title.isEmpty) {
+      return EmptyFieldError();
     }
-    return errors;
+    return null;
+  }
+
+  @override
+  ValidationFailure? validate(Task task) {
+    final errors = <String, ValidationError>{};
+    final titleError = validateTitle(task.title);
+
+    if (titleError != null) {
+      errors['title'] = titleError;
+    }
+
+    if (errors.isNotEmpty) {
+      return ValidationFailure(errors);
+    }
+
+    return null;
   }
 }

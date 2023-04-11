@@ -2,5 +2,12 @@
   "listTasksScreenTitle": "Hello, World!",
   "addTaskScreenTitle": "Add Task",
   "taskTitleHint": "Enter task here",
-  "saveTaskButton": "Save Task"
+  "saveTaskButton": "Save Task",
+  "somethingWentWrong": "Something went wrong",
+  "networkError": "Network error. Please check your connection.",
+  "cacheGetError": "Failed to retrieve data.",
+  "cachePutError": "Failed to save data.",
+  "emptyFieldError": "Field cannot be empty"
 }
+
+

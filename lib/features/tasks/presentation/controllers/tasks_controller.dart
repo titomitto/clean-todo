@@ -24,7 +24,7 @@ class TasksController extends StateNotifier<TasksState> {
 
     var response = await addTask(AddTaskParams(task: task));
     await response.fold((failure) {
-      state = TasksError(failure.message);
+      state = TasksError(failure);
     }, (success) async {
       await getTasks();
     });
@@ -36,7 +36,7 @@ class TasksController extends StateNotifier<TasksState> {
     var response = await getTasksUseCase();
 
     response.fold((failure) {
-      state = TasksError(failure.message);
+      state = TasksError(failure);
     }, (tasks) {
       if (tasks.isEmpty) {
         state = TasksEmpty();
@@ -52,7 +52,7 @@ class TasksController extends StateNotifier<TasksState> {
     var response = await deleteTask(DeleteTaskParams(task: task));
 
     await response.fold((failure) {
-      state = TasksError(failure.message);
+      state = TasksError(failure);
     }, (_) async {
       await getTasks();
     });
@@ -70,7 +70,7 @@ class TasksController extends StateNotifier<TasksState> {
     );
 
     response.fold((failure) {
-      state = TasksError(failure.message);
+      state = TasksError(failure);
     }, (_) {
       getTasks();
     });
