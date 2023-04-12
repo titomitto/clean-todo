@@ -6,23 +6,6 @@ import 'package:hive/hive.dart';
 import '../models/task_model.dart';
 import 'tasks_local_datasource.dart';
 
-final tasksBoxProvider =
-    FutureProvider.autoDispose<Box<TaskModel>>((ref) async {
-  Box<TaskModel> box = await Hive.openBox("tasks");
-  ref.onDispose(() {
-    box.close();
-    log("tasksBoxProvider disposed");
-  });
-  return box;
-});
-
-final tasksLocalDataSourceProvider =
-    Provider.autoDispose<TasksLocalDataSource>((ref) {
-  final box = ref.watch(tasksBoxProvider.future);
-
-  return TasksLocalDataSourceImpl(box);
-});
-
 class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   final Future<Box<TaskModel>> getBox;
 
@@ -81,3 +64,19 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
     await box.clear();
   }
 }
+
+final tasksBoxProvider =
+    FutureProvider.autoDispose<Box<TaskModel>>((ref) async {
+  Box<TaskModel> box = await Hive.openBox("tasks");
+  ref.onDispose(() {
+    box.close();
+    log("tasksBoxProvider disposed");
+  });
+  return box;
+});
+
+final tasksLocalDataSourceProvider =
+    Provider.autoDispose<TasksLocalDataSource>((ref) {
+  final box = ref.watch(tasksBoxProvider.future);
+  return TasksLocalDataSourceImpl(box);
+});
