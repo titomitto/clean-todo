@@ -6,28 +6,32 @@ import 'package:hive/hive.dart';
 import '../models/task_model.dart';
 import 'tasks_local_datasource.dart';
 
-final tasksLocalDataSourceProvider =
-    FutureProvider.autoDispose<TasksLocalDataSource>((ref) async {
+final tasksBoxProvider =
+    FutureProvider.autoDispose<Box<TaskModel>>((ref) async {
   Box<TaskModel> box = await Hive.openBox("tasks");
-
-  var tasksLocalDataSource = TasksLocalDataSourceImpl(box);
-
   ref.onDispose(() {
-    tasksLocalDataSource.close();
-    log("tasksLocalDataSourceProvider disposed");
+    box.close();
+    log("tasksBoxProvider disposed");
   });
+  return box;
+});
 
-  return tasksLocalDataSource;
+final tasksLocalDataSourceProvider =
+    Provider.autoDispose<TasksLocalDataSource>((ref) {
+  final box = ref.watch(tasksBoxProvider.future);
+
+  return TasksLocalDataSourceImpl(box);
 });
 
 class TasksLocalDataSourceImpl extends TasksLocalDataSource {
-  final Box<TaskModel> box;
+  final Future<Box<TaskModel>> getBox;
 
-  TasksLocalDataSourceImpl(this.box);
+  TasksLocalDataSourceImpl(this.getBox);
 
   @override
   Future<List<TaskModel>> getTasks() async {
     try {
+      final box = await getBox;
       return box.values.toList();
     } catch (e) {
       log("$e");
@@ -38,6 +42,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   @override
   Future<bool> addTask(TaskModel task) async {
     try {
+      final box = await getBox;
       int id = await box.add(task);
       await box.put(id, task..id = id);
       return true;
@@ -50,6 +55,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   @override
   Future<void> deleteTask(TaskModel task) async {
     try {
+      final box = await getBox;
       await box.delete(task.id);
     } catch (e) {
       log("$e");
@@ -60,6 +66,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   @override
   Future<bool> updateTask(TaskModel task) async {
     try {
+      final box = await getBox;
       await box.put(task.id, task);
       return true;
     } catch (e) {
@@ -70,11 +77,7 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
 
   @override
   Future<void> clear() async {
+    final box = await getBox;
     await box.clear();
-  }
-
-  @override
-  Future<void> close() async {
-    await box.close();
   }
 }

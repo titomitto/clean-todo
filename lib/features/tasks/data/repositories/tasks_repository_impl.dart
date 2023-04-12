@@ -12,21 +12,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../datasources/tasks_local_datasource_impl.dart';
 
 final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
-  final tasksLocalDataSource = ref.watch(tasksLocalDataSourceProvider.future);
-  return TasksRepositoryImpl(futureTasksLocalDataSource: tasksLocalDataSource);
+  final tasksLocalDataSource = ref.watch(tasksLocalDataSourceProvider);
+  return TasksRepositoryImpl(localDataSource: tasksLocalDataSource);
 });
 
 class TasksRepositoryImpl extends TasksRepository {
-  final Future<TasksLocalDataSource> futureTasksLocalDataSource;
+  final TasksLocalDataSource localDataSource;
 
   TasksRepositoryImpl({
-    required this.futureTasksLocalDataSource,
+    required this.localDataSource,
   });
 
   @override
   Future<Either<Failure, Unit>> updateTask(Task task) async {
     try {
-      final localDataSource = await futureTasksLocalDataSource;
       await localDataSource.updateTask(task.toModel());
       return const Right(unit);
     } catch (e) {
@@ -37,7 +36,6 @@ class TasksRepositoryImpl extends TasksRepository {
   @override
   Future<Either<Failure, Unit>> addTask(Task task) async {
     try {
-      final localDataSource = await futureTasksLocalDataSource;
       await localDataSource.addTask(task.toModel());
       return const Right(unit);
     } catch (e) {
@@ -48,7 +46,6 @@ class TasksRepositoryImpl extends TasksRepository {
   @override
   Future<Either<Failure, List<Task>>> getTasks() async {
     try {
-      final localDataSource = await futureTasksLocalDataSource;
       var taskModels = await localDataSource.getTasks();
       var tasks = taskModels.map((e) => e.toEntity()).toList();
       return Right(tasks);
@@ -61,7 +58,6 @@ class TasksRepositoryImpl extends TasksRepository {
   @override
   Future<Either<Failure, Unit>> deleteTask(Task task) async {
     try {
-      final localDataSource = await futureTasksLocalDataSource;
       await localDataSource.deleteTask(task.toModel());
       return const Right(unit);
     } catch (e) {
