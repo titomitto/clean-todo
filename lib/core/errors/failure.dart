@@ -6,6 +6,8 @@ class NetworkFailure extends Failure {}
 
 class CacheGetFailure extends Failure {}
 
+class NotFoundFailure extends Failure {}
+
 class CachePutFailure extends Failure {}
 
 class CacheDeleteFailure extends Failure {}
