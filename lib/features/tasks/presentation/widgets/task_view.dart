@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-
-import '../controllers/tasks_controller.dart';
+import '../controllers/task_controller.dart';
 
 class TaskView extends StatelessWidget {
   final Task task;
@@ -63,7 +62,7 @@ class CheckBox extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: () {
-          ref.read(tasksProvider.notifier).toggle(task);
+          ref.read(taskProvider.notifier).toggle(task);
         },
         behavior: HitTestBehavior.opaque,
         child: Icon(
@@ -88,7 +87,7 @@ class DeleteButton extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(tasksProvider.notifier).deleteTask(task);
+        ref.read(taskProvider.notifier).removeTask(task);
       },
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0),

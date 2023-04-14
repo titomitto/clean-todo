@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/core.dart';
 import '../../tasks.dart';
+import '../controllers/task_controller.dart';
+import '../states/task_state.dart';
 
 class AddTaskForm extends ConsumerStatefulWidget {
   const AddTaskForm({
@@ -20,9 +22,8 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
   final taskTitleController = TextEditingController();
 
   void submit() {
-    final taskController = ref.read(tasksProvider.notifier);
-    taskController.addTask(taskTitleController.text.trim());
-    context.pop();
+    final taskController = ref.read(taskProvider.notifier);
+    taskController.saveTask(taskTitleController.text.trim());
   }
 
   String mapValidationErrorToMessage(context, ValidationError error) {
@@ -30,6 +31,10 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
       return AppLocalizations.of(context)!.emptyFieldError;
     }
     return AppLocalizations.of(context)!.somethingWentWrong;
+  }
+
+  void navigateBack() {
+    context.pop();
   }
 
   @override
@@ -40,6 +45,12 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(taskProvider, (prevState, state) {
+      if (state is TaskAdded) {
+        navigateBack();
+      }
+    });
+
     return Form(
       key: formKey,
       child: Column(
@@ -68,9 +79,7 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
           MaterialButton(
             minWidth: double.infinity,
             onPressed: () {
-              if (formKey.currentState!.validate()) {
-                submit();
-              }
+              if (formKey.currentState!.validate()) submit();
             },
             color: const Color(0xffffd78a),
             child: Padding(

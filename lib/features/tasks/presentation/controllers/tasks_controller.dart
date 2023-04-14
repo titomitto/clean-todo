@@ -1,4 +1,4 @@
-import 'package:clean_todo/features/tasks/presentation/controllers/tasks_state.dart';
+import 'package:clean_todo/features/tasks/presentation/states/tasks_state.dart';
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 
@@ -15,21 +15,6 @@ class TasksController extends StateNotifier<TasksState> {
     getTasks();
   }
 
-  void addTask(String title) async {
-    state = TasksLoading();
-
-    final addTask = ref.read(addTaskUseCaseProvider);
-
-    var task = Task(title: title);
-
-    var response = await addTask(AddTaskParams(task: task));
-    await response.fold((failure) {
-      state = TasksError(failure);
-    }, (success) async {
-      await getTasks();
-    });
-  }
-
   Future<void> getTasks() async {
     state = TasksLoading();
 
@@ -43,36 +28,6 @@ class TasksController extends StateNotifier<TasksState> {
         return;
       }
       state = TasksData(tasks);
-    });
-  }
-
-  void deleteTask(Task task) async {
-    final deleteTask = ref.read(deleteTaskUseCaseProvider);
-
-    var response = await deleteTask(DeleteTaskParams(task: task));
-
-    await response.fold((failure) {
-      state = TasksError(failure);
-    }, (_) async {
-      await getTasks();
-    });
-  }
-
-  void toggle(Task task) async {
-    var updateTask = ref.read(updateTaskUseCaseProvider);
-
-    var response = await updateTask(
-      UpdateTaskParams(
-        task: task.copyWith(
-          isDone: !task.isDone,
-        ),
-      ),
-    );
-
-    response.fold((failure) {
-      state = TasksError(failure);
-    }, (_) {
-      getTasks();
     });
   }
 }
