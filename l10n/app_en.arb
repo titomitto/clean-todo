@@ -7,6 +7,7 @@
   "networkError": "Network error. Please check your connection.",
   "cacheGetError": "Failed to retrieve data.",
   "cachePutError": "Failed to save data.",
+  "cacheDeleteError": "Failed to delete data.",
   "emptyFieldError": "Field cannot be empty"
 }
 

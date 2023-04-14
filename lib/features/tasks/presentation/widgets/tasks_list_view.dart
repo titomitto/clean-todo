@@ -1,8 +1,7 @@
 import 'package:clean_todo/features/tasks/presentation/states/task_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/core.dart';
+import '../../../../core/utils/failure_utils.dart';
 import '../../tasks.dart';
 import '../controllers/task_controller.dart';
 import 'empty_view.dart';
@@ -17,22 +16,6 @@ class TasksListView extends ConsumerStatefulWidget {
 }
 
 class _TasksListViewState extends ConsumerState<TasksListView> {
-  String mapFailureToMessage(context, Failure failure) {
-    if (failure is NetworkFailure) {
-      return AppLocalizations.of(context)!.networkError;
-    }
-
-    if (failure is CacheGetFailure) {
-      return AppLocalizations.of(context)!.cacheGetError;
-    }
-
-    if (failure is CachePutFailure) {
-      return AppLocalizations.of(context)!.cachePutError;
-    }
-
-    return AppLocalizations.of(context)!.somethingWentWrong;
-  }
-
   @override
   Widget build(BuildContext context) {
     var state = ref.watch(tasksProvider);

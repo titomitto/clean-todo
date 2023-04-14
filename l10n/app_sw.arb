@@ -7,5 +7,6 @@
   "networkError": "Tafadhali angalia uhusiano wako wa mtandao",
   "cacheGetError": "Hakuna data iliyopatikana.",
   "cachePutError": "Hakuna uwezo wa kuhifadhi data.",
+  "cacheDeleteError": "Hakuna uwezo wa kufuta data.",
   "emptyFieldError": "Hii ni sehemu ya lazima"
 }
