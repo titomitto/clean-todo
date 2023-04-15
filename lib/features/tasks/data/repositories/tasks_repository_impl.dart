@@ -12,11 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../datasources/tasks_local_datasource_impl.dart';
 import '../models/task_model.dart';
 
-final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
-  final tasksLocalDataSource = ref.watch(tasksLocalDataSourceProvider);
-  return TasksRepositoryImpl(localDataSource: tasksLocalDataSource);
-});
-
 class TasksRepositoryImpl extends TasksRepository {
   final TasksLocalDataSource localDataSource;
 
@@ -67,3 +62,8 @@ class TasksRepositoryImpl extends TasksRepository {
     }
   }
 }
+
+final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
+  final tasksLocalDataSource = ref.watch(tasksLocalDataSourceProvider);
+  return TasksRepositoryImpl(localDataSource: tasksLocalDataSource);
+});
