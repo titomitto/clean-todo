@@ -8,9 +8,7 @@ import 'package:clean_todo/features/tasks/domain/entities/task.dart';
 import 'package:clean_todo/features/tasks/domain/repositories/task_repository.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../datasources/tasks_local_datasource_impl.dart';
-import '../models/task_model.dart';
 
 class TasksRepositoryImpl extends TasksRepository {
   final TasksLocalDataSource localDataSource;
@@ -32,8 +30,7 @@ class TasksRepositoryImpl extends TasksRepository {
   @override
   Future<Either<Failure, Unit>> createTask(String title) async {
     try {
-      var task = TaskModel(title: title, isDone: false);
-      await localDataSource.addTask(task);
+      await localDataSource.addTask(title);
       return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());

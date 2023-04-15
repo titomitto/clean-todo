@@ -23,9 +23,13 @@ class TasksLocalDataSourceImpl extends TasksLocalDataSource {
   }
 
   @override
-  Future<bool> addTask(TaskModel task) async {
+  Future<bool> addTask(String title) async {
     try {
       final box = await getBox;
+      final task = TaskModel(
+        title: title,
+        isDone: false,
+      );
       int id = await box.add(task);
       await box.put(id, task..id = id);
       return true;

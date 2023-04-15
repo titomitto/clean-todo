@@ -3,7 +3,7 @@ import '../models/task_model.dart';
 
 abstract class TasksLocalDataSource implements LocalDataSource {
   Future<List<TaskModel>> getTasks();
-  Future<void> addTask(TaskModel task);
+  Future<void> addTask(String title);
   Future<void> updateTask(TaskModel task);
   Future<void> deleteTask(TaskModel task);
 }
