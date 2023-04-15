@@ -10,6 +10,7 @@ import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../datasources/tasks_local_datasource_impl.dart';
+import '../models/task_model.dart';
 
 final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
   final tasksLocalDataSource = ref.watch(tasksLocalDataSourceProvider);
@@ -34,9 +35,10 @@ class TasksRepositoryImpl extends TasksRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> addTask(Task task) async {
+  Future<Either<Failure, Unit>> createTask(String title) async {
     try {
-      await localDataSource.addTask(task.toModel());
+      var task = TaskModel(title: title, isDone: false);
+      await localDataSource.addTask(task);
       return const Right(unit);
     } catch (e) {
       return Left(CachePutFailure());

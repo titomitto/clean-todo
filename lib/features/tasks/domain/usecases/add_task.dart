@@ -9,9 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../validators/task_validator.dart';
 
 class AddTaskParams {
-  Task task;
+  String title;
   AddTaskParams({
-    required this.task,
+    required this.title,
   });
 }
 
@@ -26,13 +26,13 @@ class AddTask extends UseCase<Future<Either<Failure, void>>, AddTaskParams> {
 
   @override
   Future<Either<Failure, void>> call(AddTaskParams params) async {
-    ValidationFailure? validationFailure = validator.validate(params.task);
+    ValidationFailure? validationFailure = validator.validate(params.title);
 
     if (validationFailure != null) {
       return Left(validationFailure);
     }
 
-    return repository.addTask(params.task);
+    return repository.createTask(params.title);
   }
 }
 

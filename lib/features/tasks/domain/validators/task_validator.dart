@@ -9,7 +9,7 @@ var taskValidatorProvider = Provider<TaskValidator>((ref) {
 
 class EmptyFieldError implements ValidationError {}
 
-class TaskValidator implements Validator<Task> {
+class TaskValidator implements Validator<String> {
   static ValidationError? validateTitle(String title) {
     if (title.isEmpty) {
       return EmptyFieldError();
@@ -18,9 +18,9 @@ class TaskValidator implements Validator<Task> {
   }
 
   @override
-  ValidationFailure? validate(Task task) {
+  ValidationFailure? validate(String title) {
     final errors = <String, ValidationError>{};
-    final titleError = validateTitle(task.title);
+    final titleError = validateTitle(title);
 
     if (titleError != null) {
       errors['title'] = titleError;

@@ -3,7 +3,7 @@ import '../models/task_model.dart';
 
 extension ExpenseModelExtension on TaskModel {
   Task toEntity() => Task(
-        id: id,
+        id: id!,
         title: title,
         isDone: isDone,
       );
