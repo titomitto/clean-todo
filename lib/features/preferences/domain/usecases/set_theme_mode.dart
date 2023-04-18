@@ -9,8 +9,7 @@ final setThemeModeUseCaseProvider = Provider<SetThemeMode>((ref) {
   return SetThemeMode(repository: repository);
 });
 
-class SetThemeMode
-    extends UseCase<Future<Either<Failure, void>>, SetThemeModeParams> {
+class SetThemeMode extends UseCase<void, SetThemeModeParams> {
   PreferencesRepository repository;
 
   SetThemeMode({

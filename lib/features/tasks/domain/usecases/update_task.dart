@@ -12,8 +12,7 @@ final updateTaskUseCaseProvider = Provider<UpdateTask>((ref) {
   return UpdateTask(repository: repository);
 });
 
-class UpdateTask
-    extends UseCase<Future<Either<Failure, void>>, UpdateTaskParams> {
+class UpdateTask extends UseCase<void, UpdateTaskParams> {
   TasksRepository repository;
 
   UpdateTask({

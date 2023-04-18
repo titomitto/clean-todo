@@ -10,8 +10,7 @@ final getPreferencesUseCaseProvider =
   return GetPreferences(repository: repository);
 });
 
-class GetPreferences
-    extends NoParamsUseCase<Future<Either<Failure, Preferences?>>> {
+class GetPreferences extends NoParamsUseCase<Preferences?> {
   PreferencesRepository repository;
 
   GetPreferences({

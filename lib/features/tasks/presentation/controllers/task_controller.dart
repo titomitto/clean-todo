@@ -15,8 +15,7 @@ class TaskController extends StateNotifier<TaskState> {
 
   void saveTask(String title) async {
     state = TaskSaving();
-    var task = Task(title: title);
-    var response = await addTask(AddTaskParams(task: task));
+    var response = await addTask(AddTaskParams(title: title));
     await response.fold((failure) {
       state = TaskError(failure);
     }, (success) async {

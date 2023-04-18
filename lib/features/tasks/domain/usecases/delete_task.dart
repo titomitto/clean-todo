@@ -12,8 +12,7 @@ final deleteTaskUseCaseProvider = Provider<DeleteTask>((ref) {
   return DeleteTask(repository: repository);
 });
 
-class DeleteTask
-    extends UseCase<Future<Either<Failure, void>>, DeleteTaskParams> {
+class DeleteTask extends UseCase<void, DeleteTaskParams> {
   TasksRepository repository;
 
   DeleteTask({

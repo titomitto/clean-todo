@@ -1,7 +1,11 @@
+import 'package:dartz/dartz.dart';
+
+import '../errors/failure.dart';
+
 abstract class UseCase<R, P> {
-  R call(P params);
+  Future<Either<Failure, R>> call(P params);
 }
 
 abstract class NoParamsUseCase<R> {
-  R call();
+  Future<Either<Failure, R>> call();
 }

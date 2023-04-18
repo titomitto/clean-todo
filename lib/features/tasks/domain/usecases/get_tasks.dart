@@ -12,7 +12,7 @@ final getTasksUseCaseProvider = Provider.autoDispose<GetTasks>((ref) {
   return GetTasks(repository: repository);
 });
 
-class GetTasks extends NoParamsUseCase<Future<Either<Failure, List<Task>>>> {
+class GetTasks extends NoParamsUseCase<List<Task>> {
   TasksRepository repository;
 
   GetTasks({

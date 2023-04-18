@@ -9,8 +9,7 @@ final setLanguageUseCaseProvider = Provider<SetLanguage>((ref) {
   return SetLanguage(repository: repository);
 });
 
-class SetLanguage
-    extends UseCase<Future<Either<Failure, void>>, SetLanguageParams> {
+class SetLanguage extends UseCase<void, SetLanguageParams> {
   PreferencesRepository repository;
 
   SetLanguage({
