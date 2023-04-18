@@ -4,10 +4,14 @@ import 'package:clean_todo/features/preferences/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final setLanguageUseCaseProvider = Provider<SetLanguage>((ref) {
-  final repository = ref.read(preferencesRepositoryProvider);
-  return SetLanguage(repository: repository);
-});
+class SetLanguageParams {
+  String language;
+  Preferences preferences;
+  SetLanguageParams({
+    required this.language,
+    required this.preferences,
+  });
+}
 
 class SetLanguage extends UseCase<void, SetLanguageParams> {
   PreferencesRepository repository;
@@ -24,11 +28,7 @@ class SetLanguage extends UseCase<void, SetLanguageParams> {
   }
 }
 
-class SetLanguageParams {
-  String language;
-  Preferences preferences;
-  SetLanguageParams({
-    required this.language,
-    required this.preferences,
-  });
-}
+final setLanguageUseCaseProvider = Provider<SetLanguage>((ref) {
+  final repository = ref.read(preferencesRepositoryProvider);
+  return SetLanguage(repository: repository);
+});

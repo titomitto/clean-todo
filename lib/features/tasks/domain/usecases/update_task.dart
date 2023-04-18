@@ -7,10 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/tasks_repository_impl.dart';
 
-final updateTaskUseCaseProvider = Provider<UpdateTask>((ref) {
-  final repository = ref.read(tasksRepositoryProvider);
-  return UpdateTask(repository: repository);
-});
+class UpdateTaskParams {
+  Task task;
+  UpdateTaskParams({
+    required this.task,
+  });
+}
 
 class UpdateTask extends UseCase<void, UpdateTaskParams> {
   TasksRepository repository;
@@ -25,9 +27,7 @@ class UpdateTask extends UseCase<void, UpdateTaskParams> {
   }
 }
 
-class UpdateTaskParams {
-  Task task;
-  UpdateTaskParams({
-    required this.task,
-  });
-}
+final updateTaskUseCaseProvider = Provider<UpdateTask>((ref) {
+  final repository = ref.read(tasksRepositoryProvider);
+  return UpdateTask(repository: repository);
+});

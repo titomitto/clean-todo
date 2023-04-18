@@ -4,10 +4,14 @@ import 'package:clean_todo/features/preferences/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final setThemeModeUseCaseProvider = Provider<SetThemeMode>((ref) {
-  final repository = ref.read(preferencesRepositoryProvider);
-  return SetThemeMode(repository: repository);
-});
+class SetThemeModeParams {
+  String themeMode;
+  Preferences preferences;
+  SetThemeModeParams({
+    required this.themeMode,
+    required this.preferences,
+  });
+}
 
 class SetThemeMode extends UseCase<void, SetThemeModeParams> {
   PreferencesRepository repository;
@@ -24,11 +28,7 @@ class SetThemeMode extends UseCase<void, SetThemeModeParams> {
   }
 }
 
-class SetThemeModeParams {
-  String themeMode;
-  Preferences preferences;
-  SetThemeModeParams({
-    required this.themeMode,
-    required this.preferences,
-  });
-}
+final setThemeModeUseCaseProvider = Provider<SetThemeMode>((ref) {
+  final repository = ref.read(preferencesRepositoryProvider);
+  return SetThemeMode(repository: repository);
+});

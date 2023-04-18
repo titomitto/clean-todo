@@ -7,10 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/tasks_repository_impl.dart';
 
-final deleteTaskUseCaseProvider = Provider<DeleteTask>((ref) {
-  final repository = ref.read(tasksRepositoryProvider);
-  return DeleteTask(repository: repository);
-});
+class DeleteTaskParams {
+  Task task;
+  DeleteTaskParams({
+    required this.task,
+  });
+}
 
 class DeleteTask extends UseCase<void, DeleteTaskParams> {
   TasksRepository repository;
@@ -25,9 +27,7 @@ class DeleteTask extends UseCase<void, DeleteTaskParams> {
   }
 }
 
-class DeleteTaskParams {
-  Task task;
-  DeleteTaskParams({
-    required this.task,
-  });
-}
+final deleteTaskUseCaseProvider = Provider<DeleteTask>((ref) {
+  final repository = ref.read(tasksRepositoryProvider);
+  return DeleteTask(repository: repository);
+});

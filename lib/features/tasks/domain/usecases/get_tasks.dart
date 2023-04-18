@@ -7,11 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repositories/tasks_repository_impl.dart';
 
-final getTasksUseCaseProvider = Provider.autoDispose<GetTasks>((ref) {
-  final repository = ref.watch(tasksRepositoryProvider);
-  return GetTasks(repository: repository);
-});
-
 class GetTasks extends NoParamsUseCase<List<Task>> {
   TasksRepository repository;
 
@@ -24,3 +19,8 @@ class GetTasks extends NoParamsUseCase<List<Task>> {
     return repository.getTasks();
   }
 }
+
+final getTasksUseCaseProvider = Provider.autoDispose<GetTasks>((ref) {
+  final repository = ref.watch(tasksRepositoryProvider);
+  return GetTasks(repository: repository);
+});

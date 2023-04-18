@@ -2,12 +2,6 @@ import 'package:clean_todo/features/tasks/presentation/states/tasks_state.dart';
 import 'package:riverpod/riverpod.dart';
 import '../../domain/domain.dart';
 
-final tasksProvider =
-    StateNotifierProvider.autoDispose<TasksController, TasksState>((ref) {
-  GetTasks getTaskUseCase = ref.watch(getTasksUseCaseProvider);
-  return TasksController(ref, getTaskUseCase);
-});
-
 class TasksController extends StateNotifier<TasksState> {
   StateNotifierProviderRef ref;
   GetTasks getTasksUseCase;
@@ -31,3 +25,9 @@ class TasksController extends StateNotifier<TasksState> {
     });
   }
 }
+
+final tasksProvider =
+    StateNotifierProvider.autoDispose<TasksController, TasksState>((ref) {
+  GetTasks getTaskUseCase = ref.watch(getTasksUseCaseProvider);
+  return TasksController(ref, getTaskUseCase);
+});

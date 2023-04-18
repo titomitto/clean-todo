@@ -4,12 +4,6 @@ import 'package:clean_todo/features/preferences/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final getPreferencesUseCaseProvider =
-    Provider.autoDispose<GetPreferences>((ref) {
-  final repository = ref.watch(preferencesRepositoryProvider);
-  return GetPreferences(repository: repository);
-});
-
 class GetPreferences extends NoParamsUseCase<Preferences?> {
   PreferencesRepository repository;
 
@@ -22,3 +16,9 @@ class GetPreferences extends NoParamsUseCase<Preferences?> {
     return repository.getPreferences();
   }
 }
+
+final getPreferencesUseCaseProvider =
+    Provider.autoDispose<GetPreferences>((ref) {
+  final repository = ref.watch(preferencesRepositoryProvider);
+  return GetPreferences(repository: repository);
+});
