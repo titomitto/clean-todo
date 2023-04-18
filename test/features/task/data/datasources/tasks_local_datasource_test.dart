@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     mockBox = MockBox();
-    dataSource = TasksLocalDataSourceImpl(mockBox);
+    dataSource = TasksLocalDataSourceImpl(Future.value(mockBox));
   });
 
   group('getTasks', () {
@@ -46,7 +46,7 @@ void main() {
       when(() => mockBox.put(2, taskToAdd..id = 2)).thenAnswer((_) async => 1);
 
       // act
-      final result = await dataSource.addTask(taskToAdd);
+      final result = await dataSource.addTask('task 4');
 
       // assert
       expect(result, true);
@@ -64,7 +64,7 @@ void main() {
       final call = dataSource.addTask;
 
       // assert
-      expect(() => call(taskToAdd), throwsA(isInstanceOf<CacheException>()));
+      expect(() => call('task 4'), throwsA(isInstanceOf<CacheException>()));
       verify(() => mockBox.add(taskToAdd));
       verifyNoMoreInteractions(mockBox);
     });
