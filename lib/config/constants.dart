@@ -1,1 +1,1 @@
-const apiUrl = "https://api.quotable.io";
+const apiUrl = "";
