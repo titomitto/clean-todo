@@ -25,7 +25,7 @@ class AddTask extends UseCase<void, AddTaskParams> {
 
   @override
   Future<Either<Failure, void>> call(AddTaskParams params) async {
-    ValidationFailure? validationFailure = validator.validate(params.title);
+    ValidationFailure? validationFailure = validator.validate(params);
 
     if (validationFailure != null) {
       return Left(validationFailure);

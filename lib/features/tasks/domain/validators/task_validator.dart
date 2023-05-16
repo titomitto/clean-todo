@@ -1,13 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:clean_todo/core/core.dart';
 
+import '../usecases/add_task.dart';
+
 var taskValidatorProvider = Provider<TaskValidator>((ref) {
   return TaskValidator();
 });
 
 class EmptyFieldFailure implements ValidationFailure {}
 
-class TaskValidator implements Validator<String> {
+class TaskValidator implements Validator<AddTaskParams> {
   static ValidationFailure? validateTitle(String title) {
     if (title.isEmpty) {
       return EmptyFieldFailure();
@@ -16,8 +18,8 @@ class TaskValidator implements Validator<String> {
   }
 
   @override
-  ValidationFailure? validate(String title) {
-    final titleFailure = validateTitle(title);
+  ValidationFailure? validate(AddTaskParams params) {
+    final titleFailure = validateTitle(params.title);
 
     if (titleFailure != null) {
       return titleFailure;
