@@ -27,11 +27,16 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
     taskController.saveTask(taskTitleController.text.trim());
   }
 
-  String mapValidationFailureToMessage(context, ValidationFailure failure) {
+  String? mapValidationFailureToMessage(context, ValidationFailure? failure) {
     if (failure is EmptyFieldFailure) {
       return AppLocalizations.of(context)!.emptyFieldError;
     }
-    return failure.toMessage(context);
+
+    if (failure != null) {
+      return failure.toMessage(context);
+    }
+
+    return null;
   }
 
   void navigateBack() {
@@ -60,11 +65,8 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
             controller: taskTitleController,
             maxLines: 3,
             validator: (value) {
-              final error = TaskValidator.validateTitle(value!);
-              if (error != null) {
-                return mapValidationFailureToMessage(context, error);
-              }
-              return null;
+              final failure = TaskValidator.validateTitle(value!);
+              return mapValidationFailureToMessage(context, failure);
             },
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.taskTitleHint,
