@@ -26,7 +26,7 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
       var preferences = preferencesModel?.toEntity();
       return Right(preferences);
     } catch (e) {
-      return Left(CacheGetFailure());
+      return Left(CacheFailure());
     }
   }
 
@@ -37,7 +37,7 @@ class PreferencesRepositoryImpl extends PreferencesRepository {
       await localDataSource.setPreferences(preferences.toModel());
       return const Right(unit);
     } catch (e) {
-      return Left(CachePutFailure());
+      return Left(CacheFailure());
     }
   }
 }

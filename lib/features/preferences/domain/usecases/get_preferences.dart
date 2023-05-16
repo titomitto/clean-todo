@@ -1,5 +1,5 @@
 import 'package:clean_todo/core/usecases/usecase.dart';
-import 'package:clean_todo/core/errors/failure.dart';
+import 'package:clean_todo/core/errors/failures.dart';
 import 'package:clean_todo/features/preferences/preferences.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:flutter_riverpod/flutter_riverpod.dart';

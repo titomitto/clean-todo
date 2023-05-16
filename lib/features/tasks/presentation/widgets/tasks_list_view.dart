@@ -1,7 +1,7 @@
 import 'package:clean_todo/features/tasks/presentation/states/task_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/utils/failure_utils.dart';
+import '../../../../core/utils/failure.dart';
 import '../../tasks.dart';
 import '../controllers/task_controller.dart';
 import 'empty_view.dart';

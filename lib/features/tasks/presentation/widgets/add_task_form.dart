@@ -1,3 +1,4 @@
+import 'package:clean_todo/core/utils/extensions/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,11 +27,11 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
     taskController.saveTask(taskTitleController.text.trim());
   }
 
-  String mapValidationErrorToMessage(context, ValidationError error) {
-    if (error is EmptyFieldError) {
+  String mapValidationFailureToMessage(context, ValidationFailure failure) {
+    if (failure is EmptyFieldFailure) {
       return AppLocalizations.of(context)!.emptyFieldError;
     }
-    return AppLocalizations.of(context)!.somethingWentWrong;
+    return failure.toMessage(context);
   }
 
   void navigateBack() {
@@ -61,7 +62,7 @@ class _AddTaskFormState extends ConsumerState<AddTaskForm> {
             validator: (value) {
               final error = TaskValidator.validateTitle(value!);
               if (error != null) {
-                return mapValidationErrorToMessage(context, error);
+                return mapValidationFailureToMessage(context, error);
               }
               return null;
             },

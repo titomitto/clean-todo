@@ -8,7 +8,10 @@
   "cacheGetError": "Failed to retrieve data.",
   "cachePutError": "Failed to save data.",
   "cacheDeleteError": "Failed to delete data.",
-  "emptyFieldError": "Field cannot be empty"
+  "emptyFieldError": "Field cannot be empty",
+  "noInternetConnection": "No internet connection",
+  "serverExceptionMessage": "Oops! Something went wrong on our end. Please try again later.",
+  "invalidArgument": "Something went wrong while processing your request."
 }
 
 

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:clean_todo/core/core.dart';
-import 'package:clean_todo/core/errors/failure.dart';
+import 'package:clean_todo/core/errors/failures.dart';
 import 'package:clean_todo/features/tasks/data/datasources/tasks_local_datasource.dart';
 import 'package:clean_todo/features/tasks/data/mappers/task.dart';
 import 'package:clean_todo/features/tasks/domain/entities/task.dart';
@@ -23,7 +23,7 @@ class TasksRepositoryImpl extends TasksRepository {
       await localDataSource.updateTask(task.toModel());
       return const Right(unit);
     } catch (e) {
-      return Left(CachePutFailure());
+      return Left(CacheFailure());
     }
   }
 
@@ -33,7 +33,7 @@ class TasksRepositoryImpl extends TasksRepository {
       await localDataSource.addTask(title);
       return const Right(unit);
     } catch (e) {
-      return Left(CachePutFailure());
+      return Left(CacheFailure());
     }
   }
 
@@ -45,7 +45,7 @@ class TasksRepositoryImpl extends TasksRepository {
       return Right(tasks);
     } catch (e) {
       log("$e");
-      return Left(CacheGetFailure());
+      return Left(CacheFailure());
     }
   }
 
@@ -55,7 +55,7 @@ class TasksRepositoryImpl extends TasksRepository {
       await localDataSource.deleteTask(task.toModel());
       return const Right(unit);
     } catch (e) {
-      return Left(CachePutFailure());
+      return Left(CacheFailure());
     }
   }
 }
